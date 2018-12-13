@@ -11,7 +11,7 @@ export default class HomePage extends React.Component {
         imageStyle={styles.image}
         >
         <View style={styles.container}>
-          <Text style={styles.textStyle}>{`${this.props.location}`}</Text>
+          <Text style={styles.textStyle}>{this.props.location}</Text>
           <TextInput
             autoCorrect={false}
             placeholder="Search any city"
