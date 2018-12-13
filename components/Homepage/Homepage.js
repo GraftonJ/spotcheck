@@ -11,14 +11,16 @@ export default class HomePage extends React.Component {
         imageStyle={styles.image}
         >
         <View style={styles.container}>
-          <Text style={styles.textStyle}>My Location:</Text>
+          <Text style={styles.textStyle}>{`${this.props.location}`}</Text>
           <TextInput
             autoCorrect={false}
             placeholder="Search any city"
             placeholderTextColor="white"
             style={styles.textInput}
             clearButtonMode="always"
+            onChangeText={this.props.updateLocation}
           />
+
           <Button
               onPress={() => {
               Alert.alert('You tapped the button!');

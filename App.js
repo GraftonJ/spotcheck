@@ -19,10 +19,22 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: 'Default location' };
+  }
+
+  updateLocation = (text) => {
+    this.setState({
+      ...this.state,
+      location: text,
+      })
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Homepage />
+        <Homepage location={this.state.location} updateLocation={this.updateLocation}/>
       </View>
     );
   }
