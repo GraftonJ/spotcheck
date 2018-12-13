@@ -5,16 +5,20 @@ export default class Resut extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.cardContainer}>
-        <Image style={styles.image} source={require('../../assets/images/homepage-dog.jpg')} />
+        <Image style={styles.image} source={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/nbfrWWtz6lRUaxYtw9PNQA/o.jpg'}} />
+
         <View style={styles.cardTopLine}>
           <Text style={styles.name}>Avery Brewery</Text>
           <Text style={styles.checkin}>79 Check-ins here!</Text>
         </View>
+
         <View style={styles.cardMiddleLine}>
           <Text style={styles.price}>$$ -</Text>
           <Text style={styles.category}> Brewery -</Text>
           <Text style={styles.rating}> ☆☆☆☆☆</Text>
+          <Text style={styles.ratingCount}> (797)</Text>
         </View>
+
         <View style={styles.cardBottomLine}>
           <Text style={styles.cardBottomLine}>251 North Main St.</Text>
         </View>
@@ -36,7 +40,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: '75%',
+    height: '60%',
 
   },
   cardTopLine: {
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   name: {
-    fontSize: 25,
+    fontSize: 30,
     fontFamily: 'Arial',
     overflow: 'hidden',
   },
@@ -57,10 +61,14 @@ const styles = StyleSheet.create({
   cardMiddleLine: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     fontSize: 20,
   },
   rating: {
-    fontSize: 20,
+    fontSize: 25,
+  },
+  ratingCount: {
+    fontSize: 15,
   },
   price: {
     fontSize: 20,
