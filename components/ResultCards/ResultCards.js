@@ -6,8 +6,10 @@ export default class Resut extends React.Component {
     return (
       <SafeAreaView style={styles.cardContainer}>
         <Image style={styles.image} source={require('../../assets/images/homepage-dog.jpg')} />
-        <Text>Restaurant Title</Text>
-
+        <View style={styles.cardTopLine}>
+          <Text style={styles.name}>Restaurant Title</Text>
+          <Text style={styles.checkin}>79 Check-ins here!</Text>
+        </View>
       </SafeAreaView>
     )
   }
@@ -29,4 +31,17 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '67%',
   },
+  cardTopLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 5,
+  },
+  name: {
+    fontSize: 25,
+    fontFamily: 'Arial',
+  },
+  checkin: {
+    fontSize: 15,
+    fontFamily: 'Arial',
+  }
 })
