@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, KeyboardAvoidingView, TextInput, SafeAreaView, ImageBackground, Image, Alert, Button} from 'react-native'
+import {StyleSheet, Text, View, KeyboardAvoidingView, TextInput, SafeAreaView, ImageBackground, Image, Alert, TouchableOpacity} from 'react-native'
+
 
 export default class HomePage extends React.Component {
   render() {
@@ -11,22 +12,22 @@ export default class HomePage extends React.Component {
         imageStyle={styles.image}
         >
         <View style={styles.container}>
-          <Text style={styles.textStyle}>{this.props.location}</Text>
+          <Text style={styles.textStyle}>Enter Location</Text>
           <TextInput
             autoCorrect={false}
             placeholder="Search any city"
-            placeholderTextColor="white"
+            placeholderTextColor="black"
             style={styles.textInput}
             clearButtonMode="always"
             onChangeText={this.props.updateLocation}
           />
 
-          <Button
+          <TouchableOpacity
+              style={styles.button}
               onPress={() => {
-              Alert.alert('You tapped the button!');
-            }}
-            title="Press Me" style={styles.textStyle}
-          />
+              Alert.alert('You tapped the button!')}}>
+            <Text >Fetch!</Text>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
 
@@ -46,12 +47,18 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 25,
     fontWeight: 'bold',
+  textShadowColor: 'rgba(0, 0, 0, 0.75)',
+  textShadowOffset: {width: -1, height: 1},
+  textShadowRadius: 10
   },
+
   smallText: {
     fontSize: 18,
 },
 textInput: {
-  backgroundColor: '#666',
+  backgroundColor: 'rgba(222, 224, 226, 0.8)',
+  borderWidth: 1,
+  borderRadius: 5,
   color: 'white',
   height: 40,
   width: 300,
@@ -71,7 +78,13 @@ image: {
   resizeMode: 'cover',
 },
 button: {
-  borderRadius: 2,
+  width: '25%',
+  height: '4%',
+  borderWidth: 1,
+  borderRadius: 10,
   backgroundColor: 'white',
+  marginTop: 10,
+  alignItems: 'center',
+  justifyContent: 'center'
 }
 });
