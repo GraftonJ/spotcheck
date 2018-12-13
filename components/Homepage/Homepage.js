@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, KeyboardAvoidingView, TextInput, SafeAreaView, ImageBackground, Image, Alert, Button} from 'react-native';
-
+import {StyleSheet, Text, View, KeyboardAvoidingView, TextInput, SafeAreaView, ImageBackground, Image, Alert, Button} from 'react-native'
 
 export default class HomePage extends React.Component {
   render() {
@@ -21,10 +20,10 @@ export default class HomePage extends React.Component {
             clearButtonMode="always"
           />
           <Button
-            onPress={() => {
+              onPress={() => {
               Alert.alert('You tapped the button!');
             }}
-            title="Press Me" style={styles.button}
+            title="Press Me" style={styles.textStyle}
           />
         </View>
       </ImageBackground>
