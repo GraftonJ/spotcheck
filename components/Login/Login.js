@@ -12,6 +12,12 @@ const User = t.struct({
   password: t.String,
 })
 
+
+onpressLogin = (e) => {
+
+}
+
+
 const Login = () => (
   <SafeAreaView style={styles.container}>
 
@@ -24,6 +30,20 @@ const Login = () => (
     <View style={{width: '85%'}}>
       <Form style={styles.form} type={User} />
     </View>
+    <TouchableOpacity
+        style={styles.button}
+        onPress={this.onpressLogin}>
+      <Text >Login</Text>
+    </TouchableOpacity>
+
+    <Text style={styles.newAccount, {marginBottom: 5}}>or</Text>
+
+    <TouchableOpacity
+
+        onPress={this.onpressLogin}>
+      <Text style={styles.newAccount} >Create New Account</Text>
+    </TouchableOpacity>
+
 
   </SafeAreaView>
 
@@ -57,6 +77,22 @@ const styles = StyleSheet.create({
     borderRadius:75,
     padding: 22,
   },
+  button: {
+    width: '25%',
+    height: '4%',
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 25,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  newAccount : {
+    fontSize: 10,
+    letterSpacing: 1,
+    margin: 2
+  }
 })
 
 export default Login
