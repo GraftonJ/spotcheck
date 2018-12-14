@@ -2,6 +2,8 @@
    Simple app-wide data store (Redux-lite)
 */
 
+export const URI = "http://localhost:3000";
+
 let state = {
 
   // Search location set by homePG

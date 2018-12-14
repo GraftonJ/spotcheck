@@ -35,11 +35,12 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <AppNavigator />
+      <LoginSCR />
     );
   }
 }
 
+  // <LoginSCR />
 //  <AppNavigator />
 
 // <View style={styles.container}>
