@@ -7,6 +7,8 @@ import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import colors from '../utils/colors'
 import store from '../store';
 
+import Login from '../components/Login/Login';
+
 export default class LoginSCR extends React.Component {
   // static navigationOptions = ({ navigation: { navigate } }) => ({
   //   title: 'Login Page',
@@ -42,14 +44,15 @@ export default class LoginSCR extends React.Component {
       <View style={styles.container}>
         {error &&
           <Text>Error...</Text>}
-
         {!error && (
-          <Text>Login page, curr user: {user.fname} {user.lname}</Text>
+          <Login />
         )}
       </View>
     );
   }
 }
+
+// <Text>Login page, curr user: {user.fname} {user.lname}</Text>
 
 const styles = StyleSheet.create({
   container: {

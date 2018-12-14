@@ -12,6 +12,8 @@ import {
 import colors from '../utils/colors'
 import store from '../store';
 
+import Homepage from '../components/Homepage/Homepage'
+
 export default class HomeSCR extends React.Component {
   // const { navigation: { navigate } } = this.props;
   navigate = this.props.navigation.navigate;
@@ -42,11 +44,11 @@ export default class HomeSCR extends React.Component {
     this.unsubscribe();
   }
 
+  // This is example of moving to a subordinant screen
   onclick = () => {
     console.log('click');
     console.log(this.props);
     this.props.navigation.navigate('ListSCR')
-    // navigate('ListSCR');
   }
 
   render() {
@@ -57,12 +59,14 @@ export default class HomeSCR extends React.Component {
         {error &&
           <Text>Error...</Text>}
         {!error && (
-          <Button onPress={this.onclick} title="seach" />
+          <Homepage />
         )}
       </View>
     );
   }
 }
+
+// <Button onPress={this.onclick} title="seach" />
 
 const styles = StyleSheet.create({
   container: {

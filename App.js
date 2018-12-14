@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import HomePage from './Components/Homepage/Homepage'
+// import HomePage from './components/Homepage/Homepage'
 
 
 
@@ -9,6 +9,7 @@ import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
+
 
 
 const instructions = Platform.select({
@@ -34,12 +35,16 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <HomePage updateLocation={this.updateLocation} location={this.state.location}/>
-      </View>
+      <AppNavigator />
     );
   }
 }
+
+//  <AppNavigator />
+
+// <View style={styles.container}>
+//   <HomePage updateLocation={this.updateLocation} location={this.state.location}/>
+// </View>
 
 const styles = StyleSheet.create({
   container: {
