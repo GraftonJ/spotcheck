@@ -1,11 +1,38 @@
 import React from 'react';
 import {StyleSheet, Text, View, KeyboardAvoidingView, TextInput, SafeAreaView, ImageBackground, Image, Alert, TouchableOpacity} from 'react-native'
 
+import store from '../../store';
 
 export default class HomePage extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchFor: '',
+    }
+  }
+
+  onchangeSearchFor = (text) => {
+    console.log('onchangeSearchFor(): ', text);
+    // store.setState({
+    //   searchFor: text,
+    // });
+    this.setState({
+      searchFor: text,
+    })
+  }
+
   onpressSearch = () => {
-    this.props.navigate('ResultsSCR');
+    console.log('onpressSearch()');
+    console.log('state', this.state);
+    console.log('store', store.getState().searchFor);
+    const searchFor = this.state.searchFor.trim();
+    if (searchFor.length) {
+      this.props.navigate('ResultsSCR', { searchFor } );
+    }
+    else {
+      Alert.alert("Grrrr", "Please enter a city and state")
+    }
   }
 
   render() {
@@ -24,7 +51,8 @@ export default class HomePage extends React.Component {
             placeholderTextColor="black"
             style={styles.textInput}
             clearButtonMode="always"
-            onChangeText={this.props.updateLocation}
+            value={this.state.searchFor}
+            onChangeText={this.onchangeSearchFor}
           />
 
           <TouchableOpacity
@@ -63,7 +91,7 @@ textInput: {
   backgroundColor: 'rgba(222, 224, 226, 0.8)',
   borderWidth: 1,
   borderRadius: 5,
-  color: 'white',
+  color: 'black',
   height: 40,
   width: 300,
   marginTop: 10,

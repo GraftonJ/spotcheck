@@ -33,11 +33,15 @@ export default class ResultsSCR extends React.Component {
   }
 
   componentWillUnmount() {
+    console.log("ResultsSCR::unmount()");
     this.unsubscribe();
   }
 
   render() {
     const { isLoading } = this.state;
+
+    const searchText = this.props.navigation.state.params.searchText;
+    console.log("ResultsSCR::render: ",searchText);
 
     return (
       <View style={styles.container}>
