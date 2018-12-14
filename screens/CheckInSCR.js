@@ -8,13 +8,13 @@ import colors from '../utils/colors'
 import store from '../store';
 
 export default class CheckInSCR extends React.Component {
-  // static navigationOptions = ({ navigation: { navigate } }) => ({
-  //   title: 'Check-in Page',
-  //   headerTintColor: 'white',
-  //   headerStyle: {
-  //     backgroundColor: colors.blue,
-  //   },
-  // });
+  static navigationOptions = ({ navigation: { navigate } }) => ({
+    title: 'Check-in',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: colors.blue,
+    },
+  });
 
   state = {
     isLoading: true,

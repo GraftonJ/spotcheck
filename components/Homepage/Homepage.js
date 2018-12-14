@@ -3,6 +3,11 @@ import {StyleSheet, Text, View, KeyboardAvoidingView, TextInput, SafeAreaView, I
 
 
 export default class HomePage extends React.Component {
+
+  onpressSearch = () => {
+    this.props.navigate('ResultsSCR');
+  }
+
   render() {
     return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -24,8 +29,7 @@ export default class HomePage extends React.Component {
 
           <TouchableOpacity
               style={styles.button}
-              onPress={() => {
-              Alert.alert('You tapped the button!')}}>
+              onPress={this.onpressSearch}>
             <Text >Fetch!</Text>
           </TouchableOpacity>
         </View>

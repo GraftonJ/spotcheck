@@ -1,4 +1,4 @@
-// listSCR.js
+// resultsSCR.js
 // Wraps the list component
 
 import React from 'react';
@@ -7,14 +7,16 @@ import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import colors from '../utils/colors'
 import store from '../store';
 
-export default class ListSCR extends React.Component {
-  // static navigationOptions = ({ navigation: { navigate } }) => ({
-  //   title: 'Check-in Page',
-  //   headerTintColor: 'white',
-  //   headerStyle: {
-  //     backgroundColor: colors.blue,
-  //   },
-  // });
+import Results from '../components/Results/Results'
+
+export default class ResultsSCR extends React.Component {
+  static navigationOptions = ({ navigation: { navigate } }) => ({
+    title: 'Results',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: colors.blue,
+    },
+  });
 
   state = {
     isLoading: true,
@@ -47,12 +49,14 @@ export default class ListSCR extends React.Component {
         )}
 
         {!isLoading && (
-          <Text>Listing page</Text>
+          <Results />
         )}
       </View>
     );
   }
 }
+
+// <Text>Listing page</Text>
 
 const styles = StyleSheet.create({
   container: {

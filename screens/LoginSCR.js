@@ -10,13 +10,13 @@ import store from '../store';
 import Login from '../components/Login/Login';
 
 export default class LoginSCR extends React.Component {
-  // static navigationOptions = ({ navigation: { navigate } }) => ({
-  //   title: 'Login Page',
-  //   headerTintColor: 'white',
-  //   headerStyle: {
-  //     backgroundColor: colors.blue,
-  //   },
-  // });
+  static navigationOptions = ({ navigation: { navigate } }) => ({
+    title: 'Login',
+    headerTintColor: 'black',
+    headerStyle: {
+      backgroundColor: colors.white,
+    },
+  });
 
   state = {
     user: store.getState().user,
@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.blue,
+    backgroundColor: colors.white,
   },
 });

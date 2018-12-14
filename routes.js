@@ -4,7 +4,7 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
-import ListSCR from './screens/ListSCR'
+import ResultsSCR from './screens/ResultsSCR'
 
 import colors from './utils/colors';
 
@@ -18,8 +18,8 @@ const SearchScreens = StackNavigator(
     HomeSCR: {
       screen: HomeSCR,
     },
-    ListSCR: {
-      screen: ListSCR,
+    ResultsSCR: {
+      screen: ResultsSCR,
     },
   },
   {
@@ -54,7 +54,7 @@ const LoginScreen = StackNavigator(
     // mode: 'modal',
     initialRouteName: 'LoginSCR',
     navigationOptions: {
-      // tabBarIcon: getTabBarIcon('person'),
+    // tabBarIcon: getTabBarIcon('person'),
     },
   },
 );

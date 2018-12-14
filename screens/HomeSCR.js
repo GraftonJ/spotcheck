@@ -17,13 +17,13 @@ import Homepage from '../components/Homepage/Homepage'
 export default class HomeSCR extends React.Component {
   // const { navigation: { navigate } } = this.props;
   navigate = this.props.navigation.navigate;
-  // static navigationOptions = ({ navigation: { navigate } }) => ({
-  //   title: 'Search Page',
-  //   headerTintColor: 'white',
-  //   headerStyle: {
-  //     backgroundColor: colors.blue,
-  //   },
-  // });
+  static navigationOptions = ({ navigation: { navigate } }) => ({
+    title: 'Search',
+    headerTintColor: 'black',
+    headerStyle: {
+      backgroundColor: colors.white,
+    },
+  });
 
   state = {
     seachFor: store.getState().searchFor,
@@ -48,7 +48,7 @@ export default class HomeSCR extends React.Component {
   onclick = () => {
     console.log('click');
     console.log(this.props);
-    this.props.navigation.navigate('ListSCR')
+    this.props.navigation.navigate('ResultsSCR')
   }
 
   render() {
@@ -59,7 +59,7 @@ export default class HomeSCR extends React.Component {
         {error &&
           <Text>Error...</Text>}
         {!error && (
-          <Homepage />
+          <Homepage navigate={this.props.navigation.navigate}/>
         )}
       </View>
     );
@@ -73,6 +73,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.blue,
+    backgroundColor: colors.white,
   },
 });
