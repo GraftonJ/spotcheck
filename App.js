@@ -8,7 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import ResultCards from './Components/ResultCards/ResultCards'
+import HomePage from './Components/Homepage/Homepage'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -34,7 +34,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <ResultCards />
+        <HomePage updateLocation={this.updateLocation} location={this.state.location}/>
       </View>
     );
   }
