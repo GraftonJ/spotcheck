@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button} from 'react-native'
 
-export default class Resut extends React.Component {
+export default class Result extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.cardContainer}>
