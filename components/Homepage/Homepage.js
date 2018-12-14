@@ -5,7 +5,6 @@ import { Fonts } from '../../assets/fonts/fonts'
 import store from '../../store';
 
 export default class HomePage extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
