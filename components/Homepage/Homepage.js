@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, KeyboardAvoidingView, TextInput, SafeAreaView, ImageBackground, Image, Alert, TouchableOpacity} from 'react-native'
+import { Fonts } from '../../assets/fonts/fonts'
 
 import store from '../../store';
 
@@ -56,7 +57,7 @@ export default class HomePage extends React.Component {
         imageStyle={styles.image}
         >
         <View style={styles.container}>
-          <Text style={styles.textStyle}>Enter Location</Text>
+          <Text style={styles.textStyle}>Spot Check</Text>
           <TextInput
             autoFocus
             autoCorrect={false}
@@ -85,16 +86,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+
   },
   textStyle: {
+    marginTop: '25%',
     textAlign: 'center',
     color: 'white',
-    fontSize: 25,
+    fontSize: 45,
+    fontFamily: 'MontSerrat',
+    letterSpacing: 1,
     fontWeight: 'bold',
-  textShadowColor: 'rgba(0, 0, 0, 0.75)',
-  textShadowOffset: {width: -1, height: 1},
-  textShadowRadius: 10
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10
   },
 
   smallText: {
@@ -105,9 +109,9 @@ textInput: {
   borderWidth: 1,
   borderRadius: 5,
   color: 'black',
-  height: 40,
+  height: 1,
   width: 300,
-  marginTop: 10,
+  marginTop: '60%',
   marginHorizontal: 20,
   paddingHorizontal: 10,
   alignSelf: 'center',
