@@ -1,6 +1,9 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import HomePage from './Components/Homepage/Homepage'
+
+
 
 import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
@@ -17,9 +20,23 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: '' };
+  }
+
+  updateLocation = (text) => {
+    this.setState({
+      ...this.state,
+      location: text,
+      })
+  }
   render() {
     return (
-      <AppNavigator />
+      <View style={styles.container}>
+        <HomePage updateLocation={this.updateLocation} location={this.state.location}/>
+      </View>
     );
   }
 }
