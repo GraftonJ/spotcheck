@@ -12,11 +12,13 @@ import {
   Alert,
   TouchableOpacity} from 'react-native';
 
+  import store from '../../store';
+
 
 const Results = () => (
   <SafeAreaView style={styles.container}>
 
-    <Text>Results</Text>
+    <Text>Results for: {store.getState().searchFor}</Text>
 
   </SafeAreaView>
 )

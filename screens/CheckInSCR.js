@@ -16,33 +16,10 @@ export default class CheckInSCR extends React.Component {
     },
   });
 
-  state = {
-    isLoading: true,
-  };
-
-  async componentDidMount() {
-
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
   render() {
-    const { isLoading } = this.state;
-
     return (
       <View style={styles.container}>
-        {isLoading && (
-          <View style={styles.container}>
-            <Text>Searching for restaurant to check into</Text>
-            <ActivityIndicator size="large" />
-          </View>
-        )}
-
-        {!isLoading && (
-          <Text>Check in to location</Text>
-        )}
+        <Text>Check in to location</Text>
       </View>
     );
   }
