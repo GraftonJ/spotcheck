@@ -8,25 +8,37 @@ export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchFor: '',
+      searchFor: store.getState().searchFor,
+      error: store.getState().error,
+
+      unsubscribe: null,
     }
   }
 
+  componentDidMount() {
+    this.unsubscribe = store.onChange(() => {
+      this.setState({
+        searchFor: store.getState().searchFor,
+        error: store.getState().error,
+      })
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   onchangeSearchFor = (text) => {
-    console.log('onchangeSearchFor(): ', text);
-    // store.setState({
-    //   searchFor: text,
-    // });
-    this.setState({
+    // console.log('HomePage::onchangeSearchFor(): ', text);
+    store.setState({
       searchFor: text,
-    })
+    });
   }
 
   onpressSearch = () => {
     console.log('onpressSearch()');
-    console.log('state', this.state);
-    console.log('store', store.getState().searchFor);
     const searchFor = this.state.searchFor.trim();
+
     if (searchFor.length) {
       this.props.navigate('ResultsSCR', { searchFor } );
     }
@@ -46,6 +58,7 @@ export default class HomePage extends React.Component {
         <View style={styles.container}>
           <Text style={styles.textStyle}>Enter Location</Text>
           <TextInput
+            autoFocus
             autoCorrect={false}
             placeholder="Search any city"
             placeholderTextColor="black"
