@@ -3,14 +3,12 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, SafeAreaView} from 'react-native';
 // import HomePage from './components/Homepage/Homepage'
 //Testing DetailCard Component below
-import DetailCard from './components/DetailCard/DetailCard'
+import ResultCards from './components/ResultCards/ResultCards'
 
 import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
-
-
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -36,7 +34,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <DetailCard />
+        <ResultCards />
       </SafeAreaView>
       //<AppNavigator />
     );
