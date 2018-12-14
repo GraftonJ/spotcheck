@@ -7,9 +7,10 @@ import t from 'tcomb-form-native'
 
 const Form = t.form.Form;
 const User = t.struct({
+  name: t.String,
   email: t.String,
-  username: t.String,
   password: t.String,
+  NameOfDog: t.String,
 })
 
 
@@ -18,32 +19,22 @@ onpressLogin = (e) => {
 }
 
 
-const Login = () => (
+const Register = () => (
   <SafeAreaView style={styles.container}>
 
     <View style={styles.circle}>
       <Image style={styles.image} source={require('../../assets/images/loginDog.jpg')} />
     </View>
 
-    <Text style={styles.text}>Login, WOOF!</Text>
+    <Text style={styles.text}>Create Account</Text>
 
     <View style={{width: '85%'}}>
       <Form style={styles.form} type={User} />
     </View>
     <TouchableOpacity
-        style={styles.button}
         onPress={this.onpressLogin}>
-      <Text >Login</Text>
+      <Text   style={styles.createAccount}>Create Account</Text>
     </TouchableOpacity>
-
-    <Text style={styles.newAccount, {marginBottom: 5}}>or</Text>
-
-    <TouchableOpacity
-
-        onPress={this.onpressLogin}>
-      <Text style={styles.newAccount} >Create New Account</Text>
-    </TouchableOpacity>
-
 
   </SafeAreaView>
 
@@ -64,6 +55,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 25,
+    letterSpacing: 1,
     marginBottom: 10,
   },
   image: {
@@ -80,22 +72,12 @@ const styles = StyleSheet.create({
     borderRadius:75,
     padding: 22,
   },
-  button: {
-    width: '25%',
-    height: '4%',
-    borderWidth: 1,
-    borderRadius: 10,
-    backgroundColor: 'white',
-    marginTop: 10,
-    marginBottom: 25,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  newAccount : {
-    fontSize: 10,
-    letterSpacing: 1,
-    margin: 2
+  createAccount : {
+    fontSize: 15,
+    fontWeight: 'bold',
+    letterSpacing: -1,
+    marginTop: 2,
   }
 })
 
-export default Login
+export default Register
