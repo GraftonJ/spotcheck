@@ -6,7 +6,7 @@ let state = {
 
   // Search location set by homePG
   // Used to load the list of locations in listPG
-  seachFor: "Boulder, CO",
+  searchFor: "",
 
   // Locations set by listPG after locations loaded from Yelp
   /* [
@@ -54,6 +54,13 @@ export default {
   },
   setState(newState) {
     state = { ...state, ...newState };
+    // console.log("---------------- store::setState ----------------------");
+    // console.log("Adding: ", newState);
+    // console.log("-------------------------------------");
+    // console.log("New store: ", state);
+    // console.log("-------------------------------------");
+    // console.log("Listener count: ", listeners.length);
+    // console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     listeners.forEach(listener => listener());
   },
   onChange(newListener) {
