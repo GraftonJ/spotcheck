@@ -9,7 +9,6 @@ import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
-import CommentsCards from './components/CommentsCards/CommentsCards'
 
 // import Register from './components/Login/NewAccount'
 
@@ -36,9 +35,7 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <View style={styles.container}>
-    <CommentsCards />
-  </View>
+      <AppNavigator />
     );
   }
 }
