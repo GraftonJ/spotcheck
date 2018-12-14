@@ -10,7 +10,7 @@ import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
 
-import Register from './components/Login/NewAccount'
+// import Register from './components/Login/NewAccount'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -35,7 +35,7 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <Register />
+      <AppNavigator />
     );
   }
 }
