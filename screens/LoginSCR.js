@@ -1,0 +1,61 @@
+// loginSCR.js
+// Wraps the login component
+
+import React from 'react';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+
+import colors from '../utils/colors'
+import store from '../store';
+
+export default class LoginSCR extends React.Component {
+  // static navigationOptions = ({ navigation: { navigate } }) => ({
+  //   title: 'Login Page',
+  //   headerTintColor: 'white',
+  //   headerStyle: {
+  //     backgroundColor: colors.blue,
+  //   },
+  // });
+
+  state = {
+    user: store.getState().user,
+    error: store.getState().error,
+  };
+
+  componentDidMount() {
+    this.unsubscribe = store.onChange(() =>
+      this.setState({
+        user: store.getState().user,
+        error: store.getState().error,
+      }));
+    const { user } = this.state;
+    store.setState({ user });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  render() {
+    const { user, error } = this.state;
+
+    return (
+      <View style={styles.container}>
+        {error &&
+          <Text>Error...</Text>}
+
+        {!error && (
+          <Text>Login page, curr user: {user.fname} {user.lname}</Text>
+        )}
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.blue,
+  },
+});
