@@ -2,8 +2,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, SafeAreaView} from 'react-native';
 // import HomePage from './components/Homepage/Homepage'
-//Testing DetailCard Component below
-import ResultCards from './components/ResultCards/ResultCards'
+// import ResultCards from './components/ResultCards/ResultCards'
 
 import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
@@ -33,10 +32,7 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <ResultCards />
-      </SafeAreaView>
-      //<AppNavigator />
+      <AppNavigator />
     );
   }
 }
