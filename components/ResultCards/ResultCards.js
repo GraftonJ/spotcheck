@@ -1,11 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button} from 'react-native'
 
-export default class ResultCards extends React.Component {
+export default class DetailCard extends React.Component {
   render() {
     return (
-      <SafeAreaView style={styles.cardContainer}>
-        <View style={styles.card}>
+        <SafeAreaView style={styles.card}>
           <Image style={styles.image} source={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/nbfrWWtz6lRUaxYtw9PNQA/o.jpg'}} />
 
           <View style={styles.cardTopLine}>
@@ -23,19 +22,12 @@ export default class ResultCards extends React.Component {
           <View style={styles.cardBottomLine}>
             <Text style={styles.cardBottomLine}>251 North Main St.</Text>
           </View>
-        </View>
-      </SafeAreaView>
+        </SafeAreaView>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   card: {
     width: '99%',
     height: '50%',

@@ -1,47 +1,68 @@
 import React from 'react';
-import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button} from 'react-native'
+import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView} from 'react-native'
 
 export default class DetailCard extends React.Component {
   render() {
     return (
-        <SafeAreaView style={styles.card}>
-          <Image style={styles.image} source={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/nbfrWWtz6lRUaxYtw9PNQA/o.jpg'}} />
+        <ScrollView style={styles.card}>
+          <View style={styles.imageContainer}>
+            <Image resizeMode={'contain'} style={styles.image} source={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/nbfrWWtz6lRUaxYtw9PNQA/o.jpg'}} />
+          </View>
 
           <View style={styles.cardTopLine}>
             <Text style={styles.name}>Avery Brewery</Text>
             <Text style={styles.checkin}>79 Check-ins here!</Text>
           </View>
 
-          <View style={styles.cardMiddleLine}>
+          <View style={styles.cardSecondLine}>
             <Text style={styles.price}>$$ -</Text>
             <Text style={styles.category}> Brewery -</Text>
             <Text style={styles.rating}> ☆☆☆☆☆</Text>
             <Text style={styles.ratingCount}> (797)</Text>
           </View>
 
-          <View style={styles.cardBottomLine}>
-            <Text style={styles.cardBottomLine}>251 North Main St.</Text>
+          <View style={styles.cardThirdLine}>
+            <Text style={styles.cardThirdLine}>251 North Main St.</Text>
           </View>
-        </SafeAreaView>
+
+          <View style={styles.cardFourthLine}>
+            <Text style={styles.directions}>Directions</Text>
+            <Text style={styles.openNow}> Open Now</Text>
+            <Text style={styles.call}> Call</Text>
+          </View>
+
+          <View style={styles.cardFifthLine}>
+            <Text >Leave a Rating or Comment </Text>
+          </View>
+
+          <View style={styles.starRating}>
+            <Text style={styles.starRating}>☆☆☆☆☆</Text>
+          </View>
+        </ScrollView>
     )
   }
 }
+const win = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   card: {
     width: '99%',
-    height: '50%',
+    height: '100%',
     backgroundColor: 'white',
-    borderColor: 'black',
-    borderWidth: 1,
-    margin: 15,
     marginBottom: 0,
-    backgroundColor: '#F4F4F4'
+    backgroundColor: '#F4F4F4',
+    borderColor: 'black',
+    borderWidth: 5,
+  },
+  imageContainer: {
+    width: '100%',
+    height: 250,
   },
   image: {
-    width: '100%',
-    height: '60%',
-
+    flex: 1,
+    alignItems: 'flex-start',
+    width: win.width,
+    height: win.height,
   },
   cardTopLine: {
     flexDirection: 'row',
@@ -58,7 +79,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'Arial',
   },
-  cardMiddleLine: {
+  cardSecondLine: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -76,10 +97,39 @@ const styles = StyleSheet.create({
   category: {
     fontSize: 20,
   },
-  cardBottomLine: {
+  cardThirdLine: {
     flexDirection: 'row',
     justifyContent: 'center',
     fontSize: 20,
     marginTop: 2,
+  },
+  cardFourthLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  directions: {
+    marginLeft: 20,
+    fontSize: 20,
+  },
+  call: {
+    marginRight: 20,
+    fontSize: 20,
+  },
+  openNow: {
+    fontSize: 20,
+  },
+  cardFifthLine: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    fontSize: 20,
+  },
+  starRating: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 30,
   },
 })

@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, SafeAreaView} from 'react-native';
 // import HomePage from './components/Homepage/Homepage'
 //Testing DetailCard Component below
 import DetailCard from './components/DetailCard/DetailCard'
@@ -35,9 +35,9 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <DetailCard />
-      </View>
+      </SafeAreaView>
       //<AppNavigator />
     );
   }
