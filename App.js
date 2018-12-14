@@ -2,8 +2,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 // import HomePage from './components/Homepage/Homepage'
-
-
+//Testing DetailCard Component below
+import DetailCard from './components/DetailCard/DetailCard'
 
 import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
@@ -35,7 +35,10 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <AppNavigator />
+      <View style={styles.container}>
+        <DetailCard />
+      </View>
+      //<AppNavigator />
     );
   }
 }
