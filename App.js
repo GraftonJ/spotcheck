@@ -8,7 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import Homepage from './components/Homepage/Homepage'
+import HomePage from './Components/Homepage/Homepage'
 
 
 
@@ -36,7 +36,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-      <Homepage />
+        <HomePage updateLocation={this.updateLocation} location={this.state.location}/>
       </View>
     );
   }
