@@ -11,57 +11,32 @@ import {
   Alert,
   TouchableOpacity} from 'react-native';
 
-  // import store from '../../store';
-
-
-
-
-  const config = {
-    headers: {'Authorization': 'Bearer VkRXEkxkuMiPqFY3xuJdHIMU3ggnwWrKaeCdL-cMm5Mh0q_b-OyMhmdZDMf8xSrbV0BPdAaPtu0aVY2vlHRCQ1JZzFl0N-ahFSjwDY16uAvQ0YviTfxrydO32n6dW3Yx'},
-    params: {
-      term: 'dog friendly restaurants',
-      location: 'Boulder, CO'
-    }
-  }
-
-  const API = 'https://api.yelp.com/v3/businesses/search'
-
-  const getResults = async () => {
-    const response = await fetch(`${API}?location=${config.params.location}`, config)
-    const json = await response.json()
-    console.log(json)
-    return json
-  }
+  import store from '../../store';
+  import { getResults } from '../../utils/api'
 
 
 export default class Results extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      results: []
+      locations: store.getState().locations
     }
   }
 
-
-  async componentWillMount() {
-    const response = await fetch(`${API}`, config)
-    const json = await getResults()
-    this.setState({
-      results: json
+  async componentDidMount() {
+    const json = await getResults(`Boulder, CO`)
+    store.setState({
+      locations: json
     })
 }
+
+
 
 render() {
   return (
     <Text>Results</Text>
   )
 }
-
-  // <SafeAreaView style={styles.container}>
-  //
-  //   <Text>Results for: {store.getState().searchFor}</Text>
-  //
-  // </SafeAreaView>
 }
 
 const styles = StyleSheet.create({

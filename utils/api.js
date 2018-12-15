@@ -22,50 +22,9 @@ import {
 
   const API = 'https://api.yelp.com/v3/businesses/search'
 
-  const getResults = async (location) => {
+  export const getResults = async (location) => {
     config.params.location = location
     const response = await fetch(`${API}?term=${config.params.term}&location=${location}`, config)
     const json = await response.json()
     return json.businesses
   }
-
-
-
-export default class Results extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      results: []
-    }
-  }
-
-  async componentDidMount() {
-    const response = await fetch(`${API}`, config)
-    const json = await getResults('Boulder, CO')
-    console.log('JSON is>>>', json);
-    this.setState({
-      results: json
-    })
-    console.log('This.state is>>>', this.state.results);
-}
-
-render() {
-  return (
-    <Text>Results</Text>
-  )
-}
-
-  // <SafeAreaView style={styles.container}>
-  //
-  //   <Text>Results for: {store.getState().searchFor}</Text>
-  //
-  // </SafeAreaView>
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent:'center',
-  },
-})
