@@ -32,12 +32,12 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <LoginSCR />
+      <AppNavigator />
     );
   }
 }
 
-  // <LoginSCR />
+//  <LoginSCR />
 //  <AppNavigator />
 
 // <View style={styles.container}>
