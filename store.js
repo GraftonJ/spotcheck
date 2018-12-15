@@ -8,7 +8,7 @@ let state = {
 
   // Search location set by homePG
   // Used to load the list of locations in listPG
-  searchFor: "Boulder, CO",
+  searchFor: "",
 
   // Locations set by listPG after locations loaded from Yelp
   /* [
