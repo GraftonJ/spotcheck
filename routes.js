@@ -21,6 +21,9 @@ const SearchScreens = StackNavigator(
     ResultsSCR: {
       screen: ResultsSCR,
     },
+    // DetailCardSCR: {
+    //   screen: DetailCardSCR,
+    // }
   },
   {
     initialRouteName: 'HomeSCR',
