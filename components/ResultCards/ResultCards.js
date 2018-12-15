@@ -6,6 +6,14 @@ export default class ResultCards extends React.Component {
     super(props)
   }
 
+
+  onpressDetails = () => {
+    Alert.alert('Details Button hooked Up!');
+// console.log('***********', this.props)
+      // this.props.navigate('DetailCardSCR');
+
+  }
+
   render() {
     return (
 
@@ -35,7 +43,9 @@ export default class ResultCards extends React.Component {
           </View>
 
           <View style={styles.details}>
-            <Text>Detail Button</Text>
+            <TouchableOpacity onPress={this.onpressDetails}>
+              <Text>View Details</Text>
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
 
