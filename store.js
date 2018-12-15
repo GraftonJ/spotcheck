@@ -34,14 +34,15 @@ let state = {
        email: "jd@gmail.com",
        dogNames: "Sparky and Tilde",
      } */
-  // FIX: set to null when we do real login
-  // user: null,
-  user: {
-    fname: "Jane",
-    lname: "Doe",
-    email: "jd@gmail.com",
-    dogNames: "Sparky and Tilde",
-  },
+  user: null,
+  isLoggedIn: false,
+  // user: {
+  //   id: 1234,
+  //   fname: "Jane",
+  //   lname: "Doe",
+  //   email: "jd@gmail.com",
+  //   dogNames: "Sparky and Tilde",
+  // },
 
   // Global error state
   // Not sure if this will be used
