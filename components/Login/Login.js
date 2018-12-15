@@ -24,46 +24,36 @@ const User = t.struct({
 
 export default class HomeSCR extends React.Component {
 
-  state: {
-    // local state not connected to store
-    email: '',
-    password: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      // local state
+      value: { // this is used by the "Form" thing
+        email: 'nuser@gmail.com', // stores the form value
+        password: 'secret', // stores the form value
+      },
+      loginErrorMsg: '', // error message for failed login
+    }
   }
 
-  // /* ********************************************* */
-  // onchangeName = (text) => {
-  //   // console.log('Login::onchangeEmail(): ', text);
-  //   this.setState({
-  //     email: text,
-  //   });
-  // }
-  /* ********************************************* */
-  // onchangePassword = (text) => {
-  //   // console.log('Login::onchangePassword(): ', text);
-  //   this.setState({
-  //     password: text,
-  //   });
+  // state: {
+  //   // local state
+  //   loginErrorMsg: '',
   // }
 
   /* ********************************************* */
-  onpressLogin = async () => {
-    console.log("Login::onpressLogin()");
+  async asyncTryLogin(email, password) {
+    console.log("-- asyncTryLogin(): ", email, password);
 
-    var value = this.refs.myform.getValue();
-    console.log("value: ",value);
-    if (!value) {
-      Alert.alert("Grrrr", "Please fill in all fields");
-      return;
-    }
-    const { email, password } = value;
-
-    console.log("email: ", email);
-    console.log("password: ", password);
+    this.setState({
+      loginErrorMsg: '',
+    })
 
     const body = { email, password };
     const url = `${URI}/users/login`;
-    console.log("=== url ", url);
+
     try {
+      // call login route
       const response = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(body),
@@ -73,7 +63,23 @@ export default class HomeSCR extends React.Component {
         },
       });
       const responseJson = await response.json();
-      console.log('==== ', response.status, responseJson);
+
+      // if the login fails, display error message
+      if (!response.ok) {
+        console.log('==== ', response.status, responseJson);
+        this.setState({
+          loginErrorMsg: responseJson.error,
+        })
+        return;
+      }
+
+      // login succeeded!
+      // console.log("+++ login success!: ", responseJson);
+      console.log("+++ login success .user!: ", responseJson.user);
+      // console.log("+++ login success .user.user!: ", responseJson.user.user);
+      store.setState({
+        user: responseJson.user,
+      });
     }
     catch(err) {
       console.log("ERROR onpressLogin fetch failed: ", err);
@@ -81,7 +87,34 @@ export default class HomeSCR extends React.Component {
   }
 
   /* ********************************************* */
+  onpressLogin = async () => {
+    console.log("Login::onpressLogin()");
+
+    var value = this.refs.myform.getValue();
+    console.log("value: ",value);
+
+    // check that user filled in the fields
+    if (!value) {
+      // Alert.alert("Grrrr", "Please fill in all fields");
+      return;
+    }
+    const { email, password } = value;
+    const success = await this.asyncTryLogin(email, password);
+    console.log("---- login success: ", success);
+  }
+
+  /* ********************************************* */
+  onChange = (value) => {
+    console.log('xxxx onChange(): ', value);
+    this.setState({value});
+  }
+
+  /* ********************************************* */
   render() {
+    const { loginErrorMsg } = this.state;
+    const displayErrorMessage = 0 !== loginErrorMsg.length;
+    console.log("+++ render error msg: ", loginErrorMsg);
+    console.log("+++ render state: ", this.state);
     return (
       <SafeAreaView style={styles.container}>
 
@@ -92,8 +125,16 @@ export default class HomeSCR extends React.Component {
         <Text style={styles.text}>Login, WOOF!</Text>
 
         <View style={{ width: '85%' }}>
-          <Form ref="myform" style={styles.form} type={User} />
+          <Form
+            ref="myform"
+            style={styles.form}
+            value={this.state.value}
+            onChange={this.onChange}
+            type={User} />
         </View>
+        {displayErrorMessage && (
+          <Text style={styles.errorMessage}>{loginErrorMsg}</Text>
+        )}
         <TouchableOpacity
           style={styles.button}
           onPress={this.onpressLogin}>
@@ -125,6 +166,9 @@ const styles = StyleSheet.create({
     height: '70%',
     width: '90%',
   },
+  form: {
+
+  },
   text: {
     fontSize: 25,
     marginBottom: 10,
@@ -133,6 +177,9 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
 
+  },
+  errorMessage: {
+    color: "red",
   },
   circle: {
     marginBottom: 25,
