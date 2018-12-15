@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, SafeAreaView} from 'react-native';
 // import HomePage from './components/Homepage/Homepage'
-// import ResultCards from './components/ResultCards/ResultCards'
+import ResultCards from './components/ResultCards/ResultCards'
 
 import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
@@ -37,6 +37,7 @@ export default class App extends Component<Props> {
   }
 }
 
+  // <LoginSCR />
 //  <AppNavigator />
 
 // <View style={styles.container}>

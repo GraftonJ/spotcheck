@@ -22,7 +22,7 @@ import {
 
   const API = 'https://api.yelp.com/v3/businesses/search'
 
-  const getResults = async (location) => {
+  export const getResults = async (location) => {
     config.params.location = location
     const response = await fetch(`${API}?term=${config.params.term}&location=${location}`, config)
     const json = await response.json()
