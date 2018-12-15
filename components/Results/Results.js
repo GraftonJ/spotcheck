@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   KeyboardAvoidingView,
   TextInput,
   SafeAreaView,
@@ -41,6 +42,7 @@ export default class Results extends React.Component {
     })
     console.log('Store state is>>', store.getState().locations);
 }
+
   componentWillUnmount() {
     this.unsubscribe();
   }
@@ -54,12 +56,13 @@ render() {
     )
   }
   return (
-      <View>
-        <Text>Test Text</Text>
+      <ScrollView>
         {locations.map(result => (
-          <Text>MAP</Text>
+          <ResultCards
+            key={result.id}
+            result={result}/>
         ))}
-      </View>
+      </ScrollView>
     )
 }
 }

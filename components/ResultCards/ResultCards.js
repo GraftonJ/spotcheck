@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button} from 'react-native'
+import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView} from 'react-native'
 
 export default class ResultCards extends React.Component {
   constructor(props) {
@@ -7,11 +7,12 @@ export default class ResultCards extends React.Component {
   }
   render() {
     return (
+
         <SafeAreaView style={styles.card}>
           <Image style={styles.image} source={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/nbfrWWtz6lRUaxYtw9PNQA/o.jpg'}} />
 
           <View style={styles.cardTopLine}>
-            <Text style={styles.name}>{this.props.result.name}</Text>
+            <Text style={styles.name}>Avery</Text>
             <Text style={styles.checkin}>79 Check-ins here!</Text>
           </View>
 
@@ -26,14 +27,15 @@ export default class ResultCards extends React.Component {
             <Text style={styles.cardBottomLine}>251 North Main St.</Text>
           </View>
         </SafeAreaView>
+
     )
   }
 }
 
 const styles = StyleSheet.create({
   card: {
-    width: '99%',
-    height: '50%',
+    width: 300,
+    height: 300,
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
