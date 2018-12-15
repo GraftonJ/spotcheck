@@ -2,13 +2,16 @@ import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button} from 'react-native'
 
 export default class ResultCards extends React.Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
     return (
         <SafeAreaView style={styles.card}>
           <Image style={styles.image} source={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/nbfrWWtz6lRUaxYtw9PNQA/o.jpg'}} />
 
           <View style={styles.cardTopLine}>
-            <Text style={styles.name}>Avery Brewery</Text>
+            <Text style={styles.name}>{this.props.result.name}</Text>
             <Text style={styles.checkin}>79 Check-ins here!</Text>
           </View>
 

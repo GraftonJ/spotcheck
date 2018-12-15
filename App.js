@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, SafeAreaView} from 'react-native';
-// import HomePage from './components/Homepage/Homepage'
+import Results from './components/Results/Results'
 
 
 import AppNavigator from './routes';
@@ -32,7 +32,9 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <LoginSCR />
+      <SafeAreaView style={styles.container}>
+        <Results />
+      </SafeAreaView>
     );
   }
 }
