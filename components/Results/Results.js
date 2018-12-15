@@ -24,6 +24,7 @@ export default class Results extends React.Component {
     this.state = {
       locations: store.getState().locations,
       isLoading: true,
+      error: false
     }
   }
 
@@ -39,6 +40,14 @@ export default class Results extends React.Component {
     store.setState({
       locations: json,
     })
+
+  if(json === undefined){
+    this.setState({
+      error: true,
+      isLoading: false,
+    })
+  }
+
     this.setState({
       isLoading: false
     })
@@ -50,7 +59,7 @@ export default class Results extends React.Component {
   }
 
 render() {
-  const { isLoading, locations } = this.state;
+  const { isLoading, locations, error } = this.state;
 
   if (isLoading) {
     return (
@@ -59,15 +68,23 @@ render() {
         color="#3399ff" />
     )
   }
-  return (
-      <ScrollView>
-        {locations.map(result => (
-          <ResultCards
-            key={result.id}
-            result={result}/>
-        ))}
-      </ScrollView>
+
+  if(error) {
+    return (
+      <Text>Uhoh Puppo! No restaurants found!</Text>
     )
+  } else {
+    return (
+        <ScrollView>
+          {locations.map(result => (
+            <ResultCards
+              key={result.id}
+              result={result}/>
+          ))}
+        </ScrollView>
+      )
+  }
+
 }
 }
 
@@ -77,4 +94,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
   },
+
 })
