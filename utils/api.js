@@ -31,29 +31,29 @@ import {
 
 
 
-export default class Results extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      locations: store.getState().locations
-    }
-  }
-
-  async componentDidMount() {
-    const response = await fetch(`${API}`, config)
-    const json = await getResults('Boulder, CO')
-    console.log('JSON is>>>', json);
-    store.setState({
-      locations: json
-    })
-    console.log('STORE DATA LINKED HOPEFULLY is>>>', store.getState().locations);
-}
-
-render() {
-  return (
-    <Text>Results</Text>
-  )
-}
+// export default class Results extends React.Component {
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       locations: store.getState().locations
+//     }
+//   }
+//
+//   async componentDidMount() {
+//     const response = await fetch(`${API}`, config)
+//     const json = await getResults('Boulder, CO')
+//     console.log('JSON is>>>', json);
+//     store.setState({
+//       locations: json
+//     })
+//     console.log('STORE DATA LINKED HOPEFULLY is>>>', store.getState().locations);
+// }
+//
+// render() {
+//   return (
+//     <Text>Results</Text>
+//   )
+// }
 
   // <SafeAreaView style={styles.container}>
   //
