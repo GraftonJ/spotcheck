@@ -24,22 +24,37 @@ const User = t.struct({
 
 export default class HomeSCR extends React.Component {
 
+  /* ********************************************* */
   constructor(props) {
     super(props);
     this.state = {
+      // connected to global store
+      isLoggedIn: false,
+
       // local state
       value: { // this is used by the "Form" thing
-        email: 'nuser@gmail.com', // stores the form value
-        password: 'secret', // stores the form value
+        email: 'nuser@gmail.com', // holds the form value
+        password: 'secret', // holds the form value
       },
       loginErrorMsg: '', // error message for failed login
     }
   }
 
-  // state: {
-  //   // local state
-  //   loginErrorMsg: '',
-  // }
+  /* ********************************************* */
+  componentDidMount() {
+    this.unsubscribe = store.onChange(() => {
+      this.setState({
+        isLoggedIn: null !== store.getState().user,
+      })
+    });
+  }
+
+  /* ********************************************* */
+  componentWillUnmount() {
+    // disconnect from store notifications
+    this.unsubscribe();
+  }
+
 
   /* ********************************************* */
   async asyncTryLogin(email, password) {
@@ -53,6 +68,7 @@ export default class HomeSCR extends React.Component {
     const url = `${URI}/users/login`;
 
     try {
+
       // call login route
       const response = await fetch(url, {
         method: 'POST',
@@ -74,11 +90,10 @@ export default class HomeSCR extends React.Component {
       }
 
       // login succeeded!
-      // console.log("+++ login success!: ", responseJson);
-      console.log("+++ login success .user!: ", responseJson.user);
-      // console.log("+++ login success .user.user!: ", responseJson.user.user);
+      console.log("('==== login success!: ", responseJson.user);
       store.setState({
         user: responseJson.user,
+        isLoggedIn: true,
       });
     }
     catch(err) {
@@ -95,13 +110,22 @@ export default class HomeSCR extends React.Component {
 
     // check that user filled in the fields
     if (!value) {
-      // Alert.alert("Grrrr", "Please fill in all fields");
       return;
     }
     const { email, password } = value;
-    const success = await this.asyncTryLogin(email, password);
-    console.log("---- login success: ", success);
+    await this.asyncTryLogin(email, password);
   }
+
+  /* ********************************************* */
+  onpressLogout =  () => {
+    console.log("Login::onpressLogout()");
+
+    store.setState({
+      user: null,
+      isLoggedIn: false,
+    })
+  }
+
 
   /* ********************************************* */
   onChange = (value) => {
@@ -113,8 +137,27 @@ export default class HomeSCR extends React.Component {
   render() {
     const { loginErrorMsg } = this.state;
     const displayErrorMessage = 0 !== loginErrorMsg.length;
-    console.log("+++ render error msg: ", loginErrorMsg);
-    console.log("+++ render state: ", this.state);
+
+    // if logged in, display Logout button
+    // ===================================
+    if (this.state.isLoggedIn) {
+      return (
+        <SafeAreaView style={styles.container}>
+          <View style={styles.circle}>
+            <Image style={styles.image} source={require('../../assets/images/loginDog.jpg')} />
+          </View>
+          <Text style={styles.text}>Logout, WOOF!</Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.onpressLogout}>
+            <Text >Logout</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      )
+    }
+
+    // if not logged in, display Login form
+    // ====================================
     return (
       <SafeAreaView style={styles.container}>
 
