@@ -24,7 +24,7 @@ export default class Results extends React.Component {
   }
 
   async componentDidMount() {
-    const json = await getResults(`Boulder, CO`)
+    const json = await getResults(store.getState().searchFor)
     store.setState({
       locations: json
     })
