@@ -11,6 +11,8 @@ import {
   Alert,
   TouchableOpacity} from 'react-native';
 
+  const RADIUS = 1000;
+
   import store from '../store';
 
   const config = {
@@ -22,9 +24,33 @@ import {
 
   const API = 'https://api.yelp.com/v3/businesses/search'
 
+  /* *********************************************************
+  getResults()
+  @param location (string) ex: "Boulder, CO"
+  @return array of Yelp businesses with lots of fields!
+  ************************************************************ */
   export const getResults = async (location) => {
     config.params.location = location
     const response = await fetch(`${API}?term=${config.params.term}&location=${location}`, config)
+    const json = await response.json()
+    return json.businesses
+  }
+
+  /* *********************************************************
+  getResultsLatLon()
+  @param lat (number)
+  @param lon (number)
+  @return array of Yelp businesses with lots of fields!
+  // Example lat/lon for Galvanize"
+  //    latitude=40.016516
+  //    longitude=-105.281656
+  // Addl params sent to Yelp
+  //    sort_by=distance
+  //    radius=1000
+  ************************************************************ */
+  export const getResultsLatLon = async (lat, lon) => {
+    config.params.location = location
+    const response = await fetch(`${API}?term=${config.params.term}&latitude=${latitude}&longitude=${longitude}&sort_by=distance&radius=${RADIUS}`, config)
     const json = await response.json()
     return json.businesses
   }

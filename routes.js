@@ -79,10 +79,10 @@ export default TabNavigator(
       style: {
         backgroundColor: colors.greyLight,
       },
-      showLabel: true,
-      showIcon: true,
-      activeTintColor: colors.blue,
-      inactiveTintColor: colors.greyDark,
+      showLabel: true, // show the name of the tab bar tab
+      showIcon: true, // show the icon for the tab bar tab
+      activeTintColor: colors.blue, // color of selected tab bar tab
+      inactiveTintColor: colors.greyDark, // color of inactive tab bar tab
       renderIndicator: () => null,
     },
   },

@@ -7,19 +7,21 @@ import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import colors from '../utils/colors'
 import store from '../store';
 
+import CheckIn from '../components/CheckIn/CheckIn'
+
 export default class CheckInSCR extends React.Component {
   static navigationOptions = ({ navigation: { navigate } }) => ({
     title: 'Check-in',
     headerTintColor: 'white',
     headerStyle: {
-      backgroundColor: colors.blue,
+      backgroundColor: colors.white,
     },
   });
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Check in to location</Text>
+        <CheckIn />
       </View>
     );
   }
@@ -30,6 +32,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.blue,
+    backgroundColor: colors.greyLight,
   },
 });
