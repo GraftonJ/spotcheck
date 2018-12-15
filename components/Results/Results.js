@@ -71,7 +71,12 @@ render() {
 
   if(error) {
     return (
+      <SafeAreaView>
       <Text>Uhoh Puppo! No restaurants found!</Text>
+      <Image
+        style={{width:330, height:300}}
+        source={require('../../assets/images/errorDog.jpg')} />
+    </SafeAreaView>
     )
   } else {
     return (
