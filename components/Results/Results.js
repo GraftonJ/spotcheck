@@ -10,6 +10,7 @@ import {
   ImageBackground,
   Image,
   Alert,
+  ActivityIndicator,
   TouchableOpacity} from 'react-native';
 
   import store from '../../store';
@@ -52,7 +53,9 @@ render() {
 
   if (isLoading) {
     return (
-      <Text>Loading"</Text>
+      <ActivityIndicator
+        size="large"
+        color="#3399ff" />
     )
   }
   return (
