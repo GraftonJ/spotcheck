@@ -11,7 +11,7 @@ import {
   Alert,
   TouchableOpacity} from 'react-native';
 
-  // import store from '../../store';
+  import store from '../store';
 
   const config = {
     headers: {'Authorization': 'Bearer VkRXEkxkuMiPqFY3xuJdHIMU3ggnwWrKaeCdL-cMm5Mh0q_b-OyMhmdZDMf8xSrbV0BPdAaPtu0aVY2vlHRCQ1JZzFl0N-ahFSjwDY16uAvQ0YviTfxrydO32n6dW3Yx'},
