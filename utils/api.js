@@ -11,7 +11,7 @@ import {
   Alert,
   TouchableOpacity} from 'react-native';
 
-  // import store from '../../store';
+  import store from '../store';
 
   const config = {
     headers: {'Authorization': 'Bearer VkRXEkxkuMiPqFY3xuJdHIMU3ggnwWrKaeCdL-cMm5Mh0q_b-OyMhmdZDMf8xSrbV0BPdAaPtu0aVY2vlHRCQ1JZzFl0N-ahFSjwDY16uAvQ0YviTfxrydO32n6dW3Yx'},
@@ -35,7 +35,7 @@ export default class Results extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      results: []
+      locations: store.getState().locations
     }
   }
 
@@ -43,10 +43,10 @@ export default class Results extends React.Component {
     const response = await fetch(`${API}`, config)
     const json = await getResults('Boulder, CO')
     console.log('JSON is>>>', json);
-    this.setState({
-      results: json
+    store.setState({
+      locations: json
     })
-    console.log('This.state is>>>', this.state.results);
+    console.log('STORE DATA LINKED HOPEFULLY is>>>', store.getState().locations);
 }
 
 render() {
