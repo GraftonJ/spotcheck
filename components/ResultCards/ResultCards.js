@@ -4,15 +4,12 @@ import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, But
 export default class ResultCards extends React.Component {
   constructor(props) {
     super(props)
-
   }
-
-
   render() {
     return (
 
         <SafeAreaView style={styles.card}>
-          <Image style={styles.image} source={{uri: `${apiResult.image_url}`}} />
+          <Image style={styles.image} source={{uri: `${this.props.result.image_url}`}} />
 
           <View style={styles.cardTopLine}>
             <Text style={styles.name}>{this.props.result.name}</Text>
