@@ -13,25 +13,22 @@ import {
 
   // import store from '../../store';
 
-
-
-
   const config = {
     headers: {'Authorization': 'Bearer VkRXEkxkuMiPqFY3xuJdHIMU3ggnwWrKaeCdL-cMm5Mh0q_b-OyMhmdZDMf8xSrbV0BPdAaPtu0aVY2vlHRCQ1JZzFl0N-ahFSjwDY16uAvQ0YviTfxrydO32n6dW3Yx'},
     params: {
-      term: 'dog friendly restaurants',
-      location: 'Boulder, CO'
+      term: 'dog+friendly+restaurants',
     }
   }
 
   const API = 'https://api.yelp.com/v3/businesses/search'
 
-  const getResults = async () => {
-    const response = await fetch(`${API}?location=${config.params.location}`, config)
+  const getResults = async (location) => {
+    config.params.location = location
+    const response = await fetch(`${API}?term=${config.params.term}&location=${location}`, config)
     const json = await response.json()
-    console.log(json)
-    return json
+    return json.businesses
   }
+
 
 
 export default class Results extends React.Component {
@@ -42,13 +39,14 @@ export default class Results extends React.Component {
     }
   }
 
-
-  async componentWillMount() {
+  async componentDidMount() {
     const response = await fetch(`${API}`, config)
-    const json = await getResults()
+    const json = await getResults('Boulder, CO')
+    console.log('JSON is>>>', json);
     this.setState({
       results: json
     })
+    console.log('This.state is>>>', this.state.results);
 }
 
 render() {
