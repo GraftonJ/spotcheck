@@ -57,13 +57,13 @@ export default {
   },
   setState(newState) {
     state = { ...state, ...newState };
-    console.log("---------------- store::setState ----------------------");
-    console.log("Adding: ", newState);
-    console.log("-------------------------------------");
-    console.log("New store: ", state);
-    console.log("-------------------------------------");
-    console.log("Listener count: ", listeners.length);
-    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+    // console.log("---------------- store::setState ----------------------");
+    // console.log("Adding: ", newState);
+    // console.log("-------------------------------------");
+    // console.log("New store: ", state);
+    // console.log("-------------------------------------");
+    // console.log("Listener count: ", listeners.length);
+    // console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     listeners.forEach(listener => listener());
   },
   onChange(newListener) {
