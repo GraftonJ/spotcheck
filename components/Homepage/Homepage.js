@@ -49,7 +49,7 @@ export default class HomePage extends React.Component {
 
   render() {
     return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView style={styles.container} behavior="position">
       <ImageBackground
         source={require('../../assets/images/homepage-dog.jpg')}
         style={styles.imageContainer}
@@ -110,7 +110,7 @@ textInput: {
   color: 'black',
   height: 1,
   width: 300,
-  marginTop: '60%',
+  marginTop: '58%',
   marginHorizontal: 20,
   paddingHorizontal: 10,
   alignSelf: 'center',

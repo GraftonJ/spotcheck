@@ -13,7 +13,7 @@ export default class ResultsSCR extends React.Component {
     title: 'Results',
     headerTintColor: 'white',
     headerStyle: {
-      backgroundColor: colors.blue,
+      backgroundColor: colors.white,
     },
   });
 
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.blue,
+    backgroundColor: colors.white,
   },
 });
