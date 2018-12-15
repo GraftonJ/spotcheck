@@ -26,27 +26,37 @@ export default class Results extends React.Component {
   }
 
   async componentDidMount() {
+    this.unsubscribe = store.onChange(() => {
+      this.setState({
+        locations: store.getState().locations,
+        error: store.getState().error,
+      })
+    })
     const json = await getResults(store.getState().searchFor)
-    this.setState({
+    store.setState({
       locations: json,
-      isLoading: false,
+    })
+    this.setState({
+      isLoading: false
     })
     console.log('Store state is>>', store.getState().locations);
 }
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
 
 render() {
-  const { isLoading } = this.state;
+  const { isLoading, locations } = this.state;
 
   if (isLoading) {
     return (
       <Text>Loading"</Text>
     )
   }
-
   return (
       <View>
         <Text>Test Text</Text>
-        {store.getState().locations.map(result => (
+        {locations.map(result => (
           <Text>MAP</Text>
         ))}
       </View>
