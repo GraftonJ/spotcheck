@@ -13,7 +13,7 @@ export default class ResultsSCR extends React.Component {
     title: 'Results',
     headerTintColor: 'white',
     headerStyle: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.blue,
     },
   });
 

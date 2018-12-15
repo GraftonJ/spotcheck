@@ -14,7 +14,7 @@ export default class CheckInSCR extends React.Component {
     title: 'Check-in',
     headerTintColor: 'white',
     headerStyle: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.blue,
     },
   });
 

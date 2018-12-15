@@ -13,7 +13,7 @@ export default class LoginSCR extends React.Component {
     title: 'Login',
     headerTintColor: 'black',
     headerStyle: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.blue,
     },
   });
 

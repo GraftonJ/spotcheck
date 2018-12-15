@@ -13,7 +13,7 @@ export default class DetailCardSCR extends React.Component {
     title: 'Details',
     headerTintColor: 'white',
     headerStyle: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.blue,
     },
   });
 
