@@ -3,66 +3,94 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   KeyboardAvoidingView,
   TextInput,
   SafeAreaView,
   ImageBackground,
   Image,
   Alert,
+  ActivityIndicator,
   TouchableOpacity} from 'react-native';
 
-  // import store from '../../store';
-
-
-
-
-  const config = {
-    headers: {'Authorization': 'Bearer VkRXEkxkuMiPqFY3xuJdHIMU3ggnwWrKaeCdL-cMm5Mh0q_b-OyMhmdZDMf8xSrbV0BPdAaPtu0aVY2vlHRCQ1JZzFl0N-ahFSjwDY16uAvQ0YviTfxrydO32n6dW3Yx'},
-    params: {
-      term: 'dog friendly restaurants',
-      location: 'Boulder, CO'
-    }
-  }
-
-  const API = 'https://api.yelp.com/v3/businesses/search'
-
-  const getResults = async () => {
-  const response = await fetch(`${API}?location=${config.params.location}`, config)
-  const json = await response.json()
-  console.log(json)
-  return json
-}
+  import store from '../../store';
+  import { getResults } from '../../utils/api'
+  import ResultCards from '../ResultCards/ResultCards'
 
 
 export default class Results extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      results: []
+      locations: store.getState().locations,
+      isLoading: true,
+      error: false
     }
   }
 
-
-  async componentWillMount() {
-
-    const response = await fetch(`${API}`, config)
-    const json = await getResults()
-    this.setState({
-      results: json
+  async componentDidMount() {
+    this.unsubscribe = store.onChange(() => {
+      this.setState({
+        locations: store.getState().locations,
+        error: store.getState().error,
+      })
     })
+
+    const json = await getResults(store.getState().searchFor)
+    store.setState({
+      locations: json,
+    })
+
+  if(json === undefined){
+    this.setState({
+      error: true,
+      isLoading: false,
+    })
+  }
+
+    this.setState({
+      isLoading: false
+    })
+    console.log('Store state is>>', store.getState().locations);
 }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
 
 render() {
-  return (
-    <Text>Results</Text>
-  )
-}
+  const { isLoading, locations, error } = this.state;
 
-  // <SafeAreaView style={styles.container}>
-  //
-  //   <Text>Results for: {store.getState().searchFor}</Text>
-  //
-  // </SafeAreaView>
+  if (isLoading) {
+    return (
+      <ActivityIndicator
+        size="large"
+        color="#3399ff" />
+    )
+  }
+
+  if(error) {
+    return (
+      <SafeAreaView>
+      <Text>Uhoh Puppo! No restaurants found!</Text>
+      <Image
+        style={{width:330, height:300}}
+        source={require('../../assets/images/errorDog.jpg')} />
+    </SafeAreaView>
+    )
+  } else {
+    return (
+        <ScrollView>
+          {locations.map(result => (
+            <ResultCards
+              key={result.id}
+              result={result}/>
+          ))}
+        </ScrollView>
+      )
+  }
+
+}
 }
 
 const styles = StyleSheet.create({
@@ -71,4 +99,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
   },
+
 })

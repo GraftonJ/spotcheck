@@ -20,7 +20,7 @@ let state = {
       { ... },
      ]
   */
-  locations: [{ yelpId: 'ABC', name: "Eureka" }, { yelpId: 'DEF', name: "Galvanize"}],
+  locations: [],
 
   // Loading status set by listPG when fetching list from Yelp
   // FIX: set back to true when we are actually loading data

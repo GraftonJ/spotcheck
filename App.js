@@ -1,13 +1,16 @@
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 // import HomePage from './components/Homepage/Homepage'
-import ResultCards from './components/ResultCards/ResultCards'
+
+
 
 import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
+
+// import Register from './components/Login/NewAccount'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',

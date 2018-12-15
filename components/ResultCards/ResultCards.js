@@ -1,36 +1,47 @@
 import React from 'react';
-import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button} from 'react-native'
+import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView} from 'react-native'
 
 export default class ResultCards extends React.Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
     return (
+
         <SafeAreaView style={styles.card}>
-          <Image style={styles.image} source={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/nbfrWWtz6lRUaxYtw9PNQA/o.jpg'}} />
+          <Image style={styles.image} source={{uri: `${this.props.result.image_url}`}} />
 
           <View style={styles.cardTopLine}>
-            <Text style={styles.name}>Avery Brewery</Text>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
+              style={styles.name}>{this.props.result.name}</Text>
+          </View>
+
+          <View style={styles.cardTopLine}>
+            <Text style={styles.price}>{this.props.result.price}</Text>
             <Text style={styles.checkin}>79 Check-ins here!</Text>
           </View>
 
           <View style={styles.cardMiddleLine}>
-            <Text style={styles.price}>$$ -</Text>
-            <Text style={styles.category}> Brewery -</Text>
+            <Text style={styles.category}>{this.props.result.categories[0].title}-</Text>
             <Text style={styles.rating}> ☆☆☆☆☆</Text>
             <Text style={styles.ratingCount}> (797)</Text>
           </View>
 
           <View style={styles.cardBottomLine}>
-            <Text style={styles.cardBottomLine}>251 North Main St.</Text>
+            <Text style={styles.cardBottomLine}>{this.props.result.location.address1}</Text>
           </View>
         </SafeAreaView>
+
     )
   }
 }
 
 const styles = StyleSheet.create({
   card: {
-    width: '99%',
-    height: '50%',
+    width: 330,
+    height: 300,
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
@@ -50,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   name: {
-    fontSize: 30,
+    fontSize: 20,
     fontFamily: 'Arial',
     overflow: 'hidden',
   },
