@@ -40,7 +40,8 @@ export default class HomePage extends React.Component {
     const searchFor = this.state.searchFor.trim();
 
     if (searchFor.length) {
-      this.props.navigate('ResultsSCR', { searchFor } );
+      this.props.navigate('ResultsSCR');
+      // this.props.navigate('ResultsSCR', { searchFor } );
     }
     else {
       Alert.alert("Grrrr", "Please enter a city and state")
