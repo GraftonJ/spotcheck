@@ -34,6 +34,7 @@ export default class Results extends React.Component {
         error: store.getState().error,
       })
     })
+
     const json = await getResults(store.getState().searchFor)
     store.setState({
       locations: json,

@@ -12,7 +12,10 @@ export default class ResultCards extends React.Component {
           <Image style={styles.image} source={{uri: `${this.props.result.image_url}`}} />
 
           <View style={styles.cardTopLine}>
-            <Text style={styles.name}>{this.props.result.name}</Text>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode={'tail'}
+              style={styles.name}>{this.props.result.name}</Text>
           </View>
 
           <View style={styles.cardTopLine}>
