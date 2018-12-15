@@ -9,6 +9,7 @@ import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
+import DetailCardSCR from './screens/DetailCardSCR'
 
 // import Register from './components/Login/NewAccount'
 

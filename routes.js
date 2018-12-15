@@ -5,6 +5,7 @@ import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
 import ResultsSCR from './screens/ResultsSCR'
+import DetailCardSCR from './screens/DetailCardSCR'
 
 import colors from './utils/colors';
 
@@ -21,9 +22,9 @@ const SearchScreens = StackNavigator(
     ResultsSCR: {
       screen: ResultsSCR,
     },
-    // DetailCardSCR: {
-    //   screen: DetailCardSCR,
-    // }
+    DetailCardSCR: {
+      screen: DetailCardSCR,
+    }
   },
   {
     initialRouteName: 'HomeSCR',
