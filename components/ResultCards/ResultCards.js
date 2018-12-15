@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView} from 'react-native'
+import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, TouchableOpacity} from 'react-native'
 
 export default class ResultCards extends React.Component {
   constructor(props) {
     super(props)
   }
+
   render() {
     return (
 
@@ -32,6 +33,10 @@ export default class ResultCards extends React.Component {
           <View style={styles.cardBottomLine}>
             <Text style={styles.cardBottomLine}>{this.props.result.location.address1}</Text>
           </View>
+
+          <View style={styles.details}>
+            <Text>Detail Button</Text>
+          </View>
         </SafeAreaView>
 
     )
@@ -41,7 +46,7 @@ export default class ResultCards extends React.Component {
 const styles = StyleSheet.create({
   card: {
     width: 330,
-    height: 300,
+    height: 365,
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
@@ -93,4 +98,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 2,
   },
+  details: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    fontSize: 10,
+    marginTop: 2,
+  },
+  button: {
+    width: '25%',
+    height: '4%',
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+
 })

@@ -10,7 +10,6 @@ export default class HomePage extends React.Component {
     this.state = {
       searchFor: store.getState().searchFor,
       error: store.getState().error,
-
       unsubscribe: null,
     }
   }
