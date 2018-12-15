@@ -24,7 +24,7 @@ export default class ResultsSCR extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Results />
+        <Results navigate={this.props.navigation.navigate}/>
       </View>
     );
   }

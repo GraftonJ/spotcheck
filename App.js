@@ -40,6 +40,7 @@ export default class App extends Component<Props> {
   }
 }
 
+//  <LoginSCR />
 //  <AppNavigator />
 
 // <View style={styles.container}>

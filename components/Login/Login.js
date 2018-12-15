@@ -16,6 +16,8 @@ import t from 'tcomb-form-native'
 
 import store, { URI } from '../../store';
 
+import NewAccount from './NewAccount'
+
 const Form = t.form.Form;
 const User = t.struct({
   email: t.String,
@@ -32,6 +34,7 @@ export default class HomeSCR extends React.Component {
       isLoggedIn: false,
 
       // local state
+      isRegistering: false, // true to display registration screen
       value: { // this is used by the "Form" thing
         email: 'nuser@gmail.com', // holds the form value
         password: 'secret', // holds the form value
@@ -47,6 +50,7 @@ export default class HomeSCR extends React.Component {
         isLoggedIn: null !== store.getState().user,
       })
     });
+    this.refs.myform.getComponent('email').refs.input.focus();
   }
 
   /* ********************************************* */
@@ -86,7 +90,7 @@ export default class HomeSCR extends React.Component {
         this.setState({
           loginErrorMsg: responseJson.error,
         })
-        return;
+        return false;
       }
 
       // login succeeded!
@@ -95,6 +99,7 @@ export default class HomeSCR extends React.Component {
         user: responseJson.user,
         isLoggedIn: true,
       });
+      return true;
     }
     catch(err) {
       console.log("ERROR onpressLogin fetch failed: ", err);
@@ -113,7 +118,10 @@ export default class HomeSCR extends React.Component {
       return;
     }
     const { email, password } = value;
-    await this.asyncTryLogin(email, password);
+    const success = await this.asyncTryLogin(email, password);
+    // if (success)
+    //   this.props.navigate('HomeSCR');
+
   }
 
   /* ********************************************* */
@@ -126,11 +134,41 @@ export default class HomeSCR extends React.Component {
     })
   }
 
-
-  /* ********************************************* */
+  /* ********************************************** */
+  // tracks changes to the form fields
   onChange = (value) => {
-    console.log('xxxx onChange(): ', value);
+    // console.log('xxxx onChange(): ', value);
     this.setState({value});
+  }
+
+  /* ********************************************** */
+  // callback from the NewAccount component,
+  //   reset flag so if they logout they'll get to the login component
+  //   not back to the NewAccount component.
+  //   IE, flow should be:  Login -> New Account -> Logout -> Login
+  //                  not:  Login -> New Account -> Logout -> New Account
+  /* ********************************************** */
+  newAccountAdded = () => {
+    this.setState({
+      isRegistering: false,
+    })
+    // this.props.navigate('HomeSCR');
+  }
+
+  /* ********************************************** */
+  onpressNewAccount = () => {
+    console.log("onpressNewAccount()");
+    this.setState({
+      isRegistering: true,
+    })
+  }
+
+  /* ***Î****************************************** */
+  onpressNewAccountCancel = () => {
+    console.log("onpressNewAccountCancel()");
+    this.setState({
+      isRegistering: false,
+    })
   }
 
   /* ********************************************* */
@@ -153,6 +191,14 @@ export default class HomeSCR extends React.Component {
             <Text >Logout</Text>
           </TouchableOpacity>
         </SafeAreaView>
+      )
+    }
+
+    // if registering as new user in, display registration page
+    // ========================================================
+    if (this.state.isRegistering) {
+      return (
+        <NewAccount newAccountAddedCB={this.newAccountAdded} onpressCancelCB={this.onpressNewAccountCancel}/>
       )
     }
 
@@ -187,17 +233,13 @@ export default class HomeSCR extends React.Component {
         <Text style={[styles.newAccount, { marginBottom: 5 }]}>or</Text>
 
         <TouchableOpacity
-          onPress={this.onpressLogin}>
+          onPress={this.onpressNewAccount}>
           <Text style={styles.newAccount} >Create New Account</Text>
         </TouchableOpacity>
       </SafeAreaView>
     )
   };
 }
-
-//
-// <Text style={styles.newAccount, {marginBottom: 5}}>or</Text>
-
 
 const styles = StyleSheet.create({
   container: {
@@ -214,6 +256,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 25,
+    letterSpacing: 1,
     marginBottom: 10,
   },
   image: {
@@ -248,7 +291,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     letterSpacing: 1,
     margin: 2
-  }
+  },
 })
 
 // export default Login
