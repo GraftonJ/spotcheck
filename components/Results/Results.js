@@ -72,9 +72,9 @@ render() {
   if(error) {
     return (
       <SafeAreaView>
-      <Text>Uhoh Puppo! No restaurants found!</Text>
+      <Text style={styles.error}>Uhoh Puppo! No restaurants found!</Text>
       <Image
-        style={{width:330, height:300}}
+        style={styles.image}
         source={require('../../assets/images/errorDog.jpg')} />
     </SafeAreaView>
     )
@@ -99,5 +99,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
   },
-
+  image: {
+    width: 330,
+    height: 300,
+    borderRadius: 50,
+    borderWidth: 1
+  },
+  error: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 10
+  }
 })
