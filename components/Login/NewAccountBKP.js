@@ -3,17 +3,16 @@ import React from 'react'
 import {StyleSheet, Text, View, KeyboardAvoidingView, TextInput, SafeAreaView, ImageBackground, Image, Alert, TouchableOpacity} from 'react-native'
 import t from 'tcomb-form-native'
 
-import store, { URI } from '../../store'
+
 
 const Form = t.form.Form;
 const User = t.struct({
   name: t.String,
   email: t.String,
   password: t.String,
-  dog_names: t.String,
+  dog_names: t.maybe(String),
 });
 
-/* ********************************************* */
 export default class NewAccount extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +20,7 @@ export default class NewAccount extends React.Component {
 
       // local state
       // ---------------
-      errorMessage: '',
+      newAccountErrorMessage: '',
       // Value is used by the "Form" thing
       // Field keys match db table fields
       value: {
@@ -49,19 +48,8 @@ export default class NewAccount extends React.Component {
     console.log("-- asyncTryAddUser(): ", user);
 
     this.setState({
-      errorMessage: '',
+      newAccountErrorMsg: '',
     })
-
-    // dog_names is optional field, need to remove it from
-    //   the object before JSON.stringify() or we get error:
-    //   "Unexpected token < in JSON at position 0"
-
-    if (!user.dog_names) {
-      delete user.dog_names;
-      console.log(")))))) removed dog_names", user);
-      const s = JSON.stringify(user);
-      console.log("))))))) stringified: ", s);
-    }
 
     const body = user;
     const url = `${URI}/users`;
@@ -77,15 +65,13 @@ export default class NewAccount extends React.Component {
           Accept: 'application/json',
         },
       });
-
       const responseJson = await response.json();
-      console.log(")) after response split");
 
       // if the new account fails, display error message
       if (!response.ok) {
         console.log('==== ', response.status, responseJson);
         this.setState({
-          errorMessage: responseJson.error,
+          newAccountErrorMsg: responseJson.error,
         })
         return;
       }
@@ -96,7 +82,6 @@ export default class NewAccount extends React.Component {
         user: responseJson.user,
         isLoggedIn: true,
       });
-      this.props.newAccountAddedCB();
     }
     catch(err) {
       console.log("ERROR asyncTryAddUser fetch failed: ", err);
@@ -113,14 +98,11 @@ export default class NewAccount extends React.Component {
       return;
 
     console.log("Adding user: ", user);
-    await this.asyncTryAddUser(user)
+    await asyncTryAddUser(user)
   }
 
   /* ***Î****************************************** */
   render() {
-    const { errorMessage } = this.state;
-    const displayErrorMessage = 0 !== errorMessage.length;
-
     const onpressCancelCB = this.props.onpressCancelCB;
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -139,9 +121,6 @@ export default class NewAccount extends React.Component {
             onChange={this.onChange}
             type={User} />
         </View>
-        {displayErrorMessage && (
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
-        )}
         <View style={styles.sideBySideButtonsContainer}>
           <TouchableOpacity
             style={styles.sideBySideButton}
@@ -201,13 +180,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  errorMessage: {
-    color: "red",
-  },
   sideBySideButton: {
     width: '28%',
-    height: '30%',
-    height: 23,
+    height: '18%',
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: 'white',
@@ -218,10 +193,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-  circle: {  // circle containing cute doggie
+  circle: {
     marginBottom: 25,
-    marginTop: 10,
+    marginTop: 100,
     height: 150,
     width: 150,
     borderWidth:1,

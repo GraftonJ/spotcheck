@@ -20,7 +20,7 @@ export default class LoginSCR extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-          <Login />
+          <Login navigate={this.props.navigation.navigate}/>
       </View>
     );
   }
