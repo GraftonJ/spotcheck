@@ -23,7 +23,7 @@ let state = {
   locations: [],
 
   // Location user has checked in to
-  checkedIn: false,
+  isCheckedIn: false,
   checkinLocationId: '',
   checkinLocationName: '',
 
@@ -34,9 +34,16 @@ let state = {
        email: "jd@gmail.com",
        dogNames: "Sparky and Tilde",
      } */
-  user: null,
+  // user: null,
+  // // convenience flag that is kept in sync with "user" key by Login
+  // isLoggedIn: false,
+  user:  { id: 2,
+         name: "Jane Doe",
+         email: "jd@gmail.com",
+         dogNames: "Sparky and Tilde",
+       },
   // convenience flag that is kept in sync with "user" key by Login
-  isLoggedIn: false,
+  isLoggedIn: true,
 
 
   // Global error state
@@ -52,13 +59,13 @@ export default {
   },
   setState(newState) {
     state = { ...state, ...newState };
-    // console.log("---------------- store::setState ----------------------");
-    // console.log("Adding: ", newState);
-    // console.log("-------------------------------------");
-    // console.log("New store: ", state);
-    // console.log("-------------------------------------");
-    // console.log("Listener count: ", listeners.length);
-    // console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+    console.log("---------------- store::setState ----------------------");
+    console.log("Adding: ", newState);
+    console.log("-------------------------------------");
+    console.log("New store: ", state);
+    console.log("-------------------------------------");
+    console.log("Listener count: ", listeners.length);
+    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     listeners.forEach(listener => listener());
   },
   onChange(newListener) {

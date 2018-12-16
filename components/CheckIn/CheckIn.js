@@ -25,6 +25,11 @@ export default class CheckIn extends React.Component {
     this.state = {
       // from store
       user: store.getState().user,
+      isLoggedIn: store.getState().isLoggedIn,
+
+      isCheckedIn: store.getState().isCheckedIn,
+      checkinLocationId: store.getState().checkinLocationId,
+      checkinLocationName: store.getState().checkinLocationName,
 
       // local state
       isLoading: true,
@@ -42,7 +47,6 @@ export default class CheckIn extends React.Component {
       const candidateLocations = [];
 
       for (locationByLatLon of locationsByLatLon) {
-        console.log('checking: ', locationByLatLon.name);
         if (locationsByCity.find(locationByCity => locationByCity.id === locationByLatLon.id))
           candidateLocations.push(locationByLatLon);
       }
@@ -54,9 +58,17 @@ export default class CheckIn extends React.Component {
       })
 
       this.unsubscribe = store.onChange(() => {
+        console.log('callback setting local state');
+        console.log('*** store.getState(): ', store.getState());
         this.setState({
           user: store.getState().user,
+          isLoggedIn: store.getState().isLoggedIn,
+
+          isCheckedIn: store.getState().isCheckedIn,
+          checkinLocationId: store.getState().checkinLocationId,
+          checkinLocationName: store.getState().checkinLocationName,
         });
+        console.log('callback new local state: ', this.state);
       });
     } catch (error) {
       console.log("ERROR CheckIn::componentDidMount(): ", error);
@@ -70,32 +82,49 @@ export default class CheckIn extends React.Component {
   }
 
   /* ********************************************* */
-  async getPotentialLocations() {
-    console.log("-- getPotentialLocations(): ", email, password);
-
-    try {
-    }
-    catch(err) {
-      console.log("ERROR getPotentialLocations fetch failed: ", err);
-    }
-  }
-
-  /* ********************************************* */
-  onpressCheckin(locationId) {
-    console.log('onpressCheckin(): ', locationId);
+  onpressCheckin(locationId, locationName) {
+    console.log('onpressCheckin(): ', locationId, locationName);
+    console.log('onpress() setting store state');
+    store.setState({
+      isCheckedIn: true,
+      checkinLocationId: locationId,
+      checkinLocationName: locationName,
+    })
   }
 
   /* ********************************************* */
   render() {
-    const { isLoading, candidateLocations } = this.state;
+    const {
+      isLoading,
+      candidateLocations,
+      isLoggedIn,
+      isCheckedIn,
+      checkinLocationName
+    } = this.state;
 
-    // isLoading, show spinnert
+    // isLoading, show spinner
     // ===================================
     if (isLoading) {
       return (
         <ActivityIndicator
           size="large"
           color="#3399ff" />
+      )
+    }
+
+    // not logged in, say they need to login
+    // ===================================
+    if (!isLoggedIn) {
+      return (
+        <Text>Please login so you can check-in to a location</Text>
+      )
+    }
+
+    // already checked in, show where they checked in
+    // ===================================
+    if (isCheckedIn) {
+      return (
+        <Text>Yay, you checked-in to {checkinLocationName}</Text>
       )
     }
 
@@ -115,7 +144,7 @@ export default class CheckIn extends React.Component {
       <SafeAreaView style={styles.container}>
         {candidateLocations.map((location) => {
           return (
-            <TouchableOpacity key={location.id} onPress={() => this.onpressCheckin(location.id)}>
+            <TouchableOpacity key={location.id} onPress={() => this.onpressCheckin(location.id, location.name)}>
               <Text>{location.name}</Text>
             </TouchableOpacity>
           )
