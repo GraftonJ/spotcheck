@@ -11,34 +11,34 @@ export default class ResultCards extends React.Component {
     console.log('*********** Details Button hooked Up!');
     console.log('***********', this.props)
     this.props.navigate('DetailCardSCR');
-
   }
 
   render() {
+    const { location } = this.props;
     return (
         <SafeAreaView style={styles.card}>
-          <Image style={styles.image} source={{uri: `${this.props.result.image_url}`}} />
+          <Image style={styles.image} source={{uri: `${location.image_url}`}} />
 
           <View style={styles.cardTopLine}>
             <Text
               numberOfLines={1}
               ellipsizeMode={'tail'}
-              style={styles.name}>{this.props.result.name}</Text>
+              style={styles.name}>{location.name}</Text>
           </View>
 
           <View style={styles.cardTopLine}>
-            <Text style={styles.price}>{this.props.result.price}</Text>
-            <Text style={styles.checkin}>79 Check-ins here!</Text>
+            <Text style={styles.price}>{location.price}</Text>
+            <Text style={styles.checkin}>{location.scNumCheckIns} Check-ins here!</Text>
           </View>
 
           <View style={styles.cardMiddleLine}>
-            <Text style={styles.category}>{this.props.result.categories[0].title}-</Text>
+            <Text style={styles.category}>{location.categories[0].title}-</Text>
             <Text style={styles.rating}> ☆☆☆☆☆</Text>
             <Text style={styles.ratingCount}> (797)</Text>
           </View>
 
           <View style={styles.cardBottomLine}>
-            <Text style={styles.cardBottomLine}>{this.props.result.location.address1}</Text>
+            <Text style={styles.cardBottomLine}>{location.location.address1}</Text>
           </View>
 
           <View style={styles.details}>
