@@ -11,7 +11,7 @@ import Login from '../components/Login/Login';
 export default class LoginSCR extends React.Component {
   static navigationOptions = ({ navigation: { navigate } }) => ({
     title: 'Login',
-    headerTintColor: 'black',
+    headerTintColor: 'white',
     headerStyle: {
       backgroundColor: colors.blue,
     },
