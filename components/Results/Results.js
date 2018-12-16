@@ -44,31 +44,43 @@ export default class Results extends React.Component {
 
     // Load locations
     // ----------------
-    let json = await getResults(store.getState().searchFor);
-    store.setState({
-      locations: json,
-    });
-    if (json === undefined) {
+    let loadedLocations = await getResults(store.getState().searchFor);
+
+    // when would the fetch return undefined?
+    if (loadedLocations === undefined) {
       this.setState({
         error: true,
         isLoading: false,
       });
+      console.log("ERROR Results::componentDidMount()");
       return;
     }
+
+    // add placeholders for scNumCheckIns and scComments[]
+    loadedLocations = loadedLocations.map((location) => {
+      location.scNumCheckIns = 0;
+      location.scComments = [];
+      return location;
+    });
+
+    // add to store
+    store.setState({
+      locations: loadedLocations,
+    });
+
     // allow render to display cards before the checkins/comments/ratings have loaded
     this.setState({
       isLoading: false,
     });
-    console.log('Store state BEFORE loading addl data>>', store.getState().locations);
 
     // load checkins and comments/ratings
     // ----------------------------------
-    const augmentedLocations = await this.getAddlLocationInfo(this.state.locations);
+    const augmentedLocations = await this.getAugmentedLocations(this.state.locations);
+    console.log('********* checkIns: ', augmentedLocations[0].scNumCheckIns);
+    console.log('********* augmentedLocations', augmentedLocations);
     store.setState({
       locations: augmentedLocations,
     });
-
-    console.log('Store state AFTER loading addl data>>', store.getState().locations);
   }
 
   /* **************************************** */
@@ -80,13 +92,16 @@ export default class Results extends React.Component {
   /* **************************************** */
   // Pass array of yelp ids to backend to get
   //   augmented info (checkins, comments/ratings)
-  // @param locations (array of yelp locations) will NOT be mutated
+  // @param locations (array of yelp locations) the array isn't mutated but
+  //          the objects in the array ARE mutated because the spread only
+  //          makes a shallow copy of the array.
   // @return
   /* **************************************** */
-  async getAddlLocationInfo(locations) {
+  async getAugmentedLocations(locations) {
     this.x = ''; // happy linter
 
-    // don't mutate locations as it's part of state
+    // spread is shallow copy and we will mutate the objects in the array
+    //   so this isn't really doing anything valuable
     const augmentedLocations = [...locations];
 
     try {
@@ -102,22 +117,32 @@ export default class Results extends React.Component {
         },
       });
       if (!response.ok) {
-        console.log("ERROR getAddlLocationInfo() fetch, response: ", response);
+        console.log("ERROR getAugmentedLocations() fetch, response: ", response);
         return augmentedLocations;
       }
       const aAugmentInfo = await response.json();
       console.log("server response of augment info: ", aAugmentInfo);
 
-      // TODO:
-      for (const location of augmentedLocations) {
-        console.log("location: ", location);
-        const idx = this.findIdx(location.id, aAugmentInfo);
-        location.scNumCheckIns = aAugmentInfo[idx].numCheckIns;
-        location.scComments = aAugmentInfo[idx].comments;
+      // copy the added info (numCheckIns/comments/ratings) into the locations
+      for (let idx = 0; idx < augmentedLocations.length; idx++) {
+
+        // Double-check arrays are as we expect, this should never be true
+        if (augmentedLocations[idx].id !== aAugmentInfo[idx].id) {
+          console.log("ERROR -- these arrays should be in same order");
+          console.log('--- augmentedLocations: ', augmentedLocations);
+          console.log('--- aAugmentInfo: ', aAugmentInfo);
+          return augmentedLocations;
+        }
+
+        augmentedLocations[idx].scNumCheckIns = aAugmentInfo[idx].numCheckIns;
+        augmentedLocations[idx].scComments = aAugmentInfo[idx].comments;
       }
-
-      console.log("%%% Augmented locations: ", augmentedLocations);
-
+      // for (const location of augmentedLocations) {
+      //   // console.log("location: ", location);
+      //   const idx = this.findIdx(location.id, aAugmentInfo);
+      //   location.scNumCheckIns = aAugmentInfo[idx].numCheckIns;
+      //   location.scComments = aAugmentInfo[idx].comments;
+      // }
     } catch (err) {
       console.log("ERROR getAddlLocationInfo() fetch failed: ", err);
     }
@@ -127,10 +152,10 @@ export default class Results extends React.Component {
   /* **************************************** */
   // had to pull this out of the look because of linter warning that block/scope
   // closure would give me a different result than I expected
-  findIdx(id, aAugmentInfo) {
-    this.x = ''; // happy linter
-    return aAugmentInfo.findIndex(augmentedInfo => augmentedInfo.locaId === id);
-  }
+  // findIdx(id, aAugmentInfo) {
+  //   this.x = ''; // happy linter
+  //   return aAugmentInfo.findIndex(augmentedInfo => augmentedInfo.id === id);
+  // }
 
   /* **************************************** */
   render() {
