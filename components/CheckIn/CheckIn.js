@@ -24,14 +24,18 @@ export default class CheckIn extends React.Component {
     super(props);
     this.state = {
       // from store
+      // ------------
       user: store.getState().user,
       isLoggedIn: store.getState().isLoggedIn,
 
+      // these get reset by Logout.  Would have been better style to
+      // listen for isLogged in to go to false and reset these variables ourself.
       isCheckedIn: store.getState().isCheckedIn,
       checkinLocationId: store.getState().checkinLocationId,
       checkinLocationName: store.getState().checkinLocationName,
 
       // local state
+      // -------------
       isLoading: true,
       candidateLocations: [], // array of locations to check-in to
     };
@@ -40,10 +44,16 @@ export default class CheckIn extends React.Component {
   /* ********************************************* */
   async componentDidMount() {
     try {
-      const locationsByCity = await getResults('Boulder, CO');
-      const locationsByLatLon = await getResultsLatLon(40.016516, -105.281656);
-      // console.log('city: ',locationsByCity);
-      // console.log('latlon: ',locationsByLatLon);
+      // const locationsByCity = await getResults('Boulder, CO');
+      // const locationsByLatLon = await getResultsLatLon(40.016516, -105.281656);
+      const promise0 = getResults('Boulder, CO');
+      const promise1 = getResultsLatLon(40.016516, -105.281656);
+      const aResults = await Promise.all([promise0, promise1]);
+      const locationsByCity = aResults[0];
+      const locationsByLatLon = aResults[1];
+      console.log('city: ',locationsByCity);
+      console.log('latlon: ',locationsByLatLon);
+      
       const candidateLocations = [];
 
       for (locationByLatLon of locationsByLatLon) {
