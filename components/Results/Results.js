@@ -19,13 +19,14 @@ import {
 
 
 export default class Results extends React.Component {
+
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       locations: store.getState().locations,
       isLoading: true,
       error: false
-    }
+    };
   }
 
   async componentDidMount() {
@@ -41,12 +42,12 @@ export default class Results extends React.Component {
       locations: json,
     })
 
-  if(json === undefined){
-    this.setState({
-      error: true,
-      isLoading: false,
-    })
-  }
+    if(json === undefined){
+      this.setState({
+        error: true,
+        isLoading: false,
+      })
+    }
 
     this.setState({
       isLoading: false
@@ -55,6 +56,7 @@ export default class Results extends React.Component {
 }
 
   componentWillUnmount() {
+    console.log("Results::componentWillUnmount()");
     this.unsubscribe();
   }
 
@@ -84,6 +86,7 @@ render() {
         <ScrollView>
           {locations.map(result => (
             <ResultCards
+              navigate={this.props.navigate}
               key={result.id}
               result={result}/>
           ))}

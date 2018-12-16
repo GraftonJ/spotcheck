@@ -2,21 +2,20 @@ import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, TouchableOpacity} from 'react-native'
 
 export default class ResultCards extends React.Component {
+
   constructor(props) {
-    super(props)
+    super(props);
   }
 
-
   onpressDetails = () => {
-    Alert.alert('Details Button hooked Up!');
-// console.log('***********', this.props)
-      // this.props.navigate('DetailCardSCR');
+    console.log('*********** Details Button hooked Up!');
+    console.log('***********', this.props)
+    this.props.navigate('DetailCardSCR');
 
   }
 
   render() {
     return (
-
         <SafeAreaView style={styles.card}>
           <Image style={styles.image} source={{uri: `${this.props.result.image_url}`}} />
 
