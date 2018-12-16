@@ -3,6 +3,8 @@ import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, But
 
 import store from '../../store.js';
 
+import Stars from '../Stars.js'
+
 export default class ResultCards extends React.Component {
 
   constructor(props) {
@@ -49,8 +51,7 @@ export default class ResultCards extends React.Component {
 
           <View style={styles.cardMiddleLine}>
             <Text style={styles.category}>{location.categories[0].title}-</Text>
-            <Text style={styles.rating}> ☆☆☆☆☆</Text>
-            <Text style={styles.ratingCount}> (797)</Text>
+            <Stars style={styles.rating} comments={location.scComments} />
           </View>
 
           <View style={styles.cardBottomLine}>
