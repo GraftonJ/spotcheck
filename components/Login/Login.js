@@ -12,9 +12,11 @@ import {
   Alert,
   TouchableOpacity
 } from 'react-native'
-import t from 'tcomb-form-native'
 
 import store, { URI } from '../../store';
+
+import t from 'tcomb-form-native'
+
 
 import NewAccount from './NewAccount'
 
@@ -31,7 +33,8 @@ export default class HomeSCR extends React.Component {
     super(props);
     this.state = {
       // connected to global store
-      isLoggedIn: false,
+      isLoggedIn: store.getState().isLoggedIn,
+      user: store.getState().user,
 
       // local state
       isRegistering: false, // true to display registration screen
@@ -45,12 +48,19 @@ export default class HomeSCR extends React.Component {
 
   /* ********************************************* */
   componentDidMount() {
+    console.log("Login::componentDidMount()");
     this.unsubscribe = store.onChange(() => {
       this.setState({
-        isLoggedIn: null !== store.getState().user,
+        isLoggedIn: store.getState().isLoggedIn,
+        user: store.getState().user,
       })
     });
-    this.refs.myform.getComponent('email').refs.input.focus();
+
+    // need to guard the set focus().  In development we may set the Store
+    // to have a dummy user already logged in.  In that case render() won't
+    // have rendered an email field so setting focus crashes the app
+    if (!this.state.isLoggedIn)
+      this.refs.myform.getComponent('email').refs.input.focus();
   }
 
   /* ********************************************* */
@@ -58,7 +68,6 @@ export default class HomeSCR extends React.Component {
     // disconnect from store notifications
     this.unsubscribe();
   }
-
 
   /* ********************************************* */
   async asyncTryLogin(email, password) {
@@ -177,6 +186,7 @@ export default class HomeSCR extends React.Component {
 
   /* ********************************************* */
   render() {
+    console.log("render");
     const { loginErrorMsg } = this.state;
     const displayErrorMessage = 0 !== loginErrorMsg.length;
 
