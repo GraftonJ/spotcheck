@@ -29,7 +29,9 @@ export default class CheckIn extends React.Component {
       isLoggedIn: store.getState().isLoggedIn,
 
       // these get reset by Logout.  Would have been better style to
-      // listen for isLogged in to go to false and reset these variables ourself.
+      // listen for isLoggedIn to go to false and reset these variables ourself.
+      // But then this component would know about Logging in/out so not
+      // sure what's best.
       isCheckedIn: store.getState().isCheckedIn,
       checkinLocationId: store.getState().checkinLocationId,
       checkinLocationName: store.getState().checkinLocationName,
@@ -45,15 +47,16 @@ export default class CheckIn extends React.Component {
   async componentDidMount() {
     try {
       // const locationsByCity = await getResults('Boulder, CO');
-      // const locationsByLatLon = await getResultsLatLon(40.016516, -105.281656);
+      // Galvanize: (40.016516, -105.281656);
+      // Avery (40.0625629,-105.2047427);
       const promise0 = getResults('Boulder, CO');
-      const promise1 = getResultsLatLon(40.016516, -105.281656);
+      const promise1 = getResultsLatLon(40.0625629,-105.2047427);
       const aResults = await Promise.all([promise0, promise1]);
       const locationsByCity = aResults[0];
       const locationsByLatLon = aResults[1];
       console.log('city: ',locationsByCity);
       console.log('latlon: ',locationsByLatLon);
-      
+
       const candidateLocations = [];
 
       for (locationByLatLon of locationsByLatLon) {
@@ -97,14 +100,15 @@ export default class CheckIn extends React.Component {
 
     console.log('onpressCheckin(): ', locationId, locationName);
 
-    const body = {
-      user_id: this.state.user.id,
-      loca_id: locationId,
-    };
 
     try {
-      // call login route
-      console.log('before fetch');
+
+      const body = {
+        user_id: this.state.user.id,
+        loca_id: locationId,
+      };
+
+      // call checkin route
       const response = await fetch(`${URI}/check_ins`, {
         method: 'POST',
         body: JSON.stringify(body),
@@ -113,11 +117,21 @@ export default class CheckIn extends React.Component {
           Accept: 'application/json',
         },
       });
-
       const responseJson = await response.json();
-      console.log("onpressCheckin() server response: ", responseJson);
+
+      // update the scNumCheckIns for the location
+      const newLocations = store.getState().locations.map((location) => {
+        if (location.id === locationId)
+          return {
+            ...location,
+            scNumCheckIns: location.scNumCheckIns + 1,
+          }
+        return location;
+      });
+
 
       store.setState({
+        locations: newLocations,
         isCheckedIn: true,
         checkinLocationId: locationId,
         checkinLocationName: locationName,
