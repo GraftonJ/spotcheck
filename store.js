@@ -22,6 +22,9 @@ let state = {
   */
   locations: [],
 
+  // set by Results when clicking to get details for a location
+  locationForDetail: '',
+
   // Location user has checked in to
   isCheckedIn: false,
   checkinLocationId: '',

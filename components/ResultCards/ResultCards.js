@@ -1,15 +1,21 @@
 import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, TouchableOpacity} from 'react-native'
 
+import store from '../../store.js';
+
 export default class ResultCards extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
-  onpressDetails = () => {
-    console.log('*********** Details Button hooked Up!');
-    console.log('***********', this.props)
+  onpressDetails = (id) => {
+    console.log('*********** onpressDetails(): ', id);
+
+    store.setState({
+      locationForDetail: id,
+    })
+
     this.props.navigate('DetailCardSCR');
   }
 
@@ -52,7 +58,7 @@ export default class ResultCards extends React.Component {
           </View>
 
           <View style={styles.details}>
-            <TouchableOpacity onPress={this.onpressDetails}>
+            <TouchableOpacity onPress={() => this.onpressDetails(location.id)}>
               <Text>View Details</Text>
             </TouchableOpacity>
           </View>
