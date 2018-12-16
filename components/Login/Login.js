@@ -198,7 +198,7 @@ export default class HomeSCR extends React.Component {
           <View style={styles.circle}>
             <Image style={styles.image} source={require('../../assets/images/loginDog.jpg')} />
           </View>
-          <Text style={styles.text}>Logout, WOOF!</Text>
+          <Text style={styles.text}>Logout?</Text>
           <TouchableOpacity
             style={styles.button}
             onPress={this.onpressLogout}>
