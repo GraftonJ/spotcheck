@@ -8,7 +8,7 @@ let state = {
 
   // Search location set by homePG
   // Used to load the list of locations in listPG
-  searchFor: "",
+  searchFor: "Boulder, CO",
 
   // Locations set by listPG after locations loaded from Yelp
   /* [
@@ -49,7 +49,7 @@ let state = {
   error: false,
 };
 
-const listeners = [];
+let listeners = [];
 
 export default {
   getState() {
@@ -68,7 +68,13 @@ export default {
   },
   onChange(newListener) {
     listeners.push(newListener);
+    // console.log("---------- store::AddListener ----------------------");
+    // console.log("Listener count: ", listeners.length);
+    // console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     // returns function to remove listener from list
-    return () => listeners.filter(listener => listener !== newListener);
+    return () => {
+      listeners = listeners.filter(listener => listener !== newListener);
+    }
+    // ORIGINAL CODE DIDN'T REMOVE LISTENERS! return () => listeners.filter(listener => listener !== newListener);
   },
 };

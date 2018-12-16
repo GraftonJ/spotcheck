@@ -14,7 +14,7 @@ import colors from '../utils/colors'
 import Homepage from '../components/Homepage/Homepage'
 
 export default class HomeSCR extends React.Component {
-  navigate = this.props.navigation.navigate;
+  // navigate = this.props.navigation.navigate;
   static navigationOptions = ({ navigation: { navigate } }) => ({
     title: 'Search',
     headerTintColor: 'black',
