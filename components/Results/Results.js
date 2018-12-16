@@ -77,7 +77,7 @@ export default class Results extends React.Component {
     // ----------------------------------
     const augmentedLocations = await this.getAugmentedLocations(this.state.locations);
 
-    // update store to rerender with scNumCheckIns and scComments 
+    // update store to rerender with scNumCheckIns and scComments
     store.setState({
       locations: augmentedLocations,
     });
@@ -183,11 +183,11 @@ export default class Results extends React.Component {
     } else {
       return (
           <ScrollView>
-            {locations.map(result => (
+            {locations.map(location => (
               <ResultCards
                 navigate={this.props.navigate}
-                key={result.id}
-                result={result}/>
+                key={location.id}
+                location={location}/>
             ))}
           </ScrollView>
         )
