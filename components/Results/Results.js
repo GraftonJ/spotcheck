@@ -173,8 +173,8 @@ export default class Results extends React.Component {
     if(error) {
       return (
         <SafeAreaView>
-        <Text style={styles.errorTop}>Uhoh Puppo!</Text>
-        <Text style={styles.errorBottom}> No restaurants found</Text>
+        <Text style={styles.errorTop}>Uh-oh Puppo!</Text>
+        <Text style={styles.errorBottom}>No restaurants found</Text>
         <Image
           style={styles.image}
           source={require('../../assets/images/errorDog.jpg')} />
