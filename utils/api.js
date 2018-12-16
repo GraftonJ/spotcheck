@@ -32,7 +32,6 @@ getResults()
 export const getResults = async (location) => {
   config.params.location = location;
   console.log("api::getResults() for: ", location);
-  console.log("api::getResults() for: ", `${API}?term=${config.params.term}&location=${location}`);
   const response = await fetch(`${API}?term=${config.params.term}&location=${location}`, config)
   const json = await response.json()
   return json.businesses
