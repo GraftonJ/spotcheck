@@ -76,8 +76,8 @@ export default class Results extends React.Component {
     // load checkins and comments/ratings
     // ----------------------------------
     const augmentedLocations = await this.getAugmentedLocations(this.state.locations);
-    console.log('********* checkIns: ', augmentedLocations[0].scNumCheckIns);
-    console.log('********* augmentedLocations', augmentedLocations);
+
+    // update store to rerender with scNumCheckIns and scComments 
     store.setState({
       locations: augmentedLocations,
     });
