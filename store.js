@@ -6,11 +6,11 @@ export const URI = "http://localhost:3000";
 
 let state = {
 
-  // Search location set by homePG
-  // Used to load the list of locations in listPG
+  // Search location set by homepage
+  // Used to load the list of locations in Results
   searchFor: "Boulder, CO",
 
-  // Locations set by listPG after locations loaded from Yelp
+  // Locations set by Results after locations loaded from Yelp
   /* [
       {
         yelpId: 'DFGET5fgHGT43fg',
@@ -22,27 +22,22 @@ let state = {
   */
   locations: [],
 
-  // Loading status set by listPG when fetching list from Yelp
-  // FIX: set back to true when we are actually loading data
-  // isFetching: true,
-  isFetching: false,
+  // Location user has checked in to
+  checkedIn: false,
+  checkinLocationId: '',
+  checkinLocationName: '',
 
-  // User loaded by loginPG
+  // Logged in user set by Login
   // Null when user is not logged in
-  /* { fname: "Jane",
-       lname: "Doe",
+  /* { id: 2,
+       name: "Jane Doe",
        email: "jd@gmail.com",
        dogNames: "Sparky and Tilde",
      } */
   user: null,
+  // convenience flag that is kept in sync with "user" key by Login
   isLoggedIn: false,
-  // user: {
-  //   id: 1234,
-  //   fname: "Jane",
-  //   lname: "Doe",
-  //   email: "jd@gmail.com",
-  //   dogNames: "Sparky and Tilde",
-  // },
+
 
   // Global error state
   // Not sure if this will be used

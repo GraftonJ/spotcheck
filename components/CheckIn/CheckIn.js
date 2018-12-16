@@ -10,9 +10,11 @@ import {
   ImageBackground,
   Image,
   Alert,
+  ActivityIndicator,
   TouchableOpacity
 } from 'react-native'
 
+import { getResults, getResultsLatLon } from '../../utils/api'
 import store, { URI } from '../../store';
 
 export default class CheckIn extends React.Component {
@@ -21,17 +23,44 @@ export default class CheckIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // from store
+      user: store.getState().user,
+
       // local state
       isLoading: true,
+      candidateLocations: [], // array of locations to check-in to
     };
   }
 
   /* ********************************************* */
-  componentDidMount() {
-    this.unsubscribe = store.onChange(() => {
+  async componentDidMount() {
+    try {
+      const locationsByCity = await getResults('Boulder, CO');
+      const locationsByLatLon = await getResultsLatLon(40.016516, -105.281656);
+      // console.log('city: ',locationsByCity);
+      // console.log('latlon: ',locationsByLatLon);
+      const candidateLocations = [];
+
+      for (locationByLatLon of locationsByLatLon) {
+        console.log('checking: ', locationByLatLon.name);
+        if (locationsByCity.find(locationByCity => locationByCity.id === locationByLatLon.id))
+          candidateLocations.push(locationByLatLon);
+      }
+
+      // console.log('Candidiate locations: ', candidateLocations);
       this.setState({
+        isLoading: false,
+        candidateLocations
       })
-    });
+
+      this.unsubscribe = store.onChange(() => {
+        this.setState({
+          user: store.getState().user,
+        });
+      });
+    } catch (error) {
+      console.log("ERROR CheckIn::componentDidMount(): ", error);
+    }
   }
 
   /* ********************************************* */
@@ -52,28 +81,45 @@ export default class CheckIn extends React.Component {
   }
 
   /* ********************************************* */
+  onpressCheckin(locationId) {
+    console.log('onpressCheckin(): ', locationId);
+  }
+
+  /* ********************************************* */
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, candidateLocations } = this.state;
 
     // isLoading, show spinnert
     // ===================================
     if (isLoading) {
-      return ( <Text>Loading...</Text> );
+      return (
+        <ActivityIndicator
+          size="large"
+          color="#3399ff" />
+      )
     }
 
-    // List is empty, show sad face
+    // No candidate locations, show sad face
     // ====================================
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text>No known dog-friendly restaurants in the area</Text>
-      </SafeAreaView>
-    )
+    if (!candidateLocations.length) {
+      return (
+        <SafeAreaView style={styles.container}>
+          <Text>Unfortunately there are no restaurants in your area that are marked as dog-friendly</Text>
+        </SafeAreaView>
+      )
+    }
 
-    // Show list of locations to check into
+    // List candidate locations to check into
     // ====================================
     return (
       <SafeAreaView style={styles.container}>
-        <Text>Listing posibilities</Text>
+        {candidateLocations.map((location) => {
+          return (
+            <TouchableOpacity key={location.id} onPress={() => this.onpressCheckin(location.id)}>
+              <Text>{location.name}</Text>
+            </TouchableOpacity>
+          )
+        })}
       </SafeAreaView>
     )
   };
