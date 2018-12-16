@@ -37,6 +37,8 @@ let state = {
   // user: null,
   // // convenience flag that is kept in sync with "user" key by Login
   // isLoggedIn: false,
+
+  // TODO: reset these to the above so app doesn't strat logged in
   user:  { id: 2,
          name: "Jane Doe",
          email: "jd@gmail.com",
