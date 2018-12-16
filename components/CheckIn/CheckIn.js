@@ -82,14 +82,40 @@ export default class CheckIn extends React.Component {
   }
 
   /* ********************************************* */
-  onpressCheckin(locationId, locationName) {
+  async onpressCheckin(locationId, locationName) {
+    this.x = ''; // happy linter
+
     console.log('onpressCheckin(): ', locationId, locationName);
-    console.log('onpress() setting store state');
-    store.setState({
-      isCheckedIn: true,
-      checkinLocationId: locationId,
-      checkinLocationName: locationName,
-    })
+
+    const body = {
+      user_id: this.state.user.id,
+      loca_id: locationId,
+    };
+
+    try {
+      // call login route
+      console.log('before fetch');
+      const response = await fetch(`${URI}/check_ins`, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+
+      const responseJson = await response.json();
+      console.log("onpressCheckin() server response: ", responseJson);
+
+      store.setState({
+        isCheckedIn: true,
+        checkinLocationId: locationId,
+        checkinLocationName: locationName,
+      });
+    } catch(error) {
+      console.log("ERROR onpressCheckin(): ", error);
+    }
+
   }
 
   /* ********************************************* */
@@ -144,7 +170,9 @@ export default class CheckIn extends React.Component {
       <SafeAreaView style={styles.container}>
         {candidateLocations.map((location) => {
           return (
-            <TouchableOpacity key={location.id} onPress={() => this.onpressCheckin(location.id, location.name)}>
+            <TouchableOpacity
+              key={location.id}
+              onPress={() => this.onpressCheckin(location.id, location.name)}>
               <Text>{location.name}</Text>
             </TouchableOpacity>
           )

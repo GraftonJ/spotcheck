@@ -131,6 +131,10 @@ export default class HomeSCR extends React.Component {
     store.setState({
       user: null,
       isLoggedIn: false,
+
+      isCheckedIn: false,
+      checkinLocationId: '',
+      checkinLocationName: '',
     })
   }
 
