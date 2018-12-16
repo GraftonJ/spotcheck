@@ -28,7 +28,17 @@ export default class ResultCards extends React.Component {
 
           <View style={styles.cardTopLine}>
             <Text style={styles.price}>{location.price}</Text>
-            <Text style={styles.checkin}>{location.scNumCheckIns} Check-ins here!</Text>
+
+            {(location.scNumCheckIns===0) && (
+              <Text style={styles.checkin}>No check-ins yet</Text>
+            )}
+            {(location.scNumCheckIns===1) && (
+              <Text style={styles.checkin}>{location.scNumCheckIns} check-in here!</Text>
+            )}
+            {(location.scNumCheckIns > 1) && (
+              <Text style={styles.checkin}>{location.scNumCheckIns} check-ins here!</Text>
+            )}
+
           </View>
 
           <View style={styles.cardMiddleLine}>
