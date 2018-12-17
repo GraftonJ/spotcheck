@@ -5,17 +5,15 @@ import RatingsClickable from '../RatingsClickable'
 import store from '../../store'
 
 
-onpressComment = (e) => {
-}
-
 export default class CommentsCards extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       locations: store.getState().locations,
       locationForDetail: store.getState().locationForDetail,
-      matchedLocation: '',
+      matchedLocation: {},
       comment: '',
+      rating: 0,
     }
   }
 
@@ -39,12 +37,32 @@ export default class CommentsCards extends React.Component {
     this.unsubscribe();
   }
 
+  onpressComment = () => {
+    const comment =
+      {
+        comment: `${this.state.comment}`,
+        locaId: `${this.state.matchedLocation.id}`,
+        rating: `${this.state.rating}`,
+        user: store.getState().user
+    }
+
+    const newLocations = store.getState().locations.map((location) => {
+      if (location.id === this.state.matchedLocation.id)
+        return {
+          ...location,
+          scComments: [comment, ...location.scComments],
+        }
+      return location;
+    })
+    console.log('New Location is>>>', newLocations);
+    store.setState({locations: newLocations})
+  }
+
   render() {
     return (
       <SafeAreaView>
         <View style={styles.cardContainer}>
           <Text style={styles.name}>Meatball</Text>
-          <Text>{this.state.comment}</Text>
           <View style={styles.rating}>
             <RatingsClickable />
           </View>
