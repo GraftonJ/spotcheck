@@ -1,7 +1,22 @@
 import React from 'react';
 import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView} from 'react-native'
+import store from '../../store'
+
+
 
 export default class DetailCard extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      locations: store.getState().locations,
+      locationForDetail: store.getState().locationForDetail,
+      isLoading: true,
+      error: false
+    }
+  }
+
+
   render() {
     return (
         <ScrollView style={styles.card}>
