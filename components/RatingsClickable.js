@@ -14,8 +14,12 @@ export default class RatingsClickable extends React.Component {
   /* ******************************** */
   constructor(props) {
     super(props);
+
+    // optional initialRatings prop, default to 0
+    const initialRating = (props.initialRating) ? props.initialRating : 0;
+
     this.state = {
-      currRating: props.initialRating,
+      currRating: initialRating,
     };
 
     this.starFilled   = require('../assets/images/star2-filled.png');
@@ -29,6 +33,7 @@ export default class RatingsClickable extends React.Component {
     this.setState({
       currRating: rating,
     });
+    this.props.ratingUpdatedCB(rating);
   }
 
   /* ******************************** */
