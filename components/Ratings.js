@@ -63,11 +63,11 @@ const Ratings = (props) => {
   const aStars = [];
   for (let i = 0; i <= 4; i++) {
     if ((i + 0.75) <= avgRating) {
-      aStars.push(( <Image key={i} style={styles.star} source={require('../assets/images/star2-filled.png')} /> ));
+      aStars.push(( <Image key={i} style={styles.star} source={require('../assets/images/star-filled.png')} /> ));
     } else if (i + 0.25 <= avgRating) {
-      aStars.push(( <Image key={i} style={styles.star} source={require('../assets/images/star2-half2.png')} /> ));
+      aStars.push(( <Image key={i} style={styles.star} source={require('../assets/images/star-half.png')} /> ));
     } else {
-      aStars.push(( <Image key={i} style={styles.star} source={require('../assets/images/star2-unfilled.png')} /> ));
+      aStars.push(( <Image key={i} style={styles.star} source={require('../assets/images/star-empty.png')} /> ));
     }
   }
 
