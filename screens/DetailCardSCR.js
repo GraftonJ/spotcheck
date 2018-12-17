@@ -24,7 +24,7 @@ export default class DetailCardSCR extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <DetailCard />
+        <DetailCard navigate={this.props.navigation.navigate}/>
       </View>
     );
   }

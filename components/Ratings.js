@@ -54,7 +54,7 @@ const Ratings = (props) => {
   if (!comments.length) {
     return (
       <View style={styles.container}>
-        <Text>no ratings yet</Text>
+        <Text> no ratings yet</Text>
       </View>
     )
   }
