@@ -237,6 +237,7 @@ const styles = StyleSheet.create({
   },
   openNow: {
     fontSize: 20,
+    marginBottom: 10,
   },
   cardFifthLine: {
     flexDirection: 'row',
