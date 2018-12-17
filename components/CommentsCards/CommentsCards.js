@@ -12,23 +12,23 @@ const CommentsCards = () => (
         <View style={styles.cardContainer}>
           <Text style={styles.name}>Meatball</Text>
           <Text style={styles.rating}> ☆☆☆☆☆</Text>
-        <View>
-          <TextInput
-           style={styles.placeholderText}
-           multiline = {true}
-           numberOfLines = {4}
-           maxLength = {500}
-           placeholder="Leave a comment to help your doggy friends find a restuarant to visit with their people!"
-          />
+          <View>
+            <TextInput
+             style={styles.placeholderText}
+             multiline = {true}
+             numberOfLines = {4}
+             maxLength = {500}
+             placeholder="Leave a comment to help your doggy friends find a restuarant to visit with their people!"
+            />
+          </View>
         </View>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={this.onpressComment}>
-          <Text>Bark! (comment)</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.onpressComment}>
+            <Text>Bark! (comment)</Text>
+          </TouchableOpacity>
+        </View>
     </SafeAreaView>
     )
 
