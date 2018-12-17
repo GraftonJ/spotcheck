@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator} from 'react-native'
+import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator, TouchableOpacity} from 'react-native'
 import store, { URI } from '../../store'
 import { getResults } from '../../utils/api'
 import Ratings from '../Ratings.js'
@@ -17,6 +17,9 @@ export default class DetailCard extends React.Component {
       error: false,
       matchedLocation: {}
     }
+  }
+  onPressComment = () => {
+    console.log('comment hooked up*************')
   }
 
   /* **************************************** */
@@ -41,15 +44,15 @@ export default class DetailCard extends React.Component {
   }
 
 
+
   /* **************************************** */
   componentWillUnmount() {
     this.unsubscribe();
   }
 
-
   /* **************************************** */
   render() {
-    const { matchedLocation, isLoading } = this.state
+    const { matchedLocation, isLoading, onPressComment } = this.state
 
   if (isLoading) {
     return (
@@ -95,12 +98,17 @@ export default class DetailCard extends React.Component {
           )}
           <Text style={styles.address}>{matchedLocation.location.address1}</Text>
           <Text style={styles.directions}>Directions</Text>
+          <Text style={styles.call}>{matchedLocation.display_phone}</Text>
         </View>
 
 
         <View style={styles.cardFifthLine}>
-          <Text >Leave a Rating or Comment </Text>
-            <Text style={styles.call}>{matchedLocation.display_phone}</Text>
+          <TouchableOpacity
+            style={styles.leaveCommentButton}
+            onPress={this.onPressComment}>
+            <Text>Leave a Rating or Comment </Text>
+          </TouchableOpacity>
+
         </View>
 
 
@@ -263,5 +271,8 @@ const styles = StyleSheet.create({
   currentRating: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  leaveCommentButton: {
+    borderBottomWidth: 1,
   }
 })
