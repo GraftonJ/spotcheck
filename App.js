@@ -8,7 +8,7 @@ import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
 import DetailCardSCR from './screens/DetailCardSCR'
-import RatingsClickable from './components/RatingsClickable'
+// import Ratings from './components/Ratings'
 
 // import Register from './components/Login/NewAccount'
 
@@ -33,18 +33,13 @@ export default class App extends Component<Props> {
       location: text,
       })
   }
-
-  ratingUpdated(newRating) {
-    console.log("newRating: ", newRating);
-  }
-
   render() {
     return (
-      <AppNavigator />
+        <AppNavigator />
     );
   }
 }
-// <RatingsClickable ratingUpdatedCB={this.ratingUpdated} initialRating={3} />
+
 //  <CheckInSCR />
 //  <LoginSCR />
 //  <AppNavigator />

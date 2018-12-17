@@ -1,23 +1,85 @@
 import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import { Fonts } from '../../assets/fonts/fonts'
+import RatingsClickable from '../RatingsClickable'
+import store from '../../store'
 
 
-onpressComment = (e) => {
+export default class CommentsCards extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      locations: store.getState().locations,
+      locationForDetail: store.getState().locationForDetail,
+      matchedLocation: {},
+      comment: '',
+      rating: 0,
+    }
+  }
 
-}
+  async componentDidMount() {
+    this.unsubscribe = store.onChange(() => {
+      this.setState({
+        locations: store.getState().locations,
+        locationForDetail: store.getState().locationForDetail,
+      })
+    })
 
-const CommentsCards = () => (
+    let matched = this.state.locations.find((location) => (location.id === this.state.locationForDetail))
+    console.log('Matched Location is>>>', matched);
+
+    this.setState({
+      matchedLocation: matched
+    })
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  ratingUpdated = (newRating) => {
+    this.setState({
+      rating: newRating
+    })
+  console.log('New rating is>>>', newRating)
+  }
+
+  onpressComment = () => {
+    const comment =
+      {
+        comment: `${this.state.comment}`,
+        locaId: `${this.state.matchedLocation.id}`,
+        rating: this.state.rating,
+        user: store.getState().user
+    }
+
+    const newLocations = store.getState().locations.map((location) => {
+      if (location.id === this.state.matchedLocation.id)
+        return {
+          ...location,
+          scComments: [comment, ...location.scComments],
+        }
+      return location;
+    })
+    console.log('New Location is>>>', newLocations);
+    store.setState({locations: newLocations})
+  }
+
+  render() {
+    return (
       <SafeAreaView>
         <View style={styles.cardContainer}>
-          <Text style={styles.name}>Meatball</Text>
-          <Text style={styles.rating}> ☆☆☆☆☆</Text>
+          <Text style={styles.name}>{store.getState().user.name}</Text>
+          <View style={styles.rating}>
+            <RatingsClickable ratingUpdatedCB={this.ratingUpdated}/>
+          </View>
           <View>
             <TextInput
              style={styles.placeholderText}
              multiline = {true}
              numberOfLines = {4}
              maxLength = {500}
+             onChangeText ={(comment) => this.setState({comment})}
              placeholder="Leave a comment to help your doggy friends find a restuarant to visit with their people!"
             />
           </View>
@@ -31,6 +93,8 @@ const CommentsCards = () => (
         </View>
     </SafeAreaView>
     )
+  }
+}
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -53,8 +117,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   rating: {
-    fontSize: 25,
-    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginBottom: 20,
   },
   placeholderText: {
@@ -79,5 +143,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 })
-
-export default CommentsCards

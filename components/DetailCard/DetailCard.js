@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator} from 'react-native'
+import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator, TouchableOpacity} from 'react-native'
 import store, { URI } from '../../store'
 import { getResults } from '../../utils/api'
 import Ratings from '../Ratings.js'
@@ -17,6 +17,9 @@ export default class DetailCard extends React.Component {
       error: false,
       matchedLocation: {}
     }
+  }
+  onPressComment = () => {
+    console.log('comment hooked up*************')
   }
 
   /* **************************************** */
@@ -41,15 +44,15 @@ export default class DetailCard extends React.Component {
   }
 
 
+
   /* **************************************** */
   componentWillUnmount() {
     this.unsubscribe();
   }
 
-
   /* **************************************** */
   render() {
-    const { matchedLocation, isLoading } = this.state
+    const { matchedLocation, isLoading, onPressComment } = this.state
 
   if (isLoading) {
     return (
@@ -79,38 +82,42 @@ export default class DetailCard extends React.Component {
           )}
         </View>
 
-        <View style={styles.cardSecondLine}>
+        <View style={styles.priceCategory}>
           <Text style={styles.price}>{matchedLocation.price}</Text>
           <Text style={styles.category}>{matchedLocation.categories[0].title}, {matchedLocation.categories[1].title}</Text>
-          <Ratings comments={matchedLocation.scComments} />
-
+          <Ratings styles={styles.currentRatings} comments={matchedLocation.scComments} />
         </View>
 
-        <View style={styles.cardThirdLine}>
-          <Text style={styles.cardThirdLine}>{matchedLocation.location.address1}</Text>
-        </View>
 
-        <View style={styles.cardFourthLine}>
-          <Text style={styles.directions}>Directions</Text>
-
+        <View style={styles.addressDirections}>
           {(matchedLocation.is_closed === false) && (
             <Text style={styles.openNow}>Open Now</Text>
           )}
           {(matchedLocation.is_closed === true) && (
             <Text style={styles.openNow}>Closed Now</Text>
           )}
-
+          <Text style={styles.address}>{matchedLocation.location.address1}</Text>
+          <Text style={styles.directions}>Directions</Text>
           <Text style={styles.call}>{matchedLocation.display_phone}</Text>
         </View>
 
+
         <View style={styles.cardFifthLine}>
-          <Text >Leave a Rating or Comment </Text>
+          <TouchableOpacity
+            style={styles.leaveCommentButton}
+            onPress={this.onPressComment}>
+            <Text>Leave a Rating or Comment </Text>
+          </TouchableOpacity>
+
         </View>
 
-        <View style={styles.starRating}>
-          <Text style={styles.starRating}>☆☆☆☆☆</Text>
-        </View>
 
+
+        <View style={styles.ratingsView}>
+          <Text>
+            Spot Check User Ratings!
+          </Text>
+        </View>
 
           {matchedLocation.scComments.map(scComments => (
           <View
@@ -121,10 +128,11 @@ export default class DetailCard extends React.Component {
               style={styles.cardTopLine}>
               <Text
               style={styles.commentName}>Name: {scComments.user.name}</Text>
-              <Text>Dog(s): {scComments.user.dogNames}</Text>
+              <Text
+              style={styles.commentName}>Dog(s): {scComments.user.dogNames}</Text>
             </View>
 
-            <View>
+            <View style={styles.cardSecondLine}>
               <Ratings rating={scComments.rating} />
             </View>
 
@@ -180,28 +188,40 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial',
   },
   cardSecondLine: {
+    display: 'flex',
+    margin: 15,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 20,
   },
-  rating: {
-    fontSize: 25,
+  priceCategory: {
+    display: 'flex',
+    margin: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 20,
   },
+
   ratingCount: {
     fontSize: 15,
   },
   price: {
     fontSize: 20,
+    flex: 1,
   },
   category: {
     fontSize: 20,
+    flex: 3,
   },
-  cardThirdLine: {
-    flexDirection: 'row',
+  addressDirections: {
     justifyContent: 'center',
+    alignItems: 'center',
     fontSize: 20,
     marginTop: 2,
+  },
+  address: {
+    fontSize: 20,
   },
   cardFourthLine: {
     flexDirection: 'row',
@@ -209,8 +229,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   directions: {
-    marginLeft: 20,
-    fontSize: 20,
+    fontSize: 15,
   },
   call: {
     marginRight: 20,
@@ -233,16 +252,27 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   comments: {
-    borderTopWidth: 1,
+    borderBottomWidth: 1,
     marginTop: 15,
   },
   commentName: {
+    flex: 1,
     fontSize: 15,
     fontWeight: 'bold'
   },
   commentContainer: {
     width: "100%",
     height: 200,
-    borderWidth: 3
+    borderTopWidth: 1,
+  },
+  ratingsView: {
+    marginTop: 40,
+  },
+  currentRating: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  leaveCommentButton: {
+    borderBottomWidth: 1,
   }
 })

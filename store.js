@@ -10,7 +10,7 @@ let state = {
   // Used to load the list of locations in Results
   searchFor: "Boulder, CO",
 
-  // Locations set by Results after locations loaded from Yelp
+  // Locations set by Results after locations loaded from Yelp. Default datatype should be an empty array
   /* [
       {
         yelpId: 'DFGET5fgHGT43fg',
@@ -20,10 +20,30 @@ let state = {
       { ... },
      ]
   */
-  locations: [],
+  locations: [
+    {
+      id: "FJo2jznp56MU_IdDcX038A",
+      alias: "avery-brewing-boulder-2",
+      name: "Avery Brewing",
+      image_url: "https://s3-media2.fl.yelpcdn.com/bphoto/MkVcVHCwoyBjRpMMH-i6iQ/o.jpg",
+      name: "Avery Brewing",
+      rating: 4.5,
+      scComments: [
+      {
+        comment: "This is a great spot",
+        locaId: "FJo2jznp56MU_IdDcX038A",
+        rating: 5,
+        user: {
+          id: 1,
+          name: "Arcis",
+          }
+        }
+      ]
+    }  
+  ],
 
-  // set by Results when clicking to get details for a location
-  locationForDetail: '',
+  // set by Results when clicking to get details for a location. Default datatype should be an empty string
+  locationForDetail: 'FJo2jznp56MU_IdDcX038A',
 
   // Location user has checked in to
   isCheckedIn: false,
