@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView} from 'react-native'
+import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator} from 'react-native'
 import store, { URI } from '../../store'
 import { getResults } from '../../utils/api'
 
@@ -13,7 +13,7 @@ export default class DetailCard extends React.Component {
 
       isLoading: true,
       error: false,
-      matchedLocation: ''
+      matchedLocation: {}
     }
   }
 
@@ -26,46 +26,38 @@ export default class DetailCard extends React.Component {
       })
     })
 
-    // let loadedLocations = await getResults(store.getState().searchFor)
 
-    // let loadedLocationForDetail = await store.getState().locationForDetail
-      // console.log('*******', loadedLocationForDetail)
-
-    // if (loadedLocations === undefined) {
-    //   this.setState({
-    //     error: true,
-    //     isLoading: false,
-    //   });
-    //   console.log("ERROR DetailCard::componentDidMount()");
-    //   return;
-    // }
-
-    // if (loadedLocationForDetail === undefined) {
-    //   this.setState({
-    //     error: true,
-    //     isLoading: false,
-    //   });
-    //   console.log("ERROR DetailCard::componentDidMount()")
-    //   return
-    // }
     let matched = this.state.locations.find((location) => (location.id === this.state.locationForDetail))
-    console.log('>>>>>>>>>>>', matched, matched.name, matched.image_url);
+
+
+    // console.log('>>>>>>>>>>>', typeof(matched), matched);
 
     this.setState({
-      matchedLocation: matched
-    });
-    console.log(this.state.matchedLocation);
+      matchedLocation: matched,
+      isLoading: false
+    })
   }
+
 
   /* **************************************** */
   componentWillUnmount() {
     this.unsubscribe();
   }
 
+
   /* **************************************** */
   render() {
-    const { matchedLocation } = this.state
+    const { matchedLocation, isLoading } = this.state
 
+  if (isLoading) {
+    return (
+      <ActivityIndicator
+        size="large"
+        color="#3399ff"
+      />
+    )
+  }
+  console.log('*****************', matchedLocation.categories[0])
     return (
       <ScrollView style={styles.card}>
         <View style={styles.imageContainer}>
@@ -79,7 +71,7 @@ export default class DetailCard extends React.Component {
 
         <View style={styles.cardSecondLine}>
           <Text style={styles.price}>{matchedLocation.price}</Text>
-          <Text style={styles.category}>Categories</Text>
+          <Text style={styles.category}>category</Text>
           <Text style={styles.rating}> ☆☆☆☆☆</Text>
           <Text style={styles.ratingCount}> (797)</Text>
         </View>
@@ -102,7 +94,7 @@ export default class DetailCard extends React.Component {
           <Text style={styles.starRating}>☆☆☆☆☆</Text>
         </View>
       </ScrollView>
-    )
+      )
   }
 }
 const win = Dimensions.get('window');
