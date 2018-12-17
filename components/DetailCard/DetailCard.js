@@ -3,7 +3,7 @@ import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image
 import store, { URI } from '../../store'
 import { getResults } from '../../utils/api'
 import Stars from '../Stars.js'
-import CommentsList from '../CommentsList/CommentsList'
+// import CommentsList from '../CommentsList/CommentsList'
 
 export default class DetailCard extends React.Component {
 
@@ -111,9 +111,18 @@ export default class DetailCard extends React.Component {
           <Text style={styles.starRating}>☆☆☆☆☆</Text>
         </View>
 
-        <View style={styles.comments}>
-          <CommentsList />
+        <View>
+          {matchedLocation.scComments.map(scComments => (
+            // console.log(scComments.user)
+            <Text
+              key={scComments.user.id}>Name: {scComments.user.dogNames}</Text>
+          ))}
+
+          <Text>This is where the comments go</Text>
         </View>
+
+
+
       </ScrollView>
       )
   }
