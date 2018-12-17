@@ -1,12 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import { Fonts } from '../../assets/fonts/fonts'
 
 
 onpressComment = (e) => {
 
 }
-
 
 const CommentsCards = () => (
       <SafeAreaView>
@@ -15,28 +14,27 @@ const CommentsCards = () => (
           <Text style={styles.rating}> ☆☆☆☆☆</Text>
           <View>
             <TextInput
-           style={styles.placeholderText}
-           multiline = {true}
-           numberOfLines = {4}
-           placeholder="Leave a comment to help your doggy friends find a restuarant to visit with their people!"
-          />
+             style={styles.placeholderText}
+             multiline = {true}
+             numberOfLines = {4}
+             maxLength = {500}
+             placeholder="Leave a comment to help your doggy friends find a restuarant to visit with their people!"
+            />
+          </View>
         </View>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
             onPress={this.onpressComment}>
-          <Text >Bark! (comment)</Text>
-        </TouchableOpacity>
-      </View>
+            <Text>Bark! (comment)</Text>
+          </TouchableOpacity>
+        </View>
     </SafeAreaView>
-
     )
-
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: '99%',
+    width: 350,
     height: '50%',
     backgroundColor: 'white',
     borderColor: 'black',
@@ -60,9 +58,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   placeholderText: {
+    width: "100%",
+    height: 200,
     fontSize: 18,
     alignSelf: 'center',
-    borderTopWidth: 1,
+    borderTopWidth: 1
   },
   buttonContainer: {
     flex: 1,
