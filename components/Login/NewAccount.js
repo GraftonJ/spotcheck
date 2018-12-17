@@ -52,10 +52,6 @@ export default class NewAccount extends React.Component {
       errorMessage: '',
     })
 
-    // dog_names is optional field, need to remove it from
-    //   the object before JSON.stringify() or we get error:
-    //   "Unexpected token < in JSON at position 0"
-
     if (!user.dog_names) {
       delete user.dog_names;
       console.log(")))))) removed dog_names", user);

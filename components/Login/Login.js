@@ -128,9 +128,9 @@ export default class HomeSCR extends React.Component {
     }
     const { email, password } = value;
     const success = await this.asyncTryLogin(email, password);
-    // if (success)
-    //   this.props.navigate('HomeSCR');
 
+    if (success)
+      this.props.navigate('SearchScreens');
   }
 
   /* ********************************************* */
@@ -165,7 +165,8 @@ export default class HomeSCR extends React.Component {
     this.setState({
       isRegistering: false,
     })
-    // this.props.navigate('HomeSCR');
+  
+    this.props.navigate('SearchScreens');
   }
 
   /* ********************************************** */
