@@ -1,5 +1,10 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
+import {
+  Text,
+  Image,
+  StyleSheet,
+} from 'react-native'
 
 import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
@@ -9,9 +14,9 @@ import DetailCardSCR from './screens/DetailCardSCR'
 
 import colors from './utils/colors';
 
-// const getTabBarIcon = icon => ({ tintColor }) => (
-//   <Text>X</Text>
-// );
+const getTabBarIcon = icon => ({ tintColor }) => (
+  <Image style={styles.icon} source={require('./assets/images/search.png')} />
+);
 // <MaterialIcons name={icon} size={26} style={{ color: tintColor }} />
 
 const SearchScreens = StackNavigator(
@@ -29,7 +34,9 @@ const SearchScreens = StackNavigator(
   {
     initialRouteName: 'HomeSCR',
     navigationOptions: {
-      // tabBarIcon: getTabBarIcon('list'),
+      tabBarIcon: ({ tintColor }) => (
+        <Image style={styles.iconSearch} source={require('./assets/images/search.png')} />
+      ),
     },
   },
 );
@@ -43,7 +50,9 @@ const CheckInScreen = StackNavigator(
   {
     initialRouteName: 'CheckInSCR',
     navigationOptions: {
-      // tabBarIcon: getTabBarIcon('star'),
+      tabBarIcon: ({ tintColor }) => (
+        <Image style={styles.iconCheckin} source={require('./assets/images/checkin.png')} />
+      ),
     },
   },
 );
@@ -58,7 +67,9 @@ const LoginScreen = StackNavigator(
     // mode: 'modal',
     initialRouteName: 'LoginSCR',
     navigationOptions: {
-    // tabBarIcon: getTabBarIcon('person'),
+      tabBarIcon: ({ tintColor }) => (
+        <Image style={styles.iconLogin} source={require('./assets/images/login.png')} />
+      ),
     },
   },
 );
@@ -91,3 +102,18 @@ export default TabNavigator(
     },
   },
 );
+
+const styles = StyleSheet.create({
+  iconSearch: {
+    height: 25,
+    width: 25,
+  },
+  iconCheckin: {
+    height: 40,
+    width: 40,
+  },
+  iconLogin: {
+    height: 45,
+    width: 45,
+  },
+});
