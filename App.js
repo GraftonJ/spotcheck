@@ -33,13 +33,18 @@ export default class App extends Component<Props> {
       location: text,
       })
   }
+
+  ratingUpdated(newRating) {
+    console.log("newRating: ", newRating);
+  }
+
   render() {
     return (
       <AppNavigator />
     );
   }
 }
-// <RatingsClickable initialRating={3} />
+// <RatingsClickable ratingUpdatedCB={this.ratingUpdated} initialRating={3} />
 //  <CheckInSCR />
 //  <LoginSCR />
 //  <AppNavigator />
