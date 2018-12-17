@@ -44,7 +44,7 @@ export default class Results extends React.Component {
 
     // Load locations
     // ----------------
-    let loadedLocations = await getResults(store.getState().searchFor);
+    let loadedLocations = await getResults(store.getState().searchFor)
 
     // when would the fetch return undefined?
     if (loadedLocations === undefined) {

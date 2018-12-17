@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView} from 'react-native'
-import store from '../../store'
-
+import store, { URI } from '../../store'
+import { getResults } from '../../utils/api'
 
 
 export default class DetailCard extends React.Component {
+
 
   constructor(props) {
     super(props)
@@ -14,7 +15,68 @@ export default class DetailCard extends React.Component {
       isLoading: true,
       error: false
     }
+// console.log(this.state.locations[0].id)
+// let ids = []
+// this.state.locations.map(location => {
+//   ids.push(location.id)
+
+  // console.log('***********************',this.state.locationForDetail)
+  // location.id === this.state.locationForDetail
+// })
+// console.log('********************', ids)
+// console.log(this.state.locationForDetail)
+// console.log(ids)
+// let match = ids.find(matchedId => (matchedId === this.state.locationforDetail))
+// console.log('*****************', match)
+    }
+
+
+
+    // console.log('NEED TO MATCH', this.state.locations[0].id, this.state.locationForDetail);
+
+
+
+
+// console.log(this.state.locations.find(location => (this.state.location.id === this.state.locationForDetail)))
+  /* **************************************** Do I need this?*/
+  async componentDidMount() {
+    this.unsubscribe = store.onChange(() => {
+      this.setState({
+        locations: store.getState().locations,
+        locationForDetail: store.getState().locationForDetail,
+      })
+    })
+
+    let loadedLocations = await getResults(store.getState().searchFor)
+
+    let loadedLocationForDetail = await store.getState().locationForDetail
+      // console.log('*******', loadedLocationForDetail)
+
+      if (loadedLocations === undefined) {
+        this.setState({
+          error: true,
+          isLoading: false,
+        });
+        console.log("ERROR DetailCard::componentDidMount()");
+        return;
+      }
+
+      if(loadedLocationForDetail === undefined) {
+        this.setState({
+          error: true,
+          isLoading: false,
+        })
+        console.log("ERROR DetailCard::componentDidMount()")
+        return
+      }
+    //   console.log('*************', loadedLocationForDetail);
+    // console.log(loadedLocations.find((location) => (location.id === loadedLocationForDetail)))
+    let matched = loadedLocations.find((location) => (location.id === loadedLocationForDetail))
+    console.log('>>>>>>>>>>>>', matched);
   }
+
+
+
 
 
   render() {
