@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
   },
   textStyle: {
-    marginTop: '25%',
+    marginTop: '15%',
     textAlign: 'center',
     color: 'white',
     fontSize: 45,
@@ -110,7 +110,7 @@ textInput: {
   color: 'black',
   height: 1,
   width: 300,
-  marginTop: '58%',
+  marginTop: '65%',
   marginHorizontal: 20,
   paddingHorizontal: 10,
   alignSelf: 'center',
