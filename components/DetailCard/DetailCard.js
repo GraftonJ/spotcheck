@@ -124,7 +124,7 @@ export default class DetailCard extends React.Component {
               <Text>Dog(s): {scComments.user.dogNames}</Text>
             </View>
 
-            <View>
+            <View style={styles.cardSecondLine}>
               <Ratings rating={scComments.rating} />
             </View>
 
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial',
   },
   cardSecondLine: {
-    flexDirection: 'row',
+    margin: 15,
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 20,
