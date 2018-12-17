@@ -40,7 +40,9 @@ export default class App extends Component<Props> {
 
   render() {
     return (
-      <AppNavigator />
+      <View style={styles.container}>
+        <CommentsCards />
+      </View>
     );
   }
 }

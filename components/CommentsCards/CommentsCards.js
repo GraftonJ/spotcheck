@@ -37,12 +37,19 @@ export default class CommentsCards extends React.Component {
     this.unsubscribe();
   }
 
+  ratingUpdated = (newRating) => {
+    this.setState({
+      rating: newRating
+    })
+  console.log('New rating is>>>', newRating)
+  }
+
   onpressComment = () => {
     const comment =
       {
         comment: `${this.state.comment}`,
         locaId: `${this.state.matchedLocation.id}`,
-        rating: `${this.state.rating}`,
+        rating: this.state.rating,
         user: store.getState().user
     }
 
@@ -64,7 +71,7 @@ export default class CommentsCards extends React.Component {
         <View style={styles.cardContainer}>
           <Text style={styles.name}>Meatball</Text>
           <View style={styles.rating}>
-            <RatingsClickable />
+            <RatingsClickable ratingUpdatedCB={this.ratingUpdated}/>
           </View>
           <View>
             <TextInput
