@@ -8,7 +8,7 @@ import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
 import DetailCardSCR from './screens/DetailCardSCR'
-// import Ratings from './components/Ratings'
+import RatingsClickable from './components/RatingsClickable'
 
 // import Register from './components/Login/NewAccount'
 
@@ -39,7 +39,7 @@ export default class App extends Component<Props> {
     );
   }
 }
-
+// <RatingsClickable initialRating={3} />
 //  <CheckInSCR />
 //  <LoginSCR />
 //  <AppNavigator />
