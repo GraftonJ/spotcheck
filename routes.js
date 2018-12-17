@@ -105,8 +105,8 @@ export default TabNavigator(
 
 const styles = StyleSheet.create({
   iconSearch: {
-    height: 25,
-    width: 25,
+    height: 23,
+    width: 23,
   },
   iconCheckin: {
     height: 40,
