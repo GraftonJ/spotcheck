@@ -18,9 +18,9 @@ export default class RatingsClickable extends React.Component {
       currRating: props.initialRating,
     };
 
-    this.starFilled   = require('../assets/images/star-filled.png');
-    this.starHalf     = require('../assets/images/star-half.png');
-    this.starUnfilled = require('../assets/images/star-empty.png');
+    this.starFilled   = require('../assets/images/star2-filled.png');
+    this.starHalf     = require('../assets/images/star2-filled.png');
+    this.starUnfilled = require('../assets/images/star2-empty.png');
   }
 
   /* ******************************** */
