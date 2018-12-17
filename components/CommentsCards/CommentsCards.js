@@ -69,7 +69,7 @@ export default class CommentsCards extends React.Component {
     return (
       <SafeAreaView>
         <View style={styles.cardContainer}>
-          <Text style={styles.name}>Meatball</Text>
+          <Text style={styles.name}>{store.getState().user.name}</Text>
           <View style={styles.rating}>
             <RatingsClickable ratingUpdatedCB={this.ratingUpdated}/>
           </View>
