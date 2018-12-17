@@ -124,6 +124,8 @@ export default class DetailCard extends React.Component {
               <Text>Dog(s): {scComments.user.dogNames}</Text>
             </View>
 
+    
+
             <View>
               <Text>{scComments.comment}</Text>
             </View>
