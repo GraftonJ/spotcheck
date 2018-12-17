@@ -111,15 +111,17 @@ export default class DetailCard extends React.Component {
           <Text style={styles.starRating}>☆☆☆☆☆</Text>
         </View>
 
-        <View>
+
           {matchedLocation.scComments.map(scComments => (
             // console.log(scComments.user)
-            <Text
-              key={scComments.user.id}>Name: {scComments.user.dogNames}</Text>
+            <View
+              key={scComments.user.id}>
+            <Text>Name: {scComments.user.dogNames}</Text>
+            <Text>{scComments.comment}</Text>
+          </View>
           ))}
 
-          <Text>This is where the comments go</Text>
-        </View>
+
 
 
 
