@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator} from 'react-native'
 import store, { URI } from '../../store'
 import { getResults } from '../../utils/api'
-import Stars from '../Stars.js'
+import Ratings from '../Ratings.js'
 // import CommentsList from '../CommentsList/CommentsList'
 
 export default class DetailCard extends React.Component {
@@ -82,7 +82,7 @@ export default class DetailCard extends React.Component {
         <View style={styles.cardSecondLine}>
           <Text style={styles.price}>{matchedLocation.price}</Text>
           <Text style={styles.category}>{matchedLocation.categories[0].title}, {matchedLocation.categories[1].title}</Text>
-          <Stars comments={matchedLocation.scComments} />
+          <Ratings comments={matchedLocation.scComments} />
 
         </View>
 
@@ -113,16 +113,29 @@ export default class DetailCard extends React.Component {
 
 
           {matchedLocation.scComments.map(scComments => (
-            // console.log(scComments.user)
-            <View
+          <View
+              style={styles.commentContainer}
               key={scComments.user.id}>
-            <Text>Name: {scComments.user.dogNames}</Text>
-            <Text>{scComments.comment}</Text>
+
+            <View
+              style={styles.cardTopLine}>
+              <Text
+              style={styles.commentName}>Name: {scComments.user.name}</Text>
+              <Text>Dog(s): {scComments.user.dogNames}</Text>
+            </View>
+
+            <View>
+              <Ratings rating={scComments.rating} />
+            </View>
+
+            <View>
+              <Text>{scComments.comment}</Text>
+            </View>
+
           </View>
+
+
           ))}
-
-
-
 
 
       </ScrollView>
@@ -222,5 +235,14 @@ const styles = StyleSheet.create({
   comments: {
     borderTopWidth: 1,
     marginTop: 15,
+  },
+  commentName: {
+    fontSize: 15,
+    fontWeight: 'bold'
+  },
+  commentContainer: {
+    width: "100%",
+    height: 200,
+    borderWidth: 3
   }
 })
