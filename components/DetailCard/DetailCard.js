@@ -51,11 +51,12 @@ export default class DetailCard extends React.Component {
       }
 
     let matched = loadedLocations.find((location) => (location.id === loadedLocationForDetail))
-    console.log('>>>>>>>>>>>>', matched.name, matched.image_url);
+    console.log('>>>>>>>>>>>>', matched, matched.name, matched.image_url);
 
     this.setState({
       matchedLocation: matched
     })
+    console.log(matchedLocation);
   }
 
 
@@ -77,14 +78,14 @@ export default class DetailCard extends React.Component {
           </View>
 
           <View style={styles.cardSecondLine}>
-            <Text style={styles.price}>$$ -</Text>
-            <Text style={styles.category}> Brewery -</Text>
+            <Text style={styles.price}>{matchedLocation.price}</Text>
+            <Text style={styles.category}>Categories</Text>
             <Text style={styles.rating}> ☆☆☆☆☆</Text>
             <Text style={styles.ratingCount}> (797)</Text>
           </View>
 
           <View style={styles.cardThirdLine}>
-            <Text style={styles.cardThirdLine}>251 North Main St.</Text>
+            <Text style={styles.cardThirdLine}>address</Text>
           </View>
 
           <View style={styles.cardFourthLine}>
