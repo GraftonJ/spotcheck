@@ -79,15 +79,12 @@ export default class DetailCard extends React.Component {
           )}
         </View>
 
-        <View style={styles.cardSecondLine}>
+        <View style={styles.priceCategory}>
           <Text style={styles.price}>{matchedLocation.price}</Text>
           <Text style={styles.category}>{matchedLocation.categories[0].title}, {matchedLocation.categories[1].title}</Text>
+          <Ratings styles={styles.currentRatings} comments={matchedLocation.scComments} />
         </View>
 
-        <View>
-          <Ratings comments={matchedLocation.scComments} />
-
-        </View>
 
         <View style={styles.cardThirdLine}>
           <Text style={styles.cardThirdLine}>{matchedLocation.location.address1}</Text>
@@ -187,15 +184,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial',
   },
   cardSecondLine: {
+    display: 'flex',
     margin: 15,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 20,
   },
-  rating: {
-    fontSize: 25,
+  priceCategory: {
+    display: 'flex',
+    margin: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 20,
   },
+
   ratingCount: {
     fontSize: 15,
   },
@@ -258,5 +261,9 @@ const styles = StyleSheet.create({
   },
   ratingsView: {
     marginTop: 40,
+  },
+  currentRating: {
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 })
