@@ -17,9 +17,9 @@ export default class HomeSCR extends React.Component {
   // navigate = this.props.navigation.navigate;
   static navigationOptions = ({ navigation: { navigate } }) => ({
     title: 'Search',
-    headerTintColor: 'black',
+    headerTintColor: 'white',
     headerStyle: {
-      backgroundColor: colors.white,
+      backgroundColor: colors.blue,
     },
   });
 
