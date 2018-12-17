@@ -13,31 +13,11 @@ export default class DetailCard extends React.Component {
       locations: store.getState().locations,
       locationForDetail: store.getState().locationForDetail,
       isLoading: true,
-      error: false
+      error: false,
+      matchedLocation: ''
     }
-// console.log(this.state.locations[0].id)
-// let ids = []
-// this.state.locations.map(location => {
-//   ids.push(location.id)
+  }
 
-  // console.log('***********************',this.state.locationForDetail)
-  // location.id === this.state.locationForDetail
-// })
-// console.log('********************', ids)
-// console.log(this.state.locationForDetail)
-// console.log(ids)
-// let match = ids.find(matchedId => (matchedId === this.state.locationforDetail))
-// console.log('*****************', match)
-    }
-
-
-
-    // console.log('NEED TO MATCH', this.state.locations[0].id, this.state.locationForDetail);
-
-
-
-
-// console.log(this.state.locations.find(location => (this.state.location.id === this.state.locationForDetail)))
   /* **************************************** Do I need this?*/
   async componentDidMount() {
     this.unsubscribe = store.onChange(() => {
@@ -69,10 +49,13 @@ export default class DetailCard extends React.Component {
         console.log("ERROR DetailCard::componentDidMount()")
         return
       }
-    //   console.log('*************', loadedLocationForDetail);
-    // console.log(loadedLocations.find((location) => (location.id === loadedLocationForDetail)))
+
     let matched = loadedLocations.find((location) => (location.id === loadedLocationForDetail))
-    console.log('>>>>>>>>>>>>', matched);
+    console.log('>>>>>>>>>>>>', matched.name, matched.image_url);
+
+    this.setState({
+      matchedLocation: matched
+    })
   }
 
 
@@ -80,14 +63,16 @@ export default class DetailCard extends React.Component {
 
 
   render() {
+    const { matchedLocation } = this.state
+
     return (
         <ScrollView style={styles.card}>
           <View style={styles.imageContainer}>
-            <Image resizeMode={'contain'} style={styles.image} source={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/nbfrWWtz6lRUaxYtw9PNQA/o.jpg'}} />
+            <Image resizeMode={'contain'} style={styles.image} source={{uri: `${matchedLocation.image_url}`}} />
           </View>
 
           <View style={styles.cardTopLine}>
-            <Text style={styles.name}>Avery Brewery</Text>
+            <Text style={styles.name}>{matchedLocation.name}</Text>
             <Text style={styles.checkin}>79 Check-ins here!</Text>
           </View>
 
