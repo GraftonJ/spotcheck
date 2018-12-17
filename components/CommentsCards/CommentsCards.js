@@ -1,12 +1,40 @@
 import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import { Fonts } from '../../assets/fonts/fonts'
+import store from '../../store'
 
 
 onpressComment = (e) => {
 }
 
-const CommentsCards = () => (
+export default class CommentsCards extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      locations: store.getState().locations,
+      locationForDetail: store.getState().locationForDetail,
+      matchedLocation: ''
+    }
+  }
+
+  async componentDidMount() {
+    this.unsubscribe = store.onChange(() => {
+      this.setState({
+        locations: store.getState().locations,
+        locationForDetail: store.getState().locationForDetail,
+      })
+    })
+
+    let matched = this.state.locations.find((location) => (location.id === this.state.locationForDetail))
+    console.log('Matched Location is>>>', matched);
+
+    this.setState({
+      matchedLocation: matched
+    })
+  }
+
+  render() {
+    return (
       <SafeAreaView>
         <View style={styles.cardContainer}>
           <Text style={styles.name}>Meatball</Text>
@@ -30,6 +58,8 @@ const CommentsCards = () => (
         </View>
     </SafeAreaView>
     )
+  }
+}
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -78,5 +108,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 })
-
-export default CommentsCards

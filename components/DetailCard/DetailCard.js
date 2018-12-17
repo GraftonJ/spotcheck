@@ -55,6 +55,7 @@ export default class DetailCard extends React.Component {
       matchedLocation: matched
     });
     console.log(this.state.matchedLocation);
+    console.log('Store Locations', store.getState().locations);
   }
 
   /* **************************************** */
