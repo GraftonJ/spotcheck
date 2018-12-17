@@ -113,16 +113,25 @@ export default class DetailCard extends React.Component {
 
 
           {matchedLocation.scComments.map(scComments => (
-            // console.log(scComments.user)
-            <View
+          <View
+              style={styles.commentContainer}
               key={scComments.user.id}>
-            <Text>Name: {scComments.user.dogNames}</Text>
-            <Text>{scComments.comment}</Text>
+
+            <View
+              style={styles.cardTopLine}>
+              <Text
+              style={styles.commentName}>Name: {scComments.user.name}</Text>
+              <Text>Dog(s): {scComments.user.dogNames}</Text>
+            </View>
+
+            <View>
+              <Text>{scComments.comment}</Text>
+            </View>
+
           </View>
+
+
           ))}
-
-
-
 
 
       </ScrollView>
@@ -222,5 +231,14 @@ const styles = StyleSheet.create({
   comments: {
     borderTopWidth: 1,
     marginTop: 15,
+  },
+  commentName: {
+    fontSize: 15,
+    fontWeight: 'bold'
+  },
+  commentContainer: {
+    width: "100%",
+    height: 200,
+    borderWidth: 3
   }
 })
