@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import CommentsCards from './components/CommentsCards/CommentsCards'
+import {Platform, StyleSheet, Text, View} from 'react-native';
+// import HomePage from './components/Homepage/Homepage'
 
 import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
@@ -35,9 +35,7 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <CommentsCards />
-      </SafeAreaView>
+      <AppNavigator />
     );
   }
 }
