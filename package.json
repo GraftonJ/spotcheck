@@ -20,10 +20,10 @@
     "react-native": "0.57.7",
     "react-native-elements": "^1.0.0-beta7",
     "react-native-fontawesome": "^6.0.1",
-    "react-native-svg": "^8.0.10",
-    "tcomb-form-native": "^0.6.20",
     "react-native-gesture-handler": "^1.0.12",
-    "react-navigation": "1.5.11"
+    "react-native-svg": "^8.0.10",
+    "react-navigation": "1.5.11",
+    "tcomb-form-native": "^0.6.20"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",

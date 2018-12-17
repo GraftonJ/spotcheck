@@ -10,11 +10,9 @@ onpressComment = (e) => {
 
 const CommentsCards = () => (
       <SafeAreaView>
-
         <View style={styles.cardContainer}>
           <Text style={styles.name}>Meatball</Text>
           <Text style={styles.rating}> ☆☆☆☆☆</Text>
-
           <View>
             <TextInput
            style={styles.placeholderText}
@@ -24,7 +22,6 @@ const CommentsCards = () => (
           />
         </View>
       </View>
-
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
