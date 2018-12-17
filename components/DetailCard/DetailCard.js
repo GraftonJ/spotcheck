@@ -1,7 +1,9 @@
 import React from 'react';
-import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView} from 'react-native'
+import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator} from 'react-native'
 import store, { URI } from '../../store'
 import { getResults } from '../../utils/api'
+import Stars from '../Stars.js'
+// import CommentsList from '../CommentsList/CommentsList'
 
 export default class DetailCard extends React.Component {
 
@@ -13,7 +15,7 @@ export default class DetailCard extends React.Component {
 
       isLoading: true,
       error: false,
-      matchedLocation: ''
+      matchedLocation: {}
     }
   }
 
@@ -26,46 +28,38 @@ export default class DetailCard extends React.Component {
       })
     })
 
-    // let loadedLocations = await getResults(store.getState().searchFor)
 
-    // let loadedLocationForDetail = await store.getState().locationForDetail
-      // console.log('*******', loadedLocationForDetail)
-
-    // if (loadedLocations === undefined) {
-    //   this.setState({
-    //     error: true,
-    //     isLoading: false,
-    //   });
-    //   console.log("ERROR DetailCard::componentDidMount()");
-    //   return;
-    // }
-
-    // if (loadedLocationForDetail === undefined) {
-    //   this.setState({
-    //     error: true,
-    //     isLoading: false,
-    //   });
-    //   console.log("ERROR DetailCard::componentDidMount()")
-    //   return
-    // }
     let matched = this.state.locations.find((location) => (location.id === this.state.locationForDetail))
-    console.log('>>>>>>>>>>>', matched, matched.name, matched.image_url);
+
+
+    // console.log('>>>>>>>>>>>', typeof(matched), matched);
 
     this.setState({
-      matchedLocation: matched
-    });
-    console.log(this.state.matchedLocation);
+      matchedLocation: matched,
+      isLoading: false
+    })
   }
+
 
   /* **************************************** */
   componentWillUnmount() {
     this.unsubscribe();
   }
 
+
   /* **************************************** */
   render() {
-    const { matchedLocation } = this.state
+    const { matchedLocation, isLoading } = this.state
 
+  if (isLoading) {
+    return (
+      <ActivityIndicator
+        size="large"
+        color="#3399ff"
+      />
+    )
+  }
+  console.log('*****************', matchedLocation)
     return (
       <ScrollView style={styles.card}>
         <View style={styles.imageContainer}>
@@ -74,24 +68,39 @@ export default class DetailCard extends React.Component {
 
         <View style={styles.cardTopLine}>
           <Text style={styles.name}>{matchedLocation.name}</Text>
-          <Text style={styles.checkin}>79 Check-ins here!</Text>
+          {(matchedLocation.scNumCheckIns===0) && (
+            <Text>No check-ins yet</Text>
+          )}
+          {(matchedLocation.scNumCheckIns===1) && (
+            <Text>{matchedLocation.scNumCheckIns} check-in here!</Text>
+          )}
+          {(matchedLocation.scNumCheckIns > 1) && (
+            <Text>{matchedLocation.scNumCheckIns} check-ins here!</Text>
+          )}
         </View>
 
         <View style={styles.cardSecondLine}>
           <Text style={styles.price}>{matchedLocation.price}</Text>
-          <Text style={styles.category}>Categories</Text>
-          <Text style={styles.rating}> ☆☆☆☆☆</Text>
-          <Text style={styles.ratingCount}> (797)</Text>
+          <Text style={styles.category}>{matchedLocation.categories[0].title}, {matchedLocation.categories[1].title}</Text>
+          <Stars comments={matchedLocation.scComments} />
+
         </View>
 
         <View style={styles.cardThirdLine}>
-          <Text style={styles.cardThirdLine}>address</Text>
+          <Text style={styles.cardThirdLine}>{matchedLocation.location.address1}</Text>
         </View>
 
         <View style={styles.cardFourthLine}>
           <Text style={styles.directions}>Directions</Text>
-          <Text style={styles.openNow}> Open Now</Text>
-          <Text style={styles.call}> Call</Text>
+
+          {(matchedLocation.is_closed === false) && (
+            <Text style={styles.openNow}>Open Now</Text>
+          )}
+          {(matchedLocation.is_closed === true) && (
+            <Text style={styles.openNow}>Closed Now</Text>
+          )}
+
+          <Text style={styles.call}>{matchedLocation.display_phone}</Text>
         </View>
 
         <View style={styles.cardFifthLine}>
@@ -101,8 +110,23 @@ export default class DetailCard extends React.Component {
         <View style={styles.starRating}>
           <Text style={styles.starRating}>☆☆☆☆☆</Text>
         </View>
+
+
+          {matchedLocation.scComments.map(scComments => (
+            // console.log(scComments.user)
+            <View
+              key={scComments.user.id}>
+            <Text>Name: {scComments.user.dogNames}</Text>
+            <Text>{scComments.comment}</Text>
+          </View>
+          ))}
+
+
+
+
+
       </ScrollView>
-    )
+      )
   }
 }
 const win = Dimensions.get('window');
@@ -115,11 +139,11 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     backgroundColor: '#F4F4F4',
     borderColor: 'black',
-    borderWidth: 5,
   },
   imageContainer: {
     width: '100%',
     height: 250,
+    borderWidth: 1,
   },
   image: {
     flex: 1,
@@ -177,7 +201,7 @@ const styles = StyleSheet.create({
   },
   call: {
     marginRight: 20,
-    fontSize: 20,
+    fontSize: 15,
   },
   openNow: {
     fontSize: 20,
@@ -195,4 +219,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontSize: 30,
   },
+  comments: {
+    borderTopWidth: 1,
+    marginTop: 15,
+  }
 })
