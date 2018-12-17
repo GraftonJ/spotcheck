@@ -1,20 +1,51 @@
 import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity} from 'react-native'
+import PropTypes from 'prop-types';
 import { Fonts } from '../../assets/fonts/fonts'
 
 
 onpressComment = (e) => {
 
 }
+export default class CommentsCards extends React.Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+  };
 
+  static defaultProps = {
+    placeholder: '',
+  };
 
-const CommentsCards = () => (
+  state = {
+    text: '',
+  };
+
+  handleChangeText = text => {
+    this.setState({ text });
+  };
+
+  handleSubmitEditing = () => {
+    const { onSubmit } = this.props;
+    const { text } = this.state;
+
+    if (!text) return;
+
+    onSubmit(text);
+    this.setState({ text: '' });
+  };
+
+  render() {
+    const { placeholder } = this.props;
+    const { text } = this.state;
+
+    return (
       <SafeAreaView>
         <View style={styles.cardContainer}>
           <Text style={styles.name}>Meatball</Text>
           <Text style={styles.rating}> ☆☆☆☆☆</Text>
-          <View>
-            <TextInput
+        <View>
+          <TextInput
            style={styles.placeholderText}
            multiline = {true}
            numberOfLines = {4}
@@ -25,18 +56,18 @@ const CommentsCards = () => (
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
-            onPress={this.onpressComment}>
+          onPress={this.onpressComment}>
           <Text >Bark! (comment)</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-
     )
-
+  }
+}
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: '99%',
+    width: 350,
     height: '50%',
     backgroundColor: 'white',
     borderColor: 'black',
@@ -79,5 +110,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 })
-
-export default CommentsCards
