@@ -4,7 +4,6 @@ import { Fonts } from '../../assets/fonts/fonts'
 
 
 onpressComment = (e) => {
-
 }
 
 const CommentsCards = () => (
