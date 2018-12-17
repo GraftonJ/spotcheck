@@ -50,6 +50,7 @@ export default class CheckIn extends React.Component {
       // Galvanize: (40.016516, -105.281656);
       // Avery (40.0625629,-105.2047427);
       const promise0 = getResults('Boulder, CO');
+      // const promise1 = getResultsLatLon(40.016516,-105.281656);
       const promise1 = getResultsLatLon(40.0625629,-105.2047427);
       const aResults = await Promise.all([promise0, promise1]);
       const locationsByCity = aResults[0];
@@ -166,7 +167,12 @@ export default class CheckIn extends React.Component {
     // ===================================
     if (!isLoggedIn) {
       return (
-        <Text>Please login so you can check-in to a location</Text>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.circle}>
+            <Image style={styles.image} source={require('../../assets/images/check-in-4.jpg')} />
+          </View>
+          <Text style={[styles.text, styles.errorMessage]}>Please login so you can check-in to a location</Text>
+        </SafeAreaView>
       )
     }
 
@@ -174,7 +180,12 @@ export default class CheckIn extends React.Component {
     // ===================================
     if (isCheckedIn) {
       return (
-        <Text>Yay, you checked-in to {checkinLocationName}</Text>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.circle}>
+            <Image style={styles.image} source={require('../../assets/images/check-in-4.jpg')} />
+          </View>
+          <Text style={styles.text}>Yay, you checked-in to {checkinLocationName}</Text>
+        </SafeAreaView>
       )
     }
 
@@ -183,7 +194,10 @@ export default class CheckIn extends React.Component {
     if (!candidateLocations.length) {
       return (
         <SafeAreaView style={styles.container}>
-          <Text>Unfortunately there are no restaurants in your area that are marked as dog-friendly</Text>
+          <View style={styles.circle}>
+            <Image style={styles.image} source={require('../../assets/images/check-in-4.jpg')} />
+          </View>
+          <Text style={styles.text}>Unfortunately there are no restaurants in your area that are marked as dog-friendly</Text>
         </SafeAreaView>
       )
     }
@@ -192,12 +206,17 @@ export default class CheckIn extends React.Component {
     // ====================================
     return (
       <SafeAreaView style={styles.container}>
+
+        <View style={styles.circle}>
+          <Image style={styles.image} source={require('../../assets/images/check-in-4.jpg')} />
+        </View>
+
         {candidateLocations.map((location) => {
           return (
             <TouchableOpacity
               key={location.id}
               onPress={() => this.onpressCheckin(location.id, location.name)}>
-              <Text>{location.name}</Text>
+              <Text style={styles.text}>{location.name}</Text>
             </TouchableOpacity>
           )
         })}
@@ -216,19 +235,24 @@ const styles = StyleSheet.create({
     height: '70%',
     width: '90%',
   },
-  form: {
+  image: {
+    height: '100%',
+    width: '100%',
 
   },
+
   text: {
     fontSize: 25,
     letterSpacing: 1,
     marginBottom: 10,
+    textAlign: "center",
   },
   image: {
     height: '100%',
     width: '100%',
 
   },
+
   errorMessage: {
     color: "red",
   },
@@ -240,22 +264,6 @@ const styles = StyleSheet.create({
     borderWidth:1,
     borderRadius:75,
     padding: 22,
-  },
-  button: {
-    width: '25%',
-    height: '4%',
-    borderWidth: 1,
-    borderRadius: 10,
-    backgroundColor: 'white',
-    marginTop: 10,
-    marginBottom: 25,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  newAccount : {
-    fontSize: 10,
-    letterSpacing: 1,
-    margin: 2
   },
 })
 

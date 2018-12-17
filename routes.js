@@ -15,7 +15,7 @@ import DetailCardSCR from './screens/DetailCardSCR'
 import colors from './utils/colors';
 
 const getTabBarIcon = icon => ({ tintColor }) => (
-  <Image style={styles.icon} source={require('./assets/images/search.png')} />
+  <Image style={styles.icon} source={require('./assets/images/tab-search.png')} />
 );
 // <MaterialIcons name={icon} size={26} style={{ color: tintColor }} />
 
@@ -35,7 +35,7 @@ const SearchScreens = StackNavigator(
     initialRouteName: 'HomeSCR',
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Image style={styles.iconSearch} source={require('./assets/images/search.png')} />
+        <Image style={styles.iconSearch} source={require('./assets/images/tab-search.png')} />
       ),
     },
   },
@@ -51,7 +51,7 @@ const CheckInScreen = StackNavigator(
     initialRouteName: 'CheckInSCR',
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Image style={styles.iconCheckin} source={require('./assets/images/checkin.png')} />
+        <Image style={styles.iconCheckin} source={require('./assets/images/tab-checkin.png')} />
       ),
     },
   },
@@ -68,7 +68,7 @@ const LoginScreen = StackNavigator(
     initialRouteName: 'LoginSCR',
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => (
-        <Image style={styles.iconLogin} source={require('./assets/images/login.png')} />
+        <Image style={styles.iconLogin} source={require('./assets/images/tab-login.png')} />
       ),
     },
   },
