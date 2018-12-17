@@ -2,6 +2,8 @@ import React from 'react';
 import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator} from 'react-native'
 import store, { URI } from '../../store'
 import { getResults } from '../../utils/api'
+import Stars from '../Stars.js'
+
 
 export default class DetailCard extends React.Component {
 
@@ -57,7 +59,7 @@ export default class DetailCard extends React.Component {
       />
     )
   }
-  console.log('*****************', matchedLocation.categories[0])
+  console.log('*****************', matchedLocation)
     return (
       <ScrollView style={styles.card}>
         <View style={styles.imageContainer}>
@@ -66,24 +68,39 @@ export default class DetailCard extends React.Component {
 
         <View style={styles.cardTopLine}>
           <Text style={styles.name}>{matchedLocation.name}</Text>
-          <Text style={styles.checkin}>79 Check-ins here!</Text>
+          {(matchedLocation.scNumCheckIns===0) && (
+            <Text>No check-ins yet</Text>
+          )}
+          {(matchedLocation.scNumCheckIns===1) && (
+            <Text>{matchedLocation.scNumCheckIns} check-in here!</Text>
+          )}
+          {(matchedLocation.scNumCheckIns > 1) && (
+            <Text>{matchedLocation.scNumCheckIns} check-ins here!</Text>
+          )}
         </View>
 
         <View style={styles.cardSecondLine}>
           <Text style={styles.price}>{matchedLocation.price}</Text>
-          <Text style={styles.category}>category</Text>
-          <Text style={styles.rating}> ☆☆☆☆☆</Text>
-          <Text style={styles.ratingCount}> (797)</Text>
+          <Text style={styles.category}>{matchedLocation.categories[0].title}, {matchedLocation.categories[1].title}</Text>
+          <Stars comments={matchedLocation.scComments} />
+
         </View>
 
         <View style={styles.cardThirdLine}>
-          <Text style={styles.cardThirdLine}>address</Text>
+          <Text style={styles.cardThirdLine}>{matchedLocation.location.address1}</Text>
         </View>
 
         <View style={styles.cardFourthLine}>
           <Text style={styles.directions}>Directions</Text>
-          <Text style={styles.openNow}> Open Now</Text>
-          <Text style={styles.call}> Call</Text>
+
+          {(matchedLocation.is_closed === false) && (
+            <Text style={styles.openNow}>Open Now</Text>
+          )}
+          {(matchedLocation.is_closed === true) && (
+            <Text style={styles.openNow}>Closed Now</Text>
+          )}
+
+          <Text style={styles.call}>{matchedLocation.display_phone}</Text>
         </View>
 
         <View style={styles.cardFifthLine}>
@@ -169,7 +186,7 @@ const styles = StyleSheet.create({
   },
   call: {
     marginRight: 20,
-    fontSize: 20,
+    fontSize: 15,
   },
   openNow: {
     fontSize: 20,
