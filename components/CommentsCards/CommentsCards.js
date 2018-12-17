@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import { Fonts } from '../../assets/fonts/fonts'
+import RatingsClickable from '../RatingsClickable'
 import store from '../../store'
 
 
@@ -13,7 +14,8 @@ export default class CommentsCards extends React.Component {
     this.state = {
       locations: store.getState().locations,
       locationForDetail: store.getState().locationForDetail,
-      matchedLocation: ''
+      matchedLocation: '',
+      comment: '',
     }
   }
 
@@ -33,18 +35,26 @@ export default class CommentsCards extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   render() {
     return (
       <SafeAreaView>
         <View style={styles.cardContainer}>
           <Text style={styles.name}>Meatball</Text>
-          <Text style={styles.rating}> ☆☆☆☆☆</Text>
+          <Text>{this.state.comment}</Text>
+          <View style={styles.rating}>
+            <RatingsClickable />
+          </View>
           <View>
             <TextInput
              style={styles.placeholderText}
              multiline = {true}
              numberOfLines = {4}
              maxLength = {500}
+             onChangeText ={(comment) => this.setState({comment})}
              placeholder="Leave a comment to help your doggy friends find a restuarant to visit with their people!"
             />
           </View>
@@ -82,8 +92,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   rating: {
-    fontSize: 25,
-    alignSelf: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginBottom: 20,
   },
   placeholderText: {
