@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import CommentsCards from './components/CommentsCards/CommentsCards'
 
 import AppNavigator from './routes';
@@ -8,7 +8,7 @@ import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
 import DetailCardSCR from './screens/DetailCardSCR'
-import RatingsClickable from './components/RatingsClickable'
+// import Ratings from './components/Ratings'
 
 // import Register from './components/Login/NewAccount'
 
@@ -35,13 +35,11 @@ export default class App extends Component<Props> {
   }
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <CommentsCards />
-      </SafeAreaView>
+      <AppNavigator />
     );
   }
 }
-// <RatingsClickable initialRating={3} />
+
 //  <CheckInSCR />
 //  <LoginSCR />
 //  <AppNavigator />
