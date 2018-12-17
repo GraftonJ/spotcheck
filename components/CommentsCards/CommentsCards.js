@@ -17,7 +17,7 @@ const CommentsCards = () => (
            style={styles.placeholderText}
            multiline = {true}
            numberOfLines = {4}
-           maxLength = {300}
+           maxLength = {500}
            placeholder="Leave a comment to help your doggy friends find a restuarant to visit with their people!"
           />
         </View>
