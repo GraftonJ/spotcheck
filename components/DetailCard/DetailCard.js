@@ -104,6 +104,7 @@ export default class DetailCard extends React.Component {
 
         <View style={styles.cardFifthLine}>
           <TouchableOpacity
+            style={styles.leaveCommentButton}
             onPress={this.onPressComment}>
             <Text>Leave a Rating or Comment </Text>
           </TouchableOpacity>
@@ -270,5 +271,8 @@ const styles = StyleSheet.create({
   currentRating: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  leaveCommentButton: {
+    borderBottomWidth: 1,
   }
 })
