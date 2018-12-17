@@ -9,7 +9,7 @@ import {
   TouchableOpacity} from 'react-native'
 
 // import calcAvgRating from '../utils/calcAvgRating'
-
+//getting it to work
 /* ***************************************** */
 function calcAvgRating(aComments) {
   if (!aComments.length) {
