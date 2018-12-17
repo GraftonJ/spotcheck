@@ -1,14 +1,14 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-// import HomePage from './components/Homepage/Homepage'
+import CommentsCards from './components/CommentsCards/CommentsCards'
 
 import AppNavigator from './routes';
 import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
 import DetailCardSCR from './screens/DetailCardSCR'
-import RatingsClickable from './components/RatingsClickable'
+// import Ratings from './components/Ratings'
 
 // import Register from './components/Login/NewAccount'
 
