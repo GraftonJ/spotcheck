@@ -8,7 +8,7 @@ import HomeSCR from './screens/HomeSCR'
 import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
 import DetailCardSCR from './screens/DetailCardSCR'
-import Stars from './components/Stars'
+// import Stars from './components/Stars'
 
 // import Register from './components/Login/NewAccount'
 
