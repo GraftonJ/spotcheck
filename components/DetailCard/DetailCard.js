@@ -18,8 +18,11 @@ export default class DetailCard extends React.Component {
       matchedLocation: {}
     }
   }
+
+  /* **************************************** */
   onPressComment = () => {
-    console.log('comment hooked up*************')
+    console.log('comment hooked up*************');
+    this.props.navigate('CommentsSCR');
   }
 
   /* **************************************** */

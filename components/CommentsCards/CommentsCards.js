@@ -6,6 +6,8 @@ import store from '../../store'
 
 
 export default class CommentsCards extends React.Component {
+
+  /* ************************************** */
   constructor(props) {
     super(props)
     this.state = {
@@ -17,6 +19,7 @@ export default class CommentsCards extends React.Component {
     }
   }
 
+  /* ************************************** */
   async componentDidMount() {
     this.unsubscribe = store.onChange(() => {
       this.setState({
@@ -33,17 +36,19 @@ export default class CommentsCards extends React.Component {
     })
   }
 
+  /* ************************************** */
   componentWillUnmount() {
     this.unsubscribe();
   }
 
+  /* ************************************** */
   ratingUpdated = (newRating) => {
+    console.log('CommentsCards::ratingUpdated: >>>', newRating)
     this.setState({
       rating: newRating
     })
-  console.log('New rating is>>>', newRating)
   }
-
+  /* ************************************** */
   onpressComment = () => {
     const comment =
       {
@@ -62,9 +67,11 @@ export default class CommentsCards extends React.Component {
       return location;
     })
     console.log('New Location is>>>', newLocations);
-    store.setState({locations: newLocations})
+    store.setState({locations: newLocations});
+    this.props.goBack();
   }
 
+  /* ************************************** */
   render() {
     return (
       <SafeAreaView>
@@ -96,6 +103,7 @@ export default class CommentsCards extends React.Component {
   }
 }
 
+/* ************************************** */
 const styles = StyleSheet.create({
   cardContainer: {
     width: 350,

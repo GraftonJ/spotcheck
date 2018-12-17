@@ -11,6 +11,7 @@ import LoginSCR from './screens/LoginSCR'
 import CheckInSCR from './screens/CheckInSCR'
 import ResultsSCR from './screens/ResultsSCR'
 import DetailCardSCR from './screens/DetailCardSCR'
+import CommentsSCR from './screens/CommentsSCR'
 
 import colors from './utils/colors';
 
@@ -29,6 +30,9 @@ const SearchScreens = StackNavigator(
     },
     DetailCardSCR: {
       screen: DetailCardSCR,
+    },
+    CommentsSCR: {
+      screen: CommentsSCR,
     }
   },
   {
