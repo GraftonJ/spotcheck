@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
 import colors from '../utils/colors'
 
-// import Results from '../components/Results/Results'
+import DetailCard from '../components/DetailCard/DetailCard'
 
 export default class DetailCardSCR extends React.Component {
   static navigationOptions = ({ navigation: { navigate } }) => ({
@@ -24,7 +24,7 @@ export default class DetailCardSCR extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Detail Page</Text>
+        <DetailCard />
       </View>
     );
   }

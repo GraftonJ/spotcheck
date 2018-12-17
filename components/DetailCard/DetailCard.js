@@ -1,28 +1,91 @@
 import React from 'react';
 import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView} from 'react-native'
+import store, { URI } from '../../store'
+import { getResults } from '../../utils/api'
+
 
 export default class DetailCard extends React.Component {
+
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      locations: store.getState().locations,
+      locationForDetail: store.getState().locationForDetail,
+      isLoading: true,
+      error: false,
+      matchedLocation: ''
+    }
+  }
+
+  /* **************************************** Do I need this?*/
+  async componentDidMount() {
+    this.unsubscribe = store.onChange(() => {
+      this.setState({
+        locations: store.getState().locations,
+        locationForDetail: store.getState().locationForDetail,
+      })
+    })
+
+    let loadedLocations = await getResults(store.getState().searchFor)
+
+    let loadedLocationForDetail = await store.getState().locationForDetail
+      // console.log('*******', loadedLocationForDetail)
+
+      if (loadedLocations === undefined) {
+        this.setState({
+          error: true,
+          isLoading: false,
+        });
+        console.log("ERROR DetailCard::componentDidMount()");
+        return;
+      }
+
+      if(loadedLocationForDetail === undefined) {
+        this.setState({
+          error: true,
+          isLoading: false,
+        })
+        console.log("ERROR DetailCard::componentDidMount()")
+        return
+      }
+
+    let matched = loadedLocations.find((location) => (location.id === loadedLocationForDetail))
+    console.log('>>>>>>>>>>>>', matched, matched.name, matched.image_url);
+
+    this.setState({
+      matchedLocation: matched
+    })
+    console.log(matchedLocation);
+  }
+
+
+
+
+
   render() {
+    const { matchedLocation } = this.state
+
     return (
         <ScrollView style={styles.card}>
           <View style={styles.imageContainer}>
-            <Image resizeMode={'contain'} style={styles.image} source={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/nbfrWWtz6lRUaxYtw9PNQA/o.jpg'}} />
+            <Image resizeMode={'contain'} style={styles.image} source={{uri: `${matchedLocation.image_url}`}} />
           </View>
 
           <View style={styles.cardTopLine}>
-            <Text style={styles.name}>Avery Brewery</Text>
+            <Text style={styles.name}>{matchedLocation.name}</Text>
             <Text style={styles.checkin}>79 Check-ins here!</Text>
           </View>
 
           <View style={styles.cardSecondLine}>
-            <Text style={styles.price}>$$ -</Text>
-            <Text style={styles.category}> Brewery -</Text>
+            <Text style={styles.price}>{matchedLocation.price}</Text>
+            <Text style={styles.category}>Categories</Text>
             <Text style={styles.rating}> ☆☆☆☆☆</Text>
             <Text style={styles.ratingCount}> (797)</Text>
           </View>
 
           <View style={styles.cardThirdLine}>
-            <Text style={styles.cardThirdLine}>251 North Main St.</Text>
+            <Text style={styles.cardThirdLine}>address</Text>
           </View>
 
           <View style={styles.cardFourthLine}>
