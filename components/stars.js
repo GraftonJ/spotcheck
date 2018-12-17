@@ -9,7 +9,7 @@ import {
   TouchableOpacity} from 'react-native'
 
 // import calcAvgRating from '../utils/calcAvgRating'
-//getting it to work
+
 /* ***************************************** */
 function calcAvgRating(aComments) {
   if (!aComments.length) {
@@ -24,8 +24,32 @@ function calcAvgRating(aComments) {
 }
 
 /* ***************************************** */
+// Stars can be called with ONE of the following props:
+//   comments -- array of comments in the form
+//               [ { locaId: 3232fT5656,
+//                   user: { id: 3, name: "Sue Grant", dogName: "Sparky"},
+//                   rating: 4,
+//                   comment: "this is a comment"}
+//                   }, {...} ]
+//  ** OR **
+//   rating -- a numeric value 0 - 5
 const Stars = (props) => {
-  const { comments } = props;
+  let { comments, rating } = props;
+
+  // was this component called with 'comments' prop?
+  let calledWithComments = true;
+
+  // This component is set to work for a comments array
+  //  so if it's called with a singleRating we just
+  //  dummy a comments array with one entry for the singleRating
+  //  and let the code works with the comments array
+  if (rating) {
+    if (comments) {
+      console.log("ERROR -- don't call Stars components with both props");
+    }
+    comments = [{ rating }];
+    calledWithComments = false;
+  }
 
   if (!comments.length) {
     return (
@@ -54,7 +78,9 @@ const Stars = (props) => {
       {aStars.map(star => (
         star
       ))}
-      <Text> ({ratings})</Text>
+      {calledWithComments && (
+        <Text> ({ratings})</Text>
+      )}
     </View>
   );
 };
@@ -66,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'pink',
+    // backgroundColor: 'pink',
   },
   star: {
     width: 18,
