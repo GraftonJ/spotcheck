@@ -5,6 +5,7 @@ import store from '../../store.js';
 
 import Stars from '../Stars.js'
 
+//stars working?
 export default class ResultCards extends React.Component {
 
   constructor(props) {
