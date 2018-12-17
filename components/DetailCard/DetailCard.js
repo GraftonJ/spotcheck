@@ -86,25 +86,21 @@ export default class DetailCard extends React.Component {
         </View>
 
 
-        <View style={styles.cardThirdLine}>
-          <Text style={styles.cardThirdLine}>{matchedLocation.location.address1}</Text>
-        </View>
-
-        <View style={styles.cardFourthLine}>
-          <Text style={styles.directions}>Directions</Text>
-
+        <View style={styles.addressDirections}>
           {(matchedLocation.is_closed === false) && (
             <Text style={styles.openNow}>Open Now</Text>
           )}
           {(matchedLocation.is_closed === true) && (
             <Text style={styles.openNow}>Closed Now</Text>
           )}
-
-          <Text style={styles.call}>{matchedLocation.display_phone}</Text>
+          <Text style={styles.address}>{matchedLocation.location.address1}</Text>
+          <Text style={styles.directions}>Directions</Text>
         </View>
+
 
         <View style={styles.cardFifthLine}>
           <Text >Leave a Rating or Comment </Text>
+            <Text style={styles.call}>{matchedLocation.display_phone}</Text>
         </View>
 
 
@@ -210,11 +206,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     flex: 3,
   },
-  cardThirdLine: {
-    flexDirection: 'row',
+  addressDirections: {
     justifyContent: 'center',
+    alignItems: 'center',
     fontSize: 20,
     marginTop: 2,
+  },
+  address: {
+    fontSize: 20,
   },
   cardFourthLine: {
     flexDirection: 'row',
@@ -222,8 +221,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   directions: {
-    marginLeft: 20,
-    fontSize: 20,
+    fontSize: 15,
   },
   call: {
     marginRight: 20,
