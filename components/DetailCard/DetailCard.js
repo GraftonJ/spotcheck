@@ -3,7 +3,7 @@ import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image
 import store, { URI } from '../../store'
 import { getResults } from '../../utils/api'
 import Stars from '../Stars.js'
-
+import CommentsList from '../CommentsList/CommentsList'
 
 export default class DetailCard extends React.Component {
 
@@ -110,6 +110,10 @@ export default class DetailCard extends React.Component {
         <View style={styles.starRating}>
           <Text style={styles.starRating}>☆☆☆☆☆</Text>
         </View>
+
+        <View style={styles.comments}>
+          <CommentsList />
+        </View>
       </ScrollView>
       )
   }
@@ -124,11 +128,11 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     backgroundColor: '#F4F4F4',
     borderColor: 'black',
-    borderWidth: 5,
   },
   imageContainer: {
     width: '100%',
     height: 250,
+    borderWidth: 1,
   },
   image: {
     flex: 1,
@@ -204,4 +208,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontSize: 30,
   },
+  comments: {
+    borderTopWidth: 1,
+    marginTop: 15,
+  }
 })
