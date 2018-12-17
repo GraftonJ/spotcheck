@@ -26,36 +26,35 @@ export default class DetailCard extends React.Component {
       })
     })
 
-    let loadedLocations = await getResults(store.getState().searchFor)
+    // let loadedLocations = await getResults(store.getState().searchFor)
 
-    let loadedLocationForDetail = await store.getState().locationForDetail
+    // let loadedLocationForDetail = await store.getState().locationForDetail
       // console.log('*******', loadedLocationForDetail)
 
-    if (loadedLocations === undefined) {
-      this.setState({
-        error: true,
-        isLoading: false,
-      });
-      console.log("ERROR DetailCard::componentDidMount()");
-      return;
-    }
+    // if (loadedLocations === undefined) {
+    //   this.setState({
+    //     error: true,
+    //     isLoading: false,
+    //   });
+    //   console.log("ERROR DetailCard::componentDidMount()");
+    //   return;
+    // }
 
-    if (loadedLocationForDetail === undefined) {
-      this.setState({
-        error: true,
-        isLoading: false,
-      });
-      console.log("ERROR DetailCard::componentDidMount()")
-      return
-    }
-
-    let matched = loadedLocations.find((location) => (location.id === loadedLocationForDetail))
+    // if (loadedLocationForDetail === undefined) {
+    //   this.setState({
+    //     error: true,
+    //     isLoading: false,
+    //   });
+    //   console.log("ERROR DetailCard::componentDidMount()")
+    //   return
+    // }
+    let matched = this.state.locations.find((location) => (location.id === this.state.locationForDetail))
     console.log('>>>>>>>>>>>', matched, matched.name, matched.image_url);
 
     this.setState({
       matchedLocation: matched
     });
-    console.log(matchedLocation);
+    console.log(this.state.matchedLocation);
   }
 
   /* **************************************** */
