@@ -1,45 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity} from 'react-native'
-import PropTypes from 'prop-types';
+import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import { Fonts } from '../../assets/fonts/fonts'
 
 
 onpressComment = (e) => {
 
 }
-export default class CommentsCards extends React.Component {
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
-  };
 
-  static defaultProps = {
-    placeholder: '',
-  };
-
-  state = {
-    text: '',
-  };
-
-  handleChangeText = text => {
-    this.setState({ text });
-  };
-
-  handleSubmitEditing = () => {
-    const { onSubmit } = this.props;
-    const { text } = this.state;
-
-    if (!text) return;
-
-    onSubmit(text);
-    this.setState({ text: '' });
-  };
-
-  render() {
-    const { placeholder } = this.props;
-    const { text } = this.state;
-
-    return (
+const CommentsCards = () => (
       <SafeAreaView>
         <View style={styles.cardContainer}>
           <Text style={styles.name}>Meatball</Text>
@@ -49,6 +17,7 @@ export default class CommentsCards extends React.Component {
            style={styles.placeholderText}
            multiline = {true}
            numberOfLines = {4}
+           maxLength = {300}
            placeholder="Leave a comment to help your doggy friends find a restuarant to visit with their people!"
           />
         </View>
@@ -57,13 +26,11 @@ export default class CommentsCards extends React.Component {
         <TouchableOpacity
           style={styles.button}
           onPress={this.onpressComment}>
-          <Text >Bark! (comment)</Text>
+          <Text>Bark! (comment)</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
     )
-  }
-}
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -91,9 +58,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   placeholderText: {
+    width: "100%",
+    height: 200,
     fontSize: 18,
     alignSelf: 'center',
-    borderTopWidth: 1,
+    borderTopWidth: 1
   },
   buttonContainer: {
     flex: 1,
@@ -110,3 +79,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 })
+
+export default CommentsCards
