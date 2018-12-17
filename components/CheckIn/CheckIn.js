@@ -50,8 +50,8 @@ export default class CheckIn extends React.Component {
       // Galvanize: (40.016516, -105.281656);
       // Avery (40.0625629,-105.2047427);
       const promise0 = getResults('Boulder, CO');
-      // const promise1 = getResultsLatLon(40.016516,-105.281656);
-      const promise1 = getResultsLatLon(40.0625629,-105.2047427);
+      const promise1 = getResultsLatLon(40.016516,-105.281656);
+      // const promise1 = getResultsLatLon(40.0625629,-105.2047427);
       const aResults = await Promise.all([promise0, promise1]);
       const locationsByCity = aResults[0];
       const locationsByLatLon = aResults[1];
@@ -184,7 +184,8 @@ export default class CheckIn extends React.Component {
           <View style={styles.circle}>
             <Image style={styles.image} source={require('../../assets/images/check-in-4.jpg')} />
           </View>
-          <Text style={styles.text}>Yay, you checked-in to {checkinLocationName}</Text>
+          <Text style={styles.text}>You are checked-in to:</Text>
+          <Text style={styles.text}>{checkinLocationName}</Text>
         </SafeAreaView>
       )
     }
@@ -201,7 +202,6 @@ export default class CheckIn extends React.Component {
         </SafeAreaView>
       )
     }
-
     // List candidate locations to check into
     // ====================================
     return (
@@ -215,8 +215,15 @@ export default class CheckIn extends React.Component {
           return (
             <TouchableOpacity
               key={location.id}
+              style={styles.button}
               onPress={() => this.onpressCheckin(location.id, location.name)}>
-              <Text style={styles.text}>{location.name}</Text>
+              <Text
+                style={styles.text}
+                numberOfLines={1}
+                ellipsizeMode={'tail'}
+              >
+                {location.name}
+              </Text>
             </TouchableOpacity>
           )
         })}
@@ -241,16 +248,29 @@ const styles = StyleSheet.create({
 
   },
 
+  button: {
+    width: '100%',
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 0,
+    paddingLeft: 10,
+    paddingRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "#73DF36",
+  },
+
   text: {
     fontSize: 25,
     letterSpacing: 1,
-    marginBottom: 10,
     textAlign: "center",
   },
   image: {
     height: '100%',
     width: '100%',
-
   },
 
   errorMessage: {
