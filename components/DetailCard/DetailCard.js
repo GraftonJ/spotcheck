@@ -28,15 +28,15 @@ export default class DetailCard extends React.Component {
   /* **************************************** */
   async componentDidMount() {
     this.unsubscribe = store.onChange(() => {
+      console.log("---- DetailCard::store update CB()");
       this.setState({
         locations: store.getState().locations,
         locationForDetail: store.getState().locationForDetail,
+        matchedLocation: store.getState().locations.find((location) => (location.id === store.getState().locationForDetail)),
       })
     })
 
-
     let matched = this.state.locations.find((location) => (location.id === this.state.locationForDetail))
-
 
     // console.log('>>>>>>>>>>>', typeof(matched), matched);
 
@@ -45,8 +45,6 @@ export default class DetailCard extends React.Component {
       isLoading: false
     })
   }
-
-
 
   /* **************************************** */
   componentWillUnmount() {
@@ -57,15 +55,16 @@ export default class DetailCard extends React.Component {
   render() {
     const { matchedLocation, isLoading, onPressComment } = this.state
 
-  if (isLoading) {
-    return (
-      <ActivityIndicator
-        size="large"
-        color="#3399ff"
-      />
-    )
-  }
-  console.log('*****************', matchedLocation)
+    if (isLoading) {
+      return (
+        <ActivityIndicator
+          size="large"
+          color="#3399ff"
+        />
+      )
+    }
+
+    console.log('DetailCard::render(), matchedLocation: ', matchedLocation)
     return (
       <ScrollView style={styles.card}>
         <View style={styles.imageContainer}>

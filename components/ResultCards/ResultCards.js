@@ -8,10 +8,12 @@ import Ratings from '../Ratings.js'
 //stars working?
 export default class ResultCards extends React.Component {
 
+  /* ************************************* */
   constructor(props) {
     super(props);
   }
 
+  /* ************************************* */
   onpressDetails = (id) => {
     console.log('*********** onpressDetails(): ', id);
 
@@ -22,6 +24,7 @@ export default class ResultCards extends React.Component {
     this.props.navigate('DetailCardSCR');
   }
 
+  /* ************************************* */
   render() {
     const { location } = this.props;
     return (
@@ -87,8 +90,6 @@ export default class ResultCards extends React.Component {
     )
   }
 }
-
-// <Ratings style={styles.rating} comments={location.scComments} />
 
 const styles = StyleSheet.create({
   card: {
