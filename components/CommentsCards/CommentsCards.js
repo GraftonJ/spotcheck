@@ -131,7 +131,7 @@ export default class CommentsCards extends React.Component {
           <TouchableOpacity
             style={styles.button}
             onPress={this.onpressComment}>
-            <Text>Bark! (comment)</Text>
+            <Text style={styles.buttonText}>Bark! (comment)</Text>
           </TouchableOpacity>
         </View>
     </SafeAreaView>
@@ -178,12 +178,18 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '40%',
-    height: '8%',
+    height: '15%',
     borderWidth: 1,
     borderRadius: 10,
-    backgroundColor: 'white',
+    borderColor: 'grey',
+    backgroundColor: '#3498DB',
     marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center'
   },
+  buttonText: {
+    color: 'white',
+    fontFamily: 'MarkerFelt-thin',
+    fontSize: 20,
+  }
 })
