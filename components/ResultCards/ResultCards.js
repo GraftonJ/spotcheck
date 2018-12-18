@@ -41,9 +41,10 @@ export default class ResultCards extends React.Component {
             style={styles.name}>{location.name}</Text>
         </View>
 
-        {/* -- (Breweries) -- */}
-        <View style={styles.categoryContainer}>
-          <Text style={styles.category}>({location.categories[0].title})</Text>
+        {/* -- (Breweries) $$ -- */}
+        <View style={styles.categoryPriceContainer}>
+          <Text style={styles.category}>({location.categories[0].title})  |</Text>
+          <Text style={styles.price}>{location.price}</Text>
         </View>
 
 
@@ -58,8 +59,6 @@ export default class ResultCards extends React.Component {
           {(location.scNumCheckIns > 1) && (
             <Text style={styles.checkin}>{location.scNumCheckIns} check-ins</Text>
           )}
-
-          <Text style={styles.price}>{location.price}</Text>
         </View>
 
 
@@ -121,12 +120,16 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   // (Breweries)
-  categoryContainer: {
+  categoryPriceContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: "center",
   },
   category: {
+    marginRight: 10,
+    fontSize: 15,
+  },
+  price: {
     marginRight: 10,
     fontSize: 15,
   },
@@ -144,13 +147,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     // backgroundColor: 'pink',
   },
-
-  price: {
-    marginRight: 10,
-    fontSize: 20,
-    // backgroundColor: 'blue',
-  },
-
 
   // ****** (3 reviews)   Brewery
   cardMiddleLine: {
