@@ -69,8 +69,8 @@ export default class ResultCards extends React.Component {
 
 
         {/* -- 123 Main St -- */}
-        <View style={styles.cardBottomLine}>
-          <Text style={styles.cardBottomLine}>{location.location.address1}</Text>
+        <View style={styles.address}>
+          <Text style={styles.address}>{location.location.address1}</Text>
         </View>
 
 
@@ -87,7 +87,7 @@ export default class ResultCards extends React.Component {
 
 const styles = StyleSheet.create({
   card: {
-    width: 330,
+    width: 340,
     height: 365,
     backgroundColor: 'white',
     borderColor: 'black',
@@ -101,13 +101,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '60%',
   },
-
   // 4 checkins  $$
   nameContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: "center",
+    justifyContent: 'center',
     marginTop: 5,
+    paddingLeft: 3,
+    paddingRight: 3,
   },
   // Avery Brewing
   name: {
@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
   categoryPriceContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: "center",
   },
   category: {
     marginRight: 10,
@@ -130,9 +129,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   checkinsContainer: {
+    marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: "center",
   },
   checkins: {
     flexDirection: 'row',
@@ -146,24 +145,20 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial',
     textAlign: 'right',
     marginLeft: 10,
-    // backgroundColor: 'pink',
   },
 
   // ****** (3 reviews)   Brewery
   ratingContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: "center",
   },
-  rating: {
 
-  },
   // 123 Main St
-  cardBottomLine: {
+  address: {
     flexDirection: 'row',
     justifyContent: 'center',
     fontSize: 20,
-    marginTop: 2,
+    marginTop: 5,
   },
 
   // Click for details
