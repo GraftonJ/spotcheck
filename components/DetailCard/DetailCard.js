@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     width: win.width,
     height: win.height,
+
   },
   cardTopLine: {
     flexDirection: 'row',
