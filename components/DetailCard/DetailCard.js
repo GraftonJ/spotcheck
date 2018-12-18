@@ -86,7 +86,7 @@ export default class DetailCard extends React.Component {
 
         <View style={styles.priceCategory}>
           <Text style={styles.price}>{matchedLocation.price}</Text>
-          <Text style={styles.category}>{matchedLocation.categories[0].title}, {matchedLocation.categories[1].title}</Text>
+          <Text style={styles.category}>{matchedLocation.categories[0].title}</Text>
           <Ratings styles={styles.currentRatings} comments={matchedLocation.scComments} />
         </View>
 
