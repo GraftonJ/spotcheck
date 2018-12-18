@@ -101,9 +101,7 @@ export default class CheckIn extends React.Component {
 
     console.log('onpressCheckin(): ', locationId, locationName);
 
-
     try {
-
       const body = {
         user_id: this.state.user.id,
         loca_id: locationId,
@@ -129,7 +127,6 @@ export default class CheckIn extends React.Component {
           }
         return location;
       });
-
 
       store.setState({
         locations: newLocations,
