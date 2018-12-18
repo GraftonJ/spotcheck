@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView} from 'react-native'
+import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView, Alert} from 'react-native'
 import { Fonts } from '../../assets/fonts/fonts'
 import RatingsClickable from '../RatingsClickable'
 import store from '../../store'
@@ -45,6 +45,10 @@ export default class CommentsCards extends React.Component {
   }
 
   onpressComment = () => {
+    if(!this.state.comment) {
+      Alert.alert('Please enter a comment')
+      return
+    }
     const comment =
       {
         comment: `${this.state.comment}`,
