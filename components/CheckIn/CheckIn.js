@@ -38,6 +38,7 @@ export default class CheckIn extends React.Component {
 
       // local state
       // -------------
+      errorMessage: '', // set if fetch fails
       isLoading: true,
       candidateLocations: [], // array of locations to check-in to
     };
@@ -45,6 +46,9 @@ export default class CheckIn extends React.Component {
 
   /* ********************************************* */
   async componentDidMount() {
+    // TODO: When the search location changes in the Store this
+    //       seach needs to be redone.  Add a listener to the
+    //       store change state CB.
     try {
       // const locationsByCity = await getResults('Boulder, CO');
       // Galvanize: (40.016516, -105.281656);
@@ -86,7 +90,18 @@ export default class CheckIn extends React.Component {
       });
     } catch (error) {
       console.log("ERROR CheckIn::componentDidMount(): ", error);
+      this.setErrorMessage(error);
     }
+  }
+
+  /* ********************************************* */
+  setErrorMessage = (error) => {
+    this.setState({
+      errorMessage: error.error || responseJson,
+    });
+    setTimeout(() => { this.setState({errorMessage: ''}) }
+      , 3000
+    );
   }
 
   /* ********************************************* */
@@ -109,6 +124,7 @@ export default class CheckIn extends React.Component {
 
       // call checkin route
       const response = await fetch(`${URI}/check_ins`, {
+        // credentials: 'include',
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
@@ -117,6 +133,10 @@ export default class CheckIn extends React.Component {
         },
       });
       const responseJson = await response.json();
+      if (!response.ok) {
+        console.log("ERROR from fetch to post the checkin: ", responseJson);
+        this.setErrorMessage(responseJson);
+      }
 
       // update the scNumCheckIns for the location
       const newLocations = store.getState().locations.map((location) => {
@@ -147,16 +167,29 @@ export default class CheckIn extends React.Component {
       candidateLocations,
       isLoggedIn,
       isCheckedIn,
-      checkinLocationName
+      checkinLocationName,
+      errorMessage,
     } = this.state;
+
+    // error state
+    // ===================================
+    if (errorMessage) {
+      return (
+        <SafeAreaView style={styles.container}>
+          <Text>Error: {errorMessage}</Text>
+        </SafeAreaView>
+      )
+    }
 
     // isLoading, show spinner
     // ===================================
     if (isLoading) {
       return (
-        <ActivityIndicator
-          size="large"
-          color="#3399ff" />
+        <SafeAreaView style={styles.container}>
+          <ActivityIndicator
+            size="large"
+            color="#3399ff" />
+        </SafeAreaView>
       )
     }
 
