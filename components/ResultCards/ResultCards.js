@@ -78,8 +78,10 @@ export default class ResultCards extends React.Component {
 
         {/* -- View Details -- */}
         <View style={styles.details}>
-          <TouchableOpacity onPress={() => this.onpressDetails(location.id)}>
-            <Text>View Details</Text>
+          <TouchableOpacity
+            style={styles.touchableOpacityStyle}
+            onPress={() => this.onpressDetails(location.id)}>
+            <Text style={styles.buttonText}>View Details</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -90,7 +92,7 @@ export default class ResultCards extends React.Component {
 const styles = StyleSheet.create({
   card: {
     width: 340,
-    height: 380,
+    height: 390,
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
   // Image
   image: {
     width: '100%',
-    height: '60%',
+    height: '55%',
   },
   // 4 checkins  $$
   nameContainer: {
@@ -173,12 +175,26 @@ const styles = StyleSheet.create({
 
   // Click for details
   details: {
-    flexDirection: 'row',
+    flex: 1,
     justifyContent: 'center',
-    fontSize: 10,
-    marginTop: 2,
+    alignItems: 'center',
+    marginTop: -5,
   },
 
+  touchableOpacityStyle: {
+    width: '35%',
+    height: 25,
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: '#3498DB',
+    borderColor: 'grey',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontFamily: 'MarkerFelt-thin',
+    fontSize: 20,
+  }
   // button: {
   //   width: '25%',
   //   height: '4%',
