@@ -130,7 +130,7 @@ export default class DetailCard extends React.Component {
       </View>
 
         <View style={styles.ratingsView}>
-          <Text>
+          <Text style={styles.ratingsText}>
             Spot Check User Ratings!
           </Text>
         </View>
@@ -152,7 +152,7 @@ export default class DetailCard extends React.Component {
             </View>
 
             <View>
-              <Text>{scComments.comment}</Text>
+              <Text style={styles.reviewComment}>{scComments.comment}</Text>
             </View>
 
           </View>
@@ -291,29 +291,41 @@ const styles = StyleSheet.create({
   },
   comments: {
     borderBottomWidth: 1,
-    marginTop: 15,
+    marginTop: 20,
   },
   commentName: {
     flex: 2,
+    fontFamily: 'Oxygen',
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    letterSpacing: 1,
   },
   commentDogName: {
     marginBottom: 10,
-    fontSize: 13,
-    fontWeight: 'bold',
+    fontFamily: 'MarkerFelt-thin',
+    fontSize: 16,
   },
   commentRating :{
     flex: 1,
   },
   commentContainer: {
     width: "100%",
-    height: 200,
+    height: 250,
     borderTopWidth: 1,
     padding: 10,
   },
+  reviewComment: {
+    fontFamily: 'MontSerrat',
+    fontSize: 16,
+  },
   ratingsView: {
     marginTop: 40,
+    alignItems: 'center'
+  },
+  ratingsText: {
+    fontFamily: 'Oxygen',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   currentRating: {
     alignItems: 'center',
