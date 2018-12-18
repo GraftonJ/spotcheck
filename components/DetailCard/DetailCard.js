@@ -80,14 +80,18 @@ export default class DetailCard extends React.Component {
 
         <View style={styles.checkInContainer}>
           {(matchedLocation.scNumCheckIns===0) && (
-            <Text>No check-ins yet</Text>
+            <Text style={styles.checkin}>No check-ins yet</Text>
           )}
           {(matchedLocation.scNumCheckIns===1) && (
-            <Text>{matchedLocation.scNumCheckIns} check-in here!</Text>
+            <Text style={styles.checkin}>{matchedLocation.scNumCheckIns} check-in here!</Text>
           )}
           {(matchedLocation.scNumCheckIns > 1) && (
-            <Text>{matchedLocation.scNumCheckIns} check-ins here!</Text>
+            <Text style={styles.checkin}>{matchedLocation.scNumCheckIns} check-ins here!</Text>
           )}
+        </View>
+
+        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text>__________________________</Text>
         </View>
 
         <View style={styles.priceCategory}>
@@ -193,7 +197,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 30,
-    fontFamily: 'Arial',
+    fontFamily: 'Oxygen',
+    fontWeight: 'bold',
     overflow: 'hidden',
   },
   checkInContainer: {
@@ -203,7 +208,8 @@ const styles = StyleSheet.create({
   },
   checkin: {
     fontSize: 15,
-    fontFamily: 'Arial',
+    fontFamily: 'MontSerrat',
+    letterSpacing: 1,
     alignItems: 'center',
   },
   cardSecondLine: {
