@@ -75,6 +75,9 @@ export default class HomePage extends React.Component {
             <Text style={styles.buttonText}>Fetch!</Text>
           </TouchableOpacity>
 
+          <Image
+            style={{width: 25, height: 45, marginTop: 10}}
+            source={require('../../assets/images/mapsImage.png')} />
         </View>
       </ImageBackground>
 
