@@ -39,7 +39,7 @@ let state = {
           }
         }
       ]
-    }  
+    }
   ],
 
   // set by Results when clicking to get details for a location. Default datatype should be an empty string
@@ -53,22 +53,24 @@ let state = {
   // Logged in user set by Login
   // Null when user is not logged in
   /* { id: 2,
-       name: "Jane Doe",
-       email: "jd@gmail.com",
-       dogNames: "Sparky and Tilde",
+       name: "New User",
+       email: "nuser@gmail.com",
+       dogNames: ""Luna"",
+       authHeader: "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImxvZ2dlZEluIjp0cnVlLCJpYXQiOjE1NDUxNTYxMjMsImV4cCI6MTU0NTc2MDkyM30.xWToQs1ECfLF9wyKbs4uQTZnvzTFnrA4atKIRxU0bzI", // JWT from server to pass back in subsequebnt fetch's
      } */
-  // user: null,
-  // // convenience flag that is kept in sync with "user" key by Login
-  // isLoggedIn: false,
+  user: null,
+  // convenience flag that is kept in sync with "user" key by Login
+  isLoggedIn: false,
 
   // TODO: reset these to the above so app doesn't strat logged in
-  user:  { id: 2,
-         name: "Jane Doe",
-         email: "jd@gmail.com",
-         dogNames: "Sparky and Tilde",
-       },
+  // user:  { id: 2,
+  //        name: "Jane Doe",
+  //        email: "jd@gmail.com",
+  //        dogNames: "Sparky and Tilde",
+  //        authHeader: 'DUMMY_JWT', // this won't actually work, need to really log in
+  //      },
   // convenience flag that is kept in sync with "user" key by Login
-  isLoggedIn: true,
+  // isLoggedIn: true,
 
 
   // Global error state
