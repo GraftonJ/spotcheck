@@ -57,6 +57,7 @@ export default class HomePage extends React.Component {
         >
         <View style={styles.container}>
           <Text style={styles.textStyle}>Spot Check</Text>
+          <Text style={styles.smallText}>Pup Friendly Restaurants!</Text>
           <TextInput
             autoFocus
             autoCorrect={false}
@@ -91,17 +92,23 @@ const styles = StyleSheet.create({
     marginTop: '15%',
     textAlign: 'center',
     color: 'white',
-    fontSize: 45,
-    fontFamily: 'MontSerrat',
-    letterSpacing: 1,
+    fontSize: 60,
+    fontFamily: 'Oxygen',
+
     fontWeight: '500',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowColor: 'rgba(1, 0, 0, 0.90)',
     textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10
+    textShadowRadius: 50,
+    textDecorationColor: 'red',
   },
 
   smallText: {
-    fontSize: 18,
+    fontSize: 25,
+    fontFamily: 'MarkerFelt-Wide',
+    color: 'white',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    letterSpacing: 1,
 },
 textInput: {
   backgroundColor: 'rgba(222, 224, 226, 0.8)',

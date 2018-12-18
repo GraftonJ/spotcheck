@@ -62,6 +62,7 @@
 		43FA092BAFF04C80BF3BF35C /* Oxygen-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4C1134A6874DEB9013296B /* Oxygen-Light.ttf */; };
 		19F26493E460426B8D1C846A /* Oxygen-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63BCC543EFA34A4C87443495 /* Oxygen-Regular.ttf */; };
 		7BE001F3FE894768A14619AF /* ShadowsIntoLightTwo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B733C1D6D7D43799E229166 /* ShadowsIntoLightTwo-Regular.ttf */; };
+		0A8A23C22DEA4CD684169685 /* GamjaFlower-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 593483A95DAF4E1CA3612A20 /* GamjaFlower-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -394,6 +395,7 @@
 		9D4C1134A6874DEB9013296B /* Oxygen-Light.ttf */ = {isa = PBXFileReference; name = "Oxygen-Light.ttf"; path = "../assets/fonts/Oxygen-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		63BCC543EFA34A4C87443495 /* Oxygen-Regular.ttf */ = {isa = PBXFileReference; name = "Oxygen-Regular.ttf"; path = "../assets/fonts/Oxygen-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		3B733C1D6D7D43799E229166 /* ShadowsIntoLightTwo-Regular.ttf */ = {isa = PBXFileReference; name = "ShadowsIntoLightTwo-Regular.ttf"; path = "../assets/fonts/ShadowsIntoLightTwo-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		593483A95DAF4E1CA3612A20 /* GamjaFlower-Regular.ttf */ = {isa = PBXFileReference; name = "GamjaFlower-Regular.ttf"; path = "../assets/fonts/GamjaFlower-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -685,6 +687,7 @@
 				9D4C1134A6874DEB9013296B /* Oxygen-Light.ttf */,
 				63BCC543EFA34A4C87443495 /* Oxygen-Regular.ttf */,
 				3B733C1D6D7D43799E229166 /* ShadowsIntoLightTwo-Regular.ttf */,
+				593483A95DAF4E1CA3612A20 /* GamjaFlower-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1158,6 +1161,7 @@
 				43FA092BAFF04C80BF3BF35C /* Oxygen-Light.ttf in Resources */,
 				19F26493E460426B8D1C846A /* Oxygen-Regular.ttf in Resources */,
 				7BE001F3FE894768A14619AF /* ShadowsIntoLightTwo-Regular.ttf in Resources */,
+				0A8A23C22DEA4CD684169685 /* GamjaFlower-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
