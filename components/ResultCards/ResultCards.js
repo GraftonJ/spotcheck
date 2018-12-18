@@ -5,6 +5,8 @@ import store from '../../store.js';
 
 import Ratings from '../Ratings.js'
 
+import { Fonts } from '../../assets/fonts/fonts'
+
 //stars working?
 export default class ResultCards extends React.Component {
 
@@ -88,7 +90,7 @@ export default class ResultCards extends React.Component {
 const styles = StyleSheet.create({
   card: {
     width: 340,
-    height: 365,
+    height: 380,
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
@@ -111,8 +113,9 @@ const styles = StyleSheet.create({
   },
   // Avery Brewing
   name: {
-    fontSize: 20,
-    fontFamily: 'Arial',
+    fontSize: 25,
+    fontFamily: 'Oxygen',
+    fontWeight: 'bold',
     overflow: 'hidden',
   },
   // (Breweries)
@@ -122,16 +125,20 @@ const styles = StyleSheet.create({
   },
   category: {
     marginRight: 10,
-    fontSize: 15,
+    fontSize: 14,
+    letterSpacing: 1,
+    fontFamily: 'MontSerrat'
   },
   price: {
     marginRight: 10,
-    fontSize: 15,
+    fontSize: 14,
+    fontFamily: 'MontSerrat'
   },
   checkinsContainer: {
     marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'center',
+
   },
   checkins: {
     flexDirection: 'row',
@@ -141,8 +148,9 @@ const styles = StyleSheet.create({
   },
 
   checkin: {
-    fontSize: 15,
-    fontFamily: 'Arial',
+    fontSize: 18,
+    fontWeight: 'bold',
+    fontFamily: 'Oxygen',
     textAlign: 'right',
     marginLeft: 10,
   },
@@ -157,7 +165,9 @@ const styles = StyleSheet.create({
   address: {
     flexDirection: 'row',
     justifyContent: 'center',
-    fontSize: 20,
+    fontSize: 15,
+    fontFamily: 'MontSerrat',
+    letterSpacing: 1,
     marginTop: 5,
   },
 
