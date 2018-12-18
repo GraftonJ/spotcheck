@@ -133,12 +133,11 @@ export default class DetailCard extends React.Component {
               style={styles.cardTopLine}>
               <Text
               style={styles.commentName}>Name: {scComments.user.name}</Text>
-              <Text
-              style={styles.commentName}>Dog(s): {scComments.user.dogNames}</Text>
+              <Ratings style={styles.commentRating} rating={scComments.rating} />
             </View>
 
             <View style={styles.cardSecondLine}>
-              <Ratings rating={scComments.rating} />
+              <Text style={styles.commentDogName}>Doggos: {scComments.user.dogNames}</Text>
             </View>
 
             <View>
@@ -194,10 +193,8 @@ const styles = StyleSheet.create({
   },
   cardSecondLine: {
     display: 'flex',
-    margin: 15,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+
     fontSize: 20,
   },
   priceCategory: {
@@ -261,14 +258,22 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   commentName: {
-    flex: 1,
+    flex: 2,
     fontSize: 15,
     fontWeight: 'bold'
+  },
+  commentDogName: {
+    marginBottom: 10,
+    fontSize: 15
+  },
+  commentRating :{
+    flex: 1,
   },
   commentContainer: {
     width: "100%",
     height: 200,
     borderTopWidth: 1,
+    padding: 10,
   },
   ratingsView: {
     marginTop: 40,

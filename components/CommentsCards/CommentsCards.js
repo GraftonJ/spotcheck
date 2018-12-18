@@ -121,7 +121,7 @@ export default class CommentsCards extends React.Component {
              style={styles.placeholderText}
              multiline = {true}
              numberOfLines = {4}
-             maxLength = {500}
+             maxLength = {350}
              onChangeText ={(comment) => this.setState({comment})}
              placeholder="Leave a comment to help your doggy friends find a restuarant to visit with their people!"
             />
