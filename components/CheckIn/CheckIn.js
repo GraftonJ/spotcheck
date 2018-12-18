@@ -294,6 +294,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
+    fontFamily: 'Oxygen',
     fontSize: 25,
     letterSpacing: 1,
     textAlign: "center",

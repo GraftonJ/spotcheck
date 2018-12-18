@@ -74,6 +74,7 @@ export default class HomePage extends React.Component {
               onPress={this.onpressSearch}>
             <Text style={styles.buttonText}>Fetch!</Text>
           </TouchableOpacity>
+
         </View>
       </ImageBackground>
 
