@@ -121,10 +121,10 @@ export default class DetailCard extends React.Component {
           </Text>
         </View>
 
-          {matchedLocation.scComments.map(scComments => (
+          {matchedLocation.scComments.map((scComments, idx) => (
           <View
               style={styles.commentContainer}
-              key={scComments.user.id}>
+              key={idx}>
 
             <View
               style={styles.cardTopLine}>
