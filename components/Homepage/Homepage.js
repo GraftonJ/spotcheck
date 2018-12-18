@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-
   },
   textStyle: {
     marginTop: '10%',
@@ -94,12 +93,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 60,
     fontFamily: 'Oxygen',
-
     fontWeight: '500',
-    textShadowColor: 'rgba(1, 0, 0, 0.90)',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 50,
-    textDecorationColor: 'red',
   },
 
   smallText: {
@@ -107,9 +101,9 @@ const styles = StyleSheet.create({
     marginTop: -8,
     fontFamily: 'MarkerFelt-Wide',
     color: 'white',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
     letterSpacing: 1,
+    textDecorationColor: 'white',
+    textDecorationLine: 'underline',
 },
 textInput: {
   backgroundColor: 'rgba(222, 224, 226, 0.8)',
@@ -133,6 +127,7 @@ image: {
   flex: 1,
   width: null,
   height: null,
+  opacity: .80,
   resizeMode: 'cover',
 },
 button: {
