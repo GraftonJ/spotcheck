@@ -71,8 +71,14 @@ export default class DetailCard extends React.Component {
           <Image resizeMode={'contain'} style={styles.image} source={{uri: `${matchedLocation.image_url}`}} />
         </View>
 
-        <View style={styles.cardTopLine}>
-          <Text style={styles.name}>{matchedLocation.name}</Text>
+        <View style={styles.nameContainer}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode={'tail'}
+            style={styles.name}>{matchedLocation.name}</Text>
+        </View>
+
+        <View style={styles.checkInContainer}>
           {(matchedLocation.scNumCheckIns===0) && (
             <Text>No check-ins yet</Text>
           )}
@@ -116,8 +122,6 @@ export default class DetailCard extends React.Component {
 
         </View>
 
-
-
         <View style={styles.ratingsView}>
           <Text>
             Spot Check User Ratings!
@@ -133,12 +137,11 @@ export default class DetailCard extends React.Component {
               style={styles.cardTopLine}>
               <Text
               style={styles.commentName}>Name: {scComments.user.name}</Text>
-              <Text
-              style={styles.commentName}>Dog(s): {scComments.user.dogNames}</Text>
+              <Ratings style={styles.commentRating} rating={scComments.rating} />
             </View>
 
             <View style={styles.cardSecondLine}>
-              <Ratings rating={scComments.rating} />
+              <Text style={styles.commentDogName}>Doggos: {scComments.user.dogNames}</Text>
             </View>
 
             <View>
@@ -146,8 +149,6 @@ export default class DetailCard extends React.Component {
             </View>
 
           </View>
-
-
           ))}
 
 
@@ -183,21 +184,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 5,
   },
+  nameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: "center",
+    marginTop: 5,
+  },
   name: {
     fontSize: 30,
     fontFamily: 'Arial',
     overflow: 'hidden',
   },
+  checkInContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: "center",
+  },
   checkin: {
     fontSize: 15,
     fontFamily: 'Arial',
+    alignItems: 'center',
   },
   cardSecondLine: {
     display: 'flex',
-    margin: 15,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+
     fontSize: 20,
   },
   priceCategory: {
@@ -261,14 +272,23 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   commentName: {
-    flex: 1,
-    fontSize: 15,
+    flex: 2,
+    fontSize: 18,
     fontWeight: 'bold'
+  },
+  commentDogName: {
+    marginBottom: 10,
+    fontSize: 13,
+    fontWeight: 'bold',
+  },
+  commentRating :{
+    flex: 1,
   },
   commentContainer: {
     width: "100%",
     height: 200,
     borderTopWidth: 1,
+    padding: 10,
   },
   ratingsView: {
     marginTop: 40,
@@ -292,6 +312,6 @@ const styles = StyleSheet.create({
   commentDog: {
     width: 50,
     height: 50,
-    margin: 20
+    margin: 20,
   }
 })
