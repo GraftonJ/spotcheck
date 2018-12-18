@@ -210,16 +210,19 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   errorTop: {
-    fontSize: 25,
+    fontFamily: 'Oxygen',
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'black',
     textAlign: 'center',
     letterSpacing: 1,
   },
   errorBottom: {
-    fontSize: 15,
+    fontFamily: 'MontSerrat',
+    fontSize: 20,
     color: 'black',
     textAlign: 'center',
     marginBottom: 15,
+    letterSpacing: 1,
   },
 })
