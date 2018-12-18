@@ -48,8 +48,8 @@ export default class ResultCards extends React.Component {
         </View>
 
 
-        {/* -- 5 check-ins    $$ -- */}
-        <View style={styles.cardTopLine2}>
+        {/* -- 5 check-ins */}
+        <View style={styles.checkinsContainer}>
           {(location.scNumCheckIns===0) && (
             <Text style={styles.checkin}>No check-ins yet</Text>
           )}
@@ -62,23 +62,19 @@ export default class ResultCards extends React.Component {
         </View>
 
 
-        {/* -- ***** (3 ratings)    Breweries -- */}
-
-        <View style={styles.cardMiddleLine}>
-          <Text>  </Text>
+        {/* -- ***** (3 ratings)*/}
+        <View style={styles.ratingContainer}>
           <Ratings style={styles.rating} comments={location.scComments} />
         </View>
 
 
         {/* -- 123 Main St -- */}
-
         <View style={styles.cardBottomLine}>
           <Text style={styles.cardBottomLine}>{location.location.address1}</Text>
         </View>
 
 
         {/* -- View Details -- */}
-
         <View style={styles.details}>
           <TouchableOpacity onPress={() => this.onpressDetails(location.id)}>
             <Text>View Details</Text>
@@ -133,7 +129,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontSize: 15,
   },
-  cardTopLine2: {
+  checkinsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: "center",
+  },
+  checkins: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: "center",
@@ -149,33 +150,14 @@ const styles = StyleSheet.create({
   },
 
   // ****** (3 reviews)   Brewery
-  cardMiddleLine: {
+  ratingContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    // justifyContent: 'center',
-    alignItems: 'center',
-    // fontSize: 20,
+    justifyContent: 'center',
+    alignItems: "center",
   },
   rating: {
-    // textAlign: 'right',
-    marginLeft: 10,
-    // fontSize: 25,
-    // backgroundColor: 'pink',
+
   },
-
-  // ratingContainer: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'flex-end',
-  //   // textAlign: 'right',
-  //   // marginRight: 10,
-  //   // fontSize: 25,
-  //   // backgroundColor: 'pink',
-  // },
-
-  ratingCount: {
-    fontSize: 15,
-  },
-
   // 123 Main St
   cardBottomLine: {
     flexDirection: 'row',

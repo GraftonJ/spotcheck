@@ -89,7 +89,6 @@ const Ratings = (props) => {
 /* ***************************************** */
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     // backgroundColor: 'pink',
