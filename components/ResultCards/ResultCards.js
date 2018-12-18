@@ -30,24 +30,24 @@ export default class ResultCards extends React.Component {
     return (
       <SafeAreaView style={styles.card}>
 
-
         {/* -- IMAGE -- */}
-
         <Image style={styles.image} source={{uri: `${location.image_url}`}} />
 
-
         {/* -- Avery Brewing -- */}
-
-        <View style={styles.cardTopLine}>
+        <View style={styles.nameContainer}>
           <Text
             numberOfLines={1}
             ellipsizeMode={'tail'}
             style={styles.name}>{location.name}</Text>
         </View>
 
+        {/* -- (Breweries) -- */}
+        <View style={styles.categoryContainer}>
+          <Text style={styles.category}>({location.categories[0].title})</Text>
+        </View>
+
 
         {/* -- 5 check-ins    $$ -- */}
-
         <View style={styles.cardTopLine2}>
           {(location.scNumCheckIns===0) && (
             <Text style={styles.checkin}>No check-ins yet</Text>
@@ -68,7 +68,6 @@ export default class ResultCards extends React.Component {
         <View style={styles.cardMiddleLine}>
           <Text>  </Text>
           <Ratings style={styles.rating} comments={location.scComments} />
-          <Text style={styles.category}>{location.categories[0].title}</Text>
         </View>
 
 
@@ -102,28 +101,34 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     backgroundColor: '#F4F4F4'
   },
-
-
   // Image
   image: {
     width: '100%',
     height: '60%',
   },
 
-
+  // 4 checkins  $$
+  nameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: "center",
+    marginTop: 5,
+  },
   // Avery Brewing
   name: {
     fontSize: 20,
     fontFamily: 'Arial',
     overflow: 'hidden',
   },
-
-  // 4 checkins  $$
-  cardTopLine: {
+  // (Breweries)
+  categoryContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: "center",
-    marginTop: 5,
+  },
+  category: {
+    marginRight: 10,
+    fontSize: 15,
   },
   cardTopLine2: {
     flexDirection: 'row',
@@ -161,10 +166,7 @@ const styles = StyleSheet.create({
     // fontSize: 25,
     // backgroundColor: 'pink',
   },
-  category: {
-    marginRight: 10,
-    fontSize: 20,
-  },
+
   // ratingContainer: {
   //   flexDirection: 'row',
   //   justifyContent: 'flex-end',
