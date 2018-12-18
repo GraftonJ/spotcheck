@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator, TouchableOpacity} from 'react-native'
+import {StyleSheet, Dimensions, Text, View, SafeAreaView, ImageBackground, Image, Alert, Button, ScrollView, ActivityIndicator, TouchableOpacity, Linking} from 'react-native'
 import store, { URI } from '../../store'
 import { getResults } from '../../utils/api'
 import Ratings from '../Ratings.js'
@@ -99,7 +99,7 @@ export default class DetailCard extends React.Component {
             <Text style={styles.openNow}>Closed Now</Text>
           )}
           <Text style={styles.address}>{matchedLocation.location.address1}</Text>
-          <Text style={styles.directions}>Directions</Text>
+          <Text style={styles.directions} onPress={() => Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${this.state.matchedLocation.name}+${this.state.matchedLocation.address1}`)}>Directions</Text>
           <Text style={styles.call}>{matchedLocation.display_phone}</Text>
         </View>
 
