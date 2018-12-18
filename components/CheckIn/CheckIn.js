@@ -97,7 +97,7 @@ export default class CheckIn extends React.Component {
   /* ********************************************* */
   setErrorMessage = (error) => {
     this.setState({
-      errorMessage: error.error || responseJson,
+      errorMessage: error.error || error,
     });
     setTimeout(() => { this.setState({errorMessage: ''}) }
       , 3000
@@ -121,6 +121,7 @@ export default class CheckIn extends React.Component {
         user_id: this.state.user.id,
         loca_id: locationId,
       };
+      const { user } = store.getState();
 
       // call checkin route
       const response = await fetch(`${URI}/check_ins`, {
@@ -128,15 +129,18 @@ export default class CheckIn extends React.Component {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
+          'auth': user.authHeader,
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       });
-      const responseJson = await response.json();
       if (!response.ok) {
-        console.log("ERROR from fetch to post the checkin: ", responseJson);
-        this.setErrorMessage(responseJson);
+        const responseText = await response.text();
+        console.log("ERROR from fetch to post the checkin: ", responseText);
+        this.setErrorMessage(responseText);
+        return;
       }
+      const responseJson = await response.json();
 
       // update the scNumCheckIns for the location
       const newLocations = store.getState().locations.map((location) => {

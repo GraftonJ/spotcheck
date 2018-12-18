@@ -92,7 +92,6 @@ export default class HomeSCR extends React.Component {
         },
       });
       const responseJson = await response.json();
-      console.log('--- response.headers: ', response.headers);
 
       // if the login fails, display error message
       if (!response.ok) {
@@ -105,6 +104,10 @@ export default class HomeSCR extends React.Component {
 
       // login succeeded!
       console.log("('==== login success!: ", responseJson.user);
+      console.log('---- **** --- auth: ', response.headers.map.auth);
+      
+      // add the authHeader to user object since it will be passed in future fetch calls
+      responseJson.user.authHeader = response.headers.map.auth;
       store.setState({
         user: responseJson.user,
         isLoggedIn: true,

@@ -74,26 +74,32 @@ export default class CommentsCards extends React.Component {
         comment: `${this.state.comment}`,
         rating: this.state.rating,
       }
+      const { user } = store.getState();
+
       // call checkin route
       const response = await fetch(`${URI}/comments`, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
+          'auth': user.authHeader,
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       });
+      if (!response.ok) {
+        const responseText = await response.text();
+        console.log("ERROR from fetch to add a comment: ", responseText);
+        // this.setErrorMessage(responseText);
+        return;
+      }
       const responseJson = await response.json()
       console.log('JSON RESPONSE IS>>>', responseJson)
+      // add the db id key to the comment we're creating
       comment.id = responseJson.id
-      console.log('Done constructing comment')
-
     } catch(error) {
       console.log('ERROR', error);
     }
 
-
-    console.log('About to use constructed comment')
     const newLocations = store.getState().locations.map((location) => {
       if (location.id === this.state.matchedLocation.id)
         return {
