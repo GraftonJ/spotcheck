@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView, Alert} from 'react-native'
 import { Fonts } from '../../assets/fonts/fonts'
 import RatingsClickable from '../RatingsClickable'
-import store from '../../store'
+import store, { URI } from '../../store'
 
 
 export default class CommentsCards extends React.Component {
@@ -40,6 +40,7 @@ export default class CommentsCards extends React.Component {
   componentWillUnmount() {
     this.unsubscribe();
   }
+  /* ************************************** */
 
   /* ************************************** */
   ratingUpdated = (newRating) => {
@@ -49,7 +50,7 @@ export default class CommentsCards extends React.Component {
     })
   }
   /* ************************************** */
-  onpressComment = () => {
+   onpressComment = async () => {
     if(!this.state.comment) {
       Alert.alert('Please enter a comment')
       return
@@ -63,9 +64,36 @@ export default class CommentsCards extends React.Component {
         comment: `${this.state.comment}`,
         locaId: `${this.state.matchedLocation.id}`,
         rating: this.state.rating,
-        user: store.getState().user
+        user: store.getState().user,
+        id: 0, //to get filled in after responseJSON constructed
+    }
+    try {
+      const body = {
+        loca_id: `${this.state.matchedLocation.id}`,
+        user_id: store.getState().user.id,
+        comment: `${this.state.comment}`,
+        rating: this.state.rating,
+      }
+      // call checkin route
+      const response = await fetch(`${URI}/comments`, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+      const responseJson = await response.json()
+      console.log('JSON RESPONSE IS>>>', responseJson)
+      comment.id = responseJson.id
+      console.log('Done constructing comment')
+
+    } catch(error) {
+      console.log('ERROR', error);
     }
 
+
+    console.log('About to use constructed comment')
     const newLocations = store.getState().locations.map((location) => {
       if (location.id === this.state.matchedLocation.id)
         return {
