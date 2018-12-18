@@ -97,7 +97,7 @@ export default class DetailCard extends React.Component {
         <View style={styles.priceCategory}>
           <Text style={styles.price}>{matchedLocation.price}</Text>
           <Text style={styles.category}>{matchedLocation.categories[0].title}</Text>
-          <Ratings styles={styles.currentRatings} comments={matchedLocation.scComments} />
+          <Ratings styles={styles.currentRating} comments={matchedLocation.scComments} />
         </View>
 
 
@@ -108,9 +108,10 @@ export default class DetailCard extends React.Component {
           {(matchedLocation.is_closed === true) && (
             <Text style={styles.openNow}>Closed Now</Text>
           )}
+          <Text style={styles.call}>{matchedLocation.display_phone}</Text>
           <Text style={styles.address}>{matchedLocation.location.address1}</Text>
           <Text style={styles.directions} onPress={() => Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${this.state.matchedLocation.name}+${this.state.matchedLocation.address1}`)}>Directions</Text>
-          <Text style={styles.call}>{matchedLocation.display_phone}</Text>
+
         </View>
 
 
@@ -118,13 +119,15 @@ export default class DetailCard extends React.Component {
           <View >
             <Image style={styles.commentDog} source={require('../../assets/images/commentDog.png')} />
           </View>
+
           <TouchableOpacity
-            style={styles.leaveCommentButton}
+            style={styles.touchableOpacityStyle}
             onPress={this.onPressComment}>
             <Text>Leave a Rating or Comment </Text>
           </TouchableOpacity>
 
-        </View>
+
+      </View>
 
         <View style={styles.ratingsView}>
           <Text>
@@ -231,11 +234,14 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
+    fontFamily: 'MarkerFelt-thin',
     flex: 1,
   },
   category: {
     fontSize: 20,
     flex: 3,
+    fontFamily: 'Oxygen',
+    fontWeight: 'bold',
   },
   addressDirections: {
     justifyContent: 'center',
@@ -245,6 +251,9 @@ const styles = StyleSheet.create({
   },
   address: {
     fontSize: 20,
+    marginTop: 10,
+    fontFamily: 'Oxygen',
+    fontWeight: 'bold',
   },
   cardFourthLine: {
     flexDirection: 'row',
@@ -257,10 +266,14 @@ const styles = StyleSheet.create({
   call: {
     marginRight: 20,
     fontSize: 15,
+    marginTop: -10,
+    fontFamily: 'MontSerrat',
   },
   openNow: {
     fontSize: 20,
     marginBottom: 10,
+    fontFamily: 'MarkerFelt-thin',
+    letterSpacing: 1,
   },
   cardFifthLine: {
     justifyContent: 'center',
@@ -303,9 +316,22 @@ const styles = StyleSheet.create({
   currentRating: {
     alignItems: 'center',
     justifyContent: 'center',
+    fontFamily: 'MarkerFelt-thin'
   },
   leaveCommentButton: {
-    borderBottomWidth: 1,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: -5,
+  },
+  touchableOpacityStyle: {
+    width: '35%',
+    height: 25,
+    borderWidth: 1,
+    borderRadius: 10,
+    backgroundColor: '#3498DB',
+    borderColor: 'grey',
+    alignItems: 'center',
   },
   circle: {
     marginBottom: 25,
