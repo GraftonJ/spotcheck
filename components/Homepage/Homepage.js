@@ -72,7 +72,7 @@ export default class HomePage extends React.Component {
           <TouchableOpacity
               style={styles.button}
               onPress={this.onpressSearch}>
-            <Text >Fetch!</Text>
+            <Text style={styles.buttonText}>Fetch!</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 
   },
   textStyle: {
-    marginTop: '15%',
+    marginTop: '10%',
     textAlign: 'center',
     color: 'white',
     fontSize: 60,
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
 
   smallText: {
     fontSize: 25,
+    marginTop: -8,
     fontFamily: 'MarkerFelt-Wide',
     color: 'white',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
@@ -113,14 +114,16 @@ const styles = StyleSheet.create({
 textInput: {
   backgroundColor: 'rgba(222, 224, 226, 0.8)',
   borderWidth: 1,
-  borderRadius: 5,
+  borderRadius: 3,
   color: 'black',
-  height: 1,
+
   width: 300,
   marginTop: '65%',
   marginHorizontal: 20,
-  paddingHorizontal: 10,
+  padding: 5,
   alignSelf: 'center',
+  fontFamily: 'Oxygen',
+  fontSize: 18,
 },
 imageContainer: {
   flex: 1,
@@ -134,12 +137,19 @@ image: {
 },
 button: {
   width: '25%',
-  height: '4%',
+  height: '6%',
   borderWidth: 1,
   borderRadius: 10,
   backgroundColor: 'white',
   marginTop: 10,
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
+
+},
+buttonText: {
+  fontFamily: 'MarkerFelt-thin',
+  padding: 4,
+  letterSpacing: 1,
+  fontSize: 22,
 }
 });
