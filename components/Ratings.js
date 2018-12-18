@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
     // backgroundColor: 'pink',
   },
   star: {
-    width: 18,
-    height: 18,
+    width: 19,
+    height: 19,
   },
 });
 
