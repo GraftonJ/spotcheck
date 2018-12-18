@@ -50,6 +50,10 @@ export default class CommentsCards extends React.Component {
     })
   }
   /* ************************************** */
+    onpressGoBack = () => {
+      this.props.goBack()
+      return
+    }
    onpressComment = async () => {
     if(!this.state.comment) {
       Alert.alert('Please enter a comment')
@@ -109,6 +113,18 @@ export default class CommentsCards extends React.Component {
 
   /* ************************************** */
   render() {
+    if (!store.getState().isLoggedIn) {
+      return (
+        <View style={styles.goBackButtonContainerbuttonContainer}>
+          <TouchableOpacity
+            style={styles.goBackButton}
+            onPress={this.onpressGoBack}>
+            <Text style={styles.buttonText}>Go Back</Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
+
     return (
       <SafeAreaView>
         <View style={styles.cardContainer}>
@@ -191,5 +207,20 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'MarkerFelt-thin',
     fontSize: 20,
+  },
+  goBackButtonContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  goBackButton: {
+    width: 100,
+    height: '25%',
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: 'grey',
+    backgroundColor: '#3498DB',
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })

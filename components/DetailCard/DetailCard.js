@@ -21,6 +21,10 @@ export default class DetailCard extends React.Component {
 
   /* **************************************** */
   onPressComment = () => {
+    if(store.getState().isLoggedIn === false) {
+      Alert.alert('Please login to comment')
+      return
+    }
     console.log('comment hooked up*************');
     this.props.navigate('CommentsSCR');
   }
