@@ -123,7 +123,7 @@ export default class DetailCard extends React.Component {
           <TouchableOpacity
             style={styles.touchableOpacityStyle}
             onPress={this.onPressComment}>
-            <Text>Leave a Rating or Comment </Text>
+            <Text style={styles.buttonText}>Leave a Rating or Comment </Text>
           </TouchableOpacity>
 
 
@@ -262,6 +262,8 @@ const styles = StyleSheet.create({
   },
   directions: {
     fontSize: 15,
+    fontFamily: 'MontSerrat',
+    letterSpacing: 1
   },
   call: {
     marginRight: 20,
@@ -325,13 +327,19 @@ const styles = StyleSheet.create({
     marginTop: -5,
   },
   touchableOpacityStyle: {
-    width: '35%',
-    height: 25,
+    width: '65%',
+    height: 30,
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: '#3498DB',
     borderColor: 'grey',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontFamily: 'MarkerFelt-thin',
+    fontSize: 20,
   },
   circle: {
     marginBottom: 25,
@@ -345,6 +353,6 @@ const styles = StyleSheet.create({
   commentDog: {
     width: 50,
     height: 50,
-    margin: 20,
+    marginBottom: 8,
   }
 })
