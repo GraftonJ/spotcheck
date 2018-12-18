@@ -49,6 +49,10 @@ export default class CommentsCards extends React.Component {
       Alert.alert('Please enter a comment')
       return
     }
+    else if(!this.state.rating) {
+      Alert.alert('Please leave a rating')
+      return
+    }
     const comment =
       {
         comment: `${this.state.comment}`,
