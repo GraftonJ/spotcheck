@@ -71,8 +71,14 @@ export default class DetailCard extends React.Component {
           <Image resizeMode={'contain'} style={styles.image} source={{uri: `${matchedLocation.image_url}`}} />
         </View>
 
-        <View style={styles.cardTopLine}>
-          <Text style={styles.name}>{matchedLocation.name}</Text>
+        <View style={styles.nameContainer}>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode={'tail'}
+            style={styles.name}>{matchedLocation.name}</Text>
+        </View>
+
+        <View style={styles.checkInContainer}>
           {(matchedLocation.scNumCheckIns===0) && (
             <Text>No check-ins yet</Text>
           )}
@@ -116,8 +122,6 @@ export default class DetailCard extends React.Component {
 
         </View>
 
-
-
         <View style={styles.ratingsView}>
           <Text>
             Spot Check User Ratings!
@@ -145,8 +149,6 @@ export default class DetailCard extends React.Component {
             </View>
 
           </View>
-
-
           ))}
 
 
@@ -182,14 +184,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 5,
   },
+  nameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: "center",
+    marginTop: 5,
+  },
   name: {
     fontSize: 30,
     fontFamily: 'Arial',
     overflow: 'hidden',
   },
+  checkInContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: "center",
+  },
   checkin: {
     fontSize: 15,
     fontFamily: 'Arial',
+    alignItems: 'center',
   },
   cardSecondLine: {
     display: 'flex',
@@ -259,12 +273,13 @@ const styles = StyleSheet.create({
   },
   commentName: {
     flex: 2,
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   commentDogName: {
     marginBottom: 10,
-    fontSize: 15
+    fontSize: 13,
+    fontWeight: 'bold',
   },
   commentRating :{
     flex: 1,
@@ -297,6 +312,6 @@ const styles = StyleSheet.create({
   commentDog: {
     width: 50,
     height: 50,
-    margin: 20
+    margin: 20,
   }
 })
