@@ -106,6 +106,9 @@ export default class DetailCard extends React.Component {
 
 
         <View style={styles.cardFifthLine}>
+          <View >
+            <Image style={styles.commentDog} source={require('../../assets/images/commentDog.png')} />
+          </View>
           <TouchableOpacity
             style={styles.leaveCommentButton}
             onPress={this.onPressComment}>
@@ -243,7 +246,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   cardFifthLine: {
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
@@ -278,5 +280,19 @@ const styles = StyleSheet.create({
   },
   leaveCommentButton: {
     borderBottomWidth: 1,
+  },
+  circle: {
+    marginBottom: 25,
+    marginTop: -50,
+    height: 50,
+    width: 50,
+    borderWidth:1,
+    borderRadius:75,
+    padding: 22,
+  },
+  commentDog: {
+    width: 50,
+    height: 50,
+    margin: 20
   }
 })
