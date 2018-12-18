@@ -92,7 +92,6 @@ export default class RatingsClickable extends React.Component {
 /* ***************************************** */
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     // backgroundColor: 'pink',
