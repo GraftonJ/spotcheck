@@ -92,6 +92,7 @@ export default class HomeSCR extends React.Component {
         },
       });
       const responseJson = await response.json();
+      console.log('--- response.headers: ', response.headers);
 
       // if the login fails, display error message
       if (!response.ok) {
@@ -165,7 +166,7 @@ export default class HomeSCR extends React.Component {
     this.setState({
       isRegistering: false,
     })
-  
+
     this.props.navigate('SearchScreens');
   }
 
