@@ -26,6 +26,14 @@ const User = t.struct({
   password: t.String,
 })
 
+const options = {
+  fields: {
+    password: {
+      secureTextEntry: true,
+    }
+  }
+}
+
 // https://stackoverflow.com/questions/51977603/how-to-use-securetextentry-in-tcomb-form-native
 
 
@@ -253,6 +261,7 @@ export default class HomeSCR extends React.Component {
         <View style={{ width: '85%' }}>
           <Form
             ref="myform"
+            options={options}
             style={styles.form}
             value={this.state.value}
             onChange={this.onChange}
