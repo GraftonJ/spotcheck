@@ -2,7 +2,8 @@
    Simple app-wide data store (Redux-lite)
 */
 
-export const URI = "http://localhost:3000";
+// export const URI = "http://localhost:3000";
+export const URI = "https://spotcheck-g103.herokuapp.com";
 
 let state = {
 
