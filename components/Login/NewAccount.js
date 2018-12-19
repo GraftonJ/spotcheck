@@ -13,6 +13,14 @@ const User = t.struct({
   dog_names: t.String,
 });
 
+const options = {
+  fields: {
+    password: {
+      secureTextEntry: true,
+    }
+  }
+}
+
 /* ********************************************* */
 export default class NewAccount extends React.Component {
   constructor(props) {
@@ -147,6 +155,7 @@ export default class NewAccount extends React.Component {
         <View style={{width: '85%'}}>
           <Form
             ref="myform"
+            options={options}
             style={styles.form}
             value={this.state.value}
             onChange={this.onChange}
