@@ -27,6 +27,9 @@ export default class HomePage extends React.Component {
     this.unsubscribe();
   }
 
+  oncurrentLocation = () => {
+    Alert.alert('current location button hooked up!')
+  }
   onchangeSearchFor = (text) => {
     // console.log('HomePage::onchangeSearchFor(): ', text);
     store.setState({
@@ -73,6 +76,12 @@ export default class HomePage extends React.Component {
               style={styles.button}
               onPress={this.onpressSearch}>
             <Text style={styles.buttonText}>Fetch!</Text>
+          </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.oncurrentLocation}>
+          <Image
+            style={{width: 25, height: 45, marginTop: 10}}
+            source={require('../../assets/images/mapsImage.png')} />
           </TouchableOpacity>
 
         </View>
