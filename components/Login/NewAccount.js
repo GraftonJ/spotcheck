@@ -29,6 +29,7 @@ export default class NewAccount extends React.Component {
         email: 'smae@gmail.com',
         password: "secret",
         dog_names: "Shammie",
+        dogNames: "Shammie",
       },
     };
   }
@@ -88,6 +89,7 @@ export default class NewAccount extends React.Component {
 
       // new account succeeded!
       console.log("('==== new acct added!: ", responseJson.user);
+      responseJson.user.dogNames = responseJson.user.dog_names; // kludge b/c the comments expect 'dogNames'
       store.setState({
         user: responseJson.user,
         isLoggedIn: true,

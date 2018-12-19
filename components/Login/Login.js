@@ -49,6 +49,7 @@ export default class HomeSCR extends React.Component {
   /* ********************************************* */
   componentDidMount() {
     console.log("Login::componentDidMount()");
+
     this.unsubscribe = store.onChange(() => {
       this.setState({
         isLoggedIn: store.getState().isLoggedIn,
@@ -105,9 +106,10 @@ export default class HomeSCR extends React.Component {
       // login succeeded!
       console.log("('==== login success!: ", responseJson.user);
       console.log('---- **** --- auth: ', response.headers.map.auth);
-      
+
       // add the authHeader to user object since it will be passed in future fetch calls
       responseJson.user.authHeader = response.headers.map.auth;
+      responseJson.user.dogNames = responseJson.user.dog_names; // kludge b/c the comments expect 'dogNames'
       store.setState({
         user: responseJson.user,
         isLoggedIn: true,
