@@ -14,6 +14,8 @@ import {
   TouchableOpacity
 } from 'react-native'
 
+const RADIUS_CHECKIN = 100;
+
 import { getResults, getResultsLatLon } from '../../utils/api'
 import store, { URI } from '../../store';
 
@@ -54,8 +56,8 @@ export default class CheckIn extends React.Component {
       // Galvanize: (40.016516, -105.281656);
       // Avery (40.0625629,-105.2047427);
       const promise0 = getResults('Boulder, CO');
-      const promise1 = getResultsLatLon(40.016516,-105.281656);
-      // const promise1 = getResultsLatLon(40.0625629,-105.2047427);
+      const promise1 = getResultsLatLon(40.016516,-105.281656, RADIUS_CHECKIN);
+      // const promise1 = getResultsLatLon(40.0625629,-105.2047427, RADIUS_CHECKIN);
       const aResults = await Promise.all([promise0, promise1]);
       const locationsByCity = aResults[0];
       const locationsByLatLon = aResults[1];

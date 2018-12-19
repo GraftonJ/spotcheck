@@ -9,6 +9,7 @@ let state = {
   // Search location set by homepage
   // Used to load the list of locations in Results
   searchFor: "Boulder, CO",
+  searchForLatLon: false, // set to true when user clicks the pin
 
   // Locations set by Results after locations loaded from Yelp. Default datatype should be an empty array
   /* [

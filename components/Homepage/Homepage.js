@@ -5,6 +5,7 @@ import { Fonts } from '../../assets/fonts/fonts'
 import store from '../../store';
 
 export default class HomePage extends React.Component {
+  /* ************************************************ */
   constructor(props) {
     super(props);
     this.state = {
@@ -14,6 +15,7 @@ export default class HomePage extends React.Component {
     }
   }
 
+  /* ************************************************ */
   componentDidMount() {
     this.unsubscribe = store.onChange(() => {
       this.setState({
@@ -23,13 +25,12 @@ export default class HomePage extends React.Component {
     });
   }
 
+  /* ************************************************ */
   componentWillUnmount() {
     this.unsubscribe();
   }
 
-  oncurrentLocation = () => {
-    Alert.alert('current location button hooked up!')
-  }
+  /* ************************************************ */
   onchangeSearchFor = (text) => {
     // console.log('HomePage::onchangeSearchFor(): ', text);
     store.setState({
@@ -37,11 +38,24 @@ export default class HomePage extends React.Component {
     });
   }
 
+  /* ************************************************ */
+  onpressPin = () => {
+    console.log('onpressPin()');
+    store.setState({
+      searchForLatLon: true,
+    });
+    this.props.navigate('ResultsSCR');
+  }
+
+  /* ************************************************ */
   onpressSearch = () => {
     console.log('onpressSearch()');
     const searchFor = this.state.searchFor.trim();
 
     if (searchFor.length) {
+      store.setState({
+        searchForLatLon: false,
+      });
       this.props.navigate('ResultsSCR');
       // this.props.navigate('ResultsSCR', { searchFor } );
     }
@@ -50,6 +64,7 @@ export default class HomePage extends React.Component {
     }
   }
 
+  /* ************************************************ */
   render() {
     return (
     <KeyboardAvoidingView style={styles.container} behavior="position">
@@ -78,10 +93,10 @@ export default class HomePage extends React.Component {
             <Text style={styles.buttonText}>Fetch!</Text>
           </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.oncurrentLocation}>
-          <Image
-            style={{width: 25, height: 45, marginTop: 10}}
-            source={require('../../assets/images/mapsImage.png')} />
+          <TouchableOpacity onPress={this.onpressPin}>
+            <Image
+              style={{width: 25, height: 45, marginTop: 10}}
+              source={require('../../assets/images/mapsImage.png')} />
           </TouchableOpacity>
 
         </View>

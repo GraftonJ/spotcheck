@@ -14,7 +14,7 @@ import {
   TouchableOpacity} from 'react-native';
 
   import store, { URI } from '../../store';
-  import { getResults } from '../../utils/api'
+  import { getResults, getResultsCurrentLocation } from '../../utils/api'
   import ResultCards from '../ResultCards/ResultCards'
 
 
@@ -44,7 +44,12 @@ export default class Results extends React.Component {
 
     // Load locations
     // ----------------
-    let loadedLocations = await getResults(store.getState().searchFor)
+    let loadedLocations = [];
+    if (store.getState().searchForLatLon) {
+      loadedLocations = await getResultsCurrentLocation();
+    } else {
+      loadedLocations = await getResults(store.getState().searchFor);
+    }
 
     // when would the fetch return undefined?
     if (loadedLocations === undefined) {
