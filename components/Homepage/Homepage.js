@@ -60,7 +60,7 @@ export default class HomePage extends React.Component {
       // this.props.navigate('ResultsSCR', { searchFor } );
     }
     else {
-      Alert.alert("Grrrr", "Please enter a city and state")
+      Alert.alert("Grrrr", "Please enter city and state or click pin")
     }
   }
 
