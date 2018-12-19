@@ -26,6 +26,11 @@ const User = t.struct({
   password: t.String,
 })
 
+// https://stackoverflow.com/questions/51977603/how-to-use-securetextentry-in-tcomb-form-native
+
+
+
+
 export default class HomeSCR extends React.Component {
 
   /* ********************************************* */
@@ -39,9 +44,13 @@ export default class HomeSCR extends React.Component {
       // local state
       isRegistering: false, // true to display registration screen
       value: { // this is used by the "Form" thing
-        email: 'nuser@gmail.com', // holds the form value
-        password: 'secret', // holds the form value
+        email: '', // holds the form value
+        password: '', // holds the form value
       },
+      // value: { // this is used by the "Form" thing
+      //   email: 'nuser@gmail.com', // holds the form value
+      //   password: 'secret', // holds the form value
+      // },
       loginErrorMsg: '', // error message for failed login
     }
   }
@@ -134,9 +143,16 @@ export default class HomeSCR extends React.Component {
     }
     const { email, password } = value;
     const success = await this.asyncTryLogin(email, password);
-
-    if (success)
+    console.log();
+    if (success) {
+      this.setState({
+        value: { // this is used by the "Form" thing
+          email: '', // holds the form value
+          password: '', // holds the form value
+        },
+      })
       this.props.navigate('SearchScreens');
+    }
   }
 
   /* ********************************************* */

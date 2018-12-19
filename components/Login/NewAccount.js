@@ -25,12 +25,19 @@ export default class NewAccount extends React.Component {
       // Value is used by the "Form" thing
       // Field keys match db table fields
       value: {
-        name: 'Sally Mae', // holds the form value
-        email: 'smae@gmail.com',
-        password: "secret",
-        dog_names: "Shammie",
-        dogNames: "Shammie",
+        name: '', // holds the form value
+        email: '',
+        password: "",
+        dog_names: "",
+        dogNames: "",
       },
+      // value: {
+      //   name: 'Sally Mae', // holds the form value
+      //   email: 'smae@gmail.com',
+      //   password: "secret",
+      //   dog_names: "Shammie",
+      //   dogNames: "Shammie",
+      // },
     };
   }
 
@@ -94,6 +101,14 @@ export default class NewAccount extends React.Component {
         user: responseJson.user,
         isLoggedIn: true,
       });
+      // this.setState({
+      //   value: {
+      //     name: '', // holds the form value
+      //     email: '',
+      //     password: "",
+      //     dog_names: "",
+      //     dogNames: "",
+      // }});
       this.props.newAccountAddedCB();
     }
     catch(err) {
