@@ -84,7 +84,7 @@ export default class HomePage extends React.Component {
 
             <TouchableOpacity onPress={this.onpressPin}>
               <Image
-                style={{ width: 25, height: 45, marginBottom: 10, marginLeft: 5,}}
+                style={{ width: 20, height: 35, marginLeft: 5,}}
                 source={require('../../assets/images/mapsImage.png')} />
             </TouchableOpacity>
 
@@ -150,7 +150,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     color: 'black',
     width: 250,
-    // marginTop: '65%',
     marginHorizontal: 20,
     padding: 5,
     alignSelf: 'center',
