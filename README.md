@@ -4,7 +4,9 @@
 
 SpotCheck is mobile app that allows the user to find dog-friendly restaurants nearby or through a city search. The app has a social component: users who login may post restaurant reviews and 'check-in' to a location they are in or very close to.
 
-SpotCheck was built with React Native and supports IOS and Android.  The app uses the Yelp api to find dog-friendly restaurants.  The applications backend is in a separate project and deployed to a Heroku server (https://github.com/GraftonJ/spotcheck-be).
+SpotCheck was built with React Native and supports IOS and Android.  The app uses the Yelp api to find dog-friendly restaurants.  The applications backend is in a separate project and deployed to a Heroku server (https://github.com/GraftonJ/spotcheck-be)
+
+View a short video demo at: https://youtu.be/IW1INo2XOqw
 
 
 ## Search
